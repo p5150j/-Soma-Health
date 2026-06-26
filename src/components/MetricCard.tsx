@@ -24,9 +24,14 @@ interface Props {
   note?:     string
   noChart?:  boolean
   seed?:     number
+  rangeMin?:  number
+  normalMin?: number
+  normalMax?: number
+  rangeMax?:  number
+  mean?:      number
 }
 
-export function MetricCard({ label, value, unit, trend, indicator, delta, note, noChart, seed = 1 }: Props) {
+export function MetricCard({ label, value, unit, trend, indicator, delta, note, noChart, seed = 1, rangeMin, normalMin, normalMax, rangeMax, mean }: Props) {
   return (
     <div className="glass-panel backdrop-blur-[40px] backdrop-saturate-150 flex flex-col p-3.5 w-full">
       {/* Pip + label */}
@@ -51,7 +56,16 @@ export function MetricCard({ label, value, unit, trend, indicator, delta, note, 
       {/* Chart */}
       {!noChart && (
         <div className="mt-3">
-          <MiniChart indicator={indicator} seed={seed} />
+          <MiniChart
+            indicator={indicator}
+            seed={seed}
+            value={parseFloat(value)}
+            rangeMin={rangeMin}
+            normalMin={normalMin}
+            normalMax={normalMax}
+            rangeMax={rangeMax}
+            mean={mean}
+          />
         </div>
       )}
     </div>

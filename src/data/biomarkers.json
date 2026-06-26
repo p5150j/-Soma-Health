@@ -6,80 +6,74 @@
         "label": "HbA1c",
         "unit": "%",
         "noChart": false,
+        "rangeMin": 4.0, "rangeMax": 10.0, "normalMin": 4.0, "normalMax": 5.6, "mean": 5.7,
         "history": [
-          { "session": "2020-01", "value": "5.4",  "trend": "→", "indicator": "green" },
-          { "session": "2022-02", "value": "5.6",  "trend": "↗", "indicator": "green" },
-          { "session": "2023-05", "value": "5.7",  "trend": "→", "indicator": "green" }
+          { "session": "2017-05", "value": "5.1",  "trend": "→", "indicator": "green" },
+          { "session": "2026-02", "value": "5.1",  "trend": "→", "indicator": "green", "note": "Feb 2023 — most recent" }
         ]
       },
       {
         "label": "eAG (Blood)",
-        "unit": "mg/dl",
+        "unit": "mg/dL",
         "noChart": false,
+        "rangeMin": 70, "rangeMax": 200, "normalMin": 70, "normalMax": 114, "mean": 105,
         "history": [
-          { "session": "2020-01", "value": "108.2", "trend": "→", "indicator": "green" },
-          { "session": "2022-02", "value": "110.4", "trend": "↗", "indicator": "yellow", "delta": "+2.2 mg/dl" },
-          { "session": "2023-05", "value": "113.1", "trend": "↘", "indicator": "red",    "delta": "+4.2 mg/dl" }
+          { "session": "2017-05", "value": "99.7", "trend": "→", "indicator": "green" },
+          { "session": "2026-02", "value": "99.7", "trend": "→", "indicator": "green", "note": "Feb 2023 — most recent" }
         ]
       },
       {
-        "label": "Testosterone",
-        "unit": "pg/ml",
+        "label": "TSH",
+        "unit": "mIU/L",
         "noChart": false,
+        "rangeMin": 0.1, "rangeMax": 6.0, "normalMin": 0.5, "normalMax": 4.0, "mean": 2.0,
         "history": [
-          { "session": "2020-01", "value": "5.7", "trend": "→", "indicator": "green" },
-          { "session": "2022-02", "value": "6.1", "trend": "↗", "indicator": "green" },
-          { "session": "2023-05", "value": "6.9", "trend": "↗", "indicator": "yellow", "delta": "+1.2 pg/ml" }
+          { "session": "2026-02", "value": "1.27", "trend": "→", "indicator": "green", "note": "Feb 2023 — most recent" }
         ]
       },
       {
-        "label": "Insulin LVL",
-        "unit": "uu/ml",
-        "noChart": false,
-        "history": [
-          { "session": "2020-01", "value": "15.3", "trend": "→", "indicator": "green" },
-          { "session": "2022-02", "value": "17.8", "trend": "↗", "indicator": "yellow", "delta": "+2.5 uu/ml" },
-          { "session": "2023-05", "value": "20.5", "trend": "↗", "indicator": "red",    "delta": "+5.1 uu/ml", "note": "Approaching upper reference limit" }
-        ]
-      },
-      {
-        "label": "DHEA-S",
-        "unit": "mg/dl",
+        "label": "PSA Total",
+        "unit": "ng/mL",
         "noChart": true,
         "history": [
-          { "session": "2020-01", "value": "108.4", "trend": "→", "indicator": "green", "note": "Healthy baseline" },
-          { "session": "2022-02", "value": "104.2", "trend": "↘", "indicator": "green", "note": "Slight decline, within range" },
-          { "session": "2023-05", "value": "97.5",  "trend": "→", "indicator": "green", "note": "Higher than previous baseline" }
+          { "session": "2026-02", "value": "0.56", "trend": "→", "indicator": "green", "note": "Feb 2023 — most recent" }
         ]
       },
       {
-        "label": "Cortisol",
-        "unit": "µg/dl",
+        "label": "HDL",
+        "unit": "mg/dL",
         "noChart": false,
+        "rangeMin": 20, "rangeMax": 100, "normalMin": 60, "normalMax": 100, "mean": 54,
         "history": [
-          { "session": "2020-01", "value": "13.1", "trend": "→", "indicator": "green" },
-          { "session": "2022-02", "value": "13.8", "trend": "→", "indicator": "green" },
-          { "session": "2023-05", "value": "14.2", "trend": "→", "indicator": "green" }
+          { "session": "2026-02", "value": "31", "trend": "→", "indicator": "red", "note": "LOW — ↑ cardiovascular risk" }
         ]
       },
       {
-        "label": "Estradiol",
-        "unit": "pg/ml",
+        "label": "Triglycerides",
+        "unit": "mg/dL",
         "noChart": false,
+        "rangeMin": 50, "rangeMax": 400, "normalMin": 50, "normalMax": 149, "mean": 131,
         "history": [
-          { "session": "2020-01", "value": "51.4", "trend": "→",  "indicator": "green" },
-          { "session": "2022-02", "value": "47.2", "trend": "↘",  "indicator": "green" },
-          { "session": "2023-05", "value": "42.0", "trend": "↘",  "indicator": "yellow", "delta": "-3.1 pg/ml" }
+          { "session": "2026-02", "value": "154", "trend": "→", "indicator": "yellow", "note": "Slightly above normal" }
         ]
       },
       {
-        "label": "Progesterone",
-        "unit": "ng/ml",
+        "label": "Hemoglobin",
+        "unit": "g/dL",
+        "noChart": false,
+        "rangeMin": 10.0, "rangeMax": 20.0, "normalMin": 13.5, "normalMax": 17.5, "mean": 15.5,
+        "history": [
+          { "session": "2017-05", "value": "16.1", "trend": "→",  "indicator": "yellow", "note": "At upper limit" },
+          { "session": "2026-02", "value": "17.0", "trend": "↗",  "indicator": "red",    "delta": "+0.9 g/dL", "note": "Above limit — monitor" }
+        ]
+      },
+      {
+        "label": "Basophils",
+        "unit": "10³/µL",
         "noChart": true,
         "history": [
-          { "session": "2020-01", "value": "0.9",  "trend": "→", "indicator": "green" },
-          { "session": "2022-02", "value": "0.85", "trend": "→", "indicator": "green" },
-          { "session": "2023-05", "value": "0.8",  "trend": "→", "indicator": "green" }
+          { "session": "2017-05", "value": "0.40", "trend": "→", "indicator": "red",    "note": "HIGH — persistent 3yr pattern" },
+          { "session": "2026-02", "value": "0.20", "trend": "↘", "indicator": "red",    "note": "Still elevated above 0.1 limit" }
         ]
       }
     ]

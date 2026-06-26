@@ -13,26 +13,35 @@ Think of it as a living medical record that replaces static PDFs with a navigabl
 - Wireframe skeleton with per-bone color highlighting (yellow=watch, red=critical)
 - Data-driven via `conditions.json` — swap in real data with zero UI changes
 - Compact glass annotation cards that track bones in 3D as skeleton rotates
-- Biomarker cards (right panel) with scatter plots and trend indicators
-- Patient profile, biological age, tomography thumbnails (left panel)
+- Biomarker cards with data-driven reference range charts (gradient zone track, patient dot with glow positioned by actual value, national mean tick, scatter dots constrained to normal zone)
+- Left panel: real patient profile (DOB, gender, ethnicity, height/weight/BMI/temp/O₂), biological age placeholder, 3 mini visit cards
 - Glass system working: z-index stack fixed, blur working on all panels
+- TopNav and FooterNav both use centered floating glass pill treatment with dividers
 
 ---
 
-## Phase 2 — Timeline Scrubber ✅
+## Phase 2 — Timeline Scrubber + Real Data ✅
 
 - Footer is now an interactive session scrubber
 - Clicking a session re-highlights skeleton with that session's conditions + severity
 - Biomarker cards animate to the historical values for that session
 - Annotation labels update to show progression ("Mild → Severe Inflammation")
 - Model position locked — no jitter on session switch
-- Data: `conditions.json` (history array per bone) + `biomarkers.json` (history per session)
+- Data: `conditions_real.json` (history per bone) + `biomarkers.json` (history per session + reference ranges)
 - Context: `TimelineContext.tsx` drives everything via `selectedSession`
 
-**Real data ready to swap in:**
-- `src/data/conditions_real.json` — real lumbar spine findings from radiology reports (May 2017 XR + Feb 2026 CT)
-- `mydata/imaging/radiology_findings_spine.json` — full report text + bone_map per vertebra
-- `mydata/labs_bloodwork_2023-2026/` — real lab values (Feb 2023 + Feb 2026) for Phase 4
+**Real data live (Patrick Ortell, 2 visits):**
+- `src/data/conditions_real.json` — lumbar spine findings (May 2017 XR + Feb 2026 CT), L1/L5 critical
+- `src/data/biomarkers.json` — 8 Hormone markers with real values + reference ranges (rangeMin/rangeMax/normalMin/normalMax/mean per marker, NHANES population data)
+- `src/data/visits.json` — session-keyed imaging thumbnails (partial visit-centric implementation)
+- `public/scans/` — real PACS screenshots: lumbar XR, CT abdomen/pelvis, skull, CT brain
+
+**Right panel dual-mode architecture:**
+- Visit mode: Labs / Imaging / Conditions tabs — Labs has pill primary tabs + underline sub-tabs (glass card backing); Imaging shows session-keyed scan thumbnails; Conditions shows severity-coded bone list
+- Analyze mode: scaffolded for Phase 5 LLM wiring (`mode: 'visit' | 'analyze'` state in RightPanel)
+
+**Still available for future use:**
+- `mydata/labs_bloodwork_2023-2026/` — full structured lab panels for Phase 4 body mapping
 
 ---
 
@@ -280,6 +289,8 @@ Best input is CT DICOM (series of slices). Flat X-ray PNGs/JPGs/TIFFs work but r
   > *"Creatinine trending 1.06 → 1.12 over 3yr while GFR dropped 86 → 81. Feb 2026 CT also noted premature aortic calcification. Combined with persistent basophilia across all bloodwork visits — cross-specialty follow-up warranted that no single visit triggered."*
 - "Jumped off a bridge" visit: head trauma + hip fractures + liver laceration + labs all on one visit ID. Every subsequent recovery visit tracks all systems simultaneously.
 - The unseen becomes visible — cross-system, cross-time correlation falls through the cracks of siloed care today.
+
+**Partial implementation exists:** `src/data/visits.json` already maps session IDs to imaging arrays — it's the first slice of this model. Extend it to include labs and conditions before Phase 6.
 
 **When to do this:** Before Phase 6 (real Cigna/FHIR data). FHIR already uses encounter-centric records — this schema maps naturally to it. Refactoring to `visits.json` before FHIR integration means one migration instead of two.
 

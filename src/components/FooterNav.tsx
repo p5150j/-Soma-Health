@@ -56,13 +56,13 @@ export function FooterNav() {
         {/* Left step controls */}
         <div className="flex items-center gap-2 shrink-0">
           <button
-            onClick={() => stepBy(-1)}
-            disabled={currentIdx === 0}
+            onClick={() => stepBy(1)}
+            disabled={currentIdx === sessions.length - 1}
             className="bg-[rgba(50,50,56,0.9)] border border-white/12 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] rounded-[11px] w-9 h-9 flex items-center justify-center text-[16px] font-[200] text-white/55 disabled:opacity-30 transition-opacity"
           >+</button>
           <button
-            onClick={() => stepBy(1)}
-            disabled={currentIdx === sessions.length - 1}
+            onClick={() => stepBy(-1)}
+            disabled={currentIdx === 0}
             className="bg-[rgba(50,50,56,0.9)] border border-white/12 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] rounded-[11px] w-9 h-9 flex items-center justify-center text-[16px] font-[200] text-white/55 disabled:opacity-30 transition-opacity"
           >−</button>
         </div>
