@@ -1,0 +1,98 @@
+{
+  "patient": "Patrick Ortell",
+
+  "studies": [
+    {
+      "date": "2017-05-04",
+      "type": "XR Lumbar Spine 3 Views (AP, LAT, SPOT)",
+      "provider": "Kevin Piper, MD",
+      "signed_by": "Joseph Carabetta at 5/4/2017 5:31 PM",
+      "wsn": "DS6HIC",
+      "history": "Lumbar spine pain with sciatica",
+      "impression": "Moderate degenerative disc disease at L1-2 and L2-3 with a limbus vertebra at L3.",
+      "findings": {
+        "alignment": "Normal",
+        "vertebral_bodies": "Intact. Moderate anterior endplate spurring and degenerative vertebral body sclerosis at L1-L2 anteriorly. Limbus vertebra at L3 with chronically fragmented appearance of the anterior superior corner.",
+        "disc_spaces": "Moderate disc height loss at L1-2 and L2-3.",
+        "sacroiliac_joints": "Unremarkable",
+        "other": "Negative"
+      },
+      "bone_map": {
+        "l1": { "severity": "watch",    "label": "Disc Narrowing — anterior endplate spurring" },
+        "l2": { "severity": "watch",    "label": "Moderate Disc Disease — height loss L1-2/L2-3" },
+        "l3": { "severity": "watch",    "label": "Limbus Vertebra — chronically fragmented anterior superior corner" }
+      }
+    },
+    {
+      "date": "2026-02-12",
+      "type": "CT Abdomen Pelvis Without Contrast",
+      "provider": "Derek Stadie, MD",
+      "signed_by": "Jeffrey Weissmann, MD at 2/12/2026 6:10 AM",
+      "wsn": "M-RAD020",
+      "history": "Left flank pain",
+      "impression": [
+        "Negative CT scan for acute pathology — no renal obstructive uropathy change",
+        "Hepatic steatosis",
+        "Diverticulosis without evidence of diverticulitis",
+        "Fairly pronounced foraminal narrowing and impingement of the exiting L5 nerve root on the left (axial imaging 295 series 4) — correlate as potential source of left flank pain"
+      ],
+      "findings": {
+        "liver": "Heterogeneous fatty infiltrative change throughout the liver (hepatic steatosis)",
+        "gallbladder": "Unremarkable",
+        "pancreas": "No liver mass or inflammation",
+        "spleen": "Negative",
+        "adrenal_glands": "Negative",
+        "right_kidney": "Small 2mm stone in lower pole. No renal obstructive uropathy.",
+        "left_kidney": "No stone or obstruction",
+        "bladder": "No focal mass lesion",
+        "bowel": "Diverticuli without diverticulitis. No acute colonic pathology.",
+        "vessels": "Mild calcified aorta. No aneurysmal change.",
+        "lymph_nodes": "Negative",
+        "lower_chest": "No infiltrates, consolidations, or effusions",
+        "musculoskeletal": {
+          "L1_L2": "Advanced disc space narrowing and degenerative changes",
+          "L2_L3": "Prominent but less pronounced disc degenerative changes",
+          "L3": "Limbus vertebral body defect along the superior endplate",
+          "L4_L5": "Moderate disc space narrowing",
+          "L5_S1": "Moderate foraminal narrowing on the LEFT with impingement of the exiting L5 nerve root — moderately severe degree (image 295 series 4)",
+          "T9": "Anterior compression change approximately 10%"
+        }
+      },
+      "bone_map": {
+        "l1": { "severity": "critical", "label": "Advanced Disc Narrowing + Degenerative Changes" },
+        "l2": { "severity": "watch",    "label": "Disc Degenerative Changes" },
+        "l3": { "severity": "watch",    "label": "Limbus Vertebra — superior endplate defect (chronic)" },
+        "l4": { "severity": "watch",    "label": "Moderate Disc Space Narrowing" },
+        "l5": { "severity": "critical", "label": "L5 Nerve Root Impingement — moderately severe, left side" },
+        "t9": { "severity": "watch",    "label": "Anterior Compression ~10%" }
+      }
+    },
+    {
+      "date": "2026-02-17",
+      "type": "CT Abdomen Pelvis With Contrast",
+      "provider": "Matthew Solley, MD",
+      "signed_by": "Ryan Griesbach, MD at 2/17/2026 12:09 AM",
+      "wsn": "KAMC#6089",
+      "history": "Left abdominal pain",
+      "comparison": "2/13/2026",
+      "impression": [
+        "No acute abnormality in the abdomen or pelvis",
+        "Chronic findings as above"
+      ],
+      "findings": {
+        "lung_bases": "Similar linear scarring or atelectasis",
+        "hepatobiliary": "Redemonstrated diffuse hepatic steatosis with fatty spring along gallbladder fossa. Unremarkable gallbladder and biliary tree.",
+        "spleen": "Negative",
+        "adrenals": "Negative",
+        "pancreas": "Negative",
+        "kidneys": "Enhance symmetrically. Stable hypodense renal lesions, likely benign cysts. No hydronephrosis or obstructing urolithiasis.",
+        "gi": "Normal caliber bowel. Few colonic diverticula, no acute diverticulitis. Normal appendix. No pneumoperitoneum or free fluid.",
+        "lymph_nodes": "Negative",
+        "vessels": "Mild aortic atherosclerotic changes — premature for age",
+        "reproductive": "Small fat-containing left inguinal hernia",
+        "bones_soft_tissue": "Redemonstrated multilevel degenerative changes in the lumbar spine. Small fat-containing umbilical hernia.",
+        "note": "No change from Feb 12 — all lumbar findings chronic and stable"
+      }
+    }
+  ]
+}

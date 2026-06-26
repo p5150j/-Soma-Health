@@ -1,0 +1,1482 @@
+[
+  {
+    "name": "Scene",
+    "type": "Group"
+  },
+  {
+    "name": "Sketchfab_model",
+    "type": "Object3D"
+  },
+  {
+    "name": "4ada9b32a2e1411cbf625fd7ebb54c30fbx",
+    "type": "Object3D"
+  },
+  {
+    "name": "RootNode",
+    "type": "Object3D"
+  },
+  {
+    "name": "c1",
+    "type": "Object3D"
+  },
+  {
+    "name": "c1_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "c2",
+    "type": "Object3D"
+  },
+  {
+    "name": "c2_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "c3",
+    "type": "Object3D"
+  },
+  {
+    "name": "c3_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "c4",
+    "type": "Object3D"
+  },
+  {
+    "name": "c4_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "c5",
+    "type": "Object3D"
+  },
+  {
+    "name": "c5_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "c6",
+    "type": "Object3D"
+  },
+  {
+    "name": "c6_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "c7",
+    "type": "Object3D"
+  },
+  {
+    "name": "c7_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "Coccyx",
+    "type": "Object3D"
+  },
+  {
+    "name": "Coccyx_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "Cranium",
+    "type": "Object3D"
+  },
+  {
+    "name": "Cranium_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "hyoid",
+    "type": "Object3D"
+  },
+  {
+    "name": "hyoid_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l_calcaneus",
+    "type": "Object3D"
+  },
+  {
+    "name": "l_calcaneus_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l_cuboid",
+    "type": "Object3D"
+  },
+  {
+    "name": "l_cuboid_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l_distal_phalange_1",
+    "type": "Object3D"
+  },
+  {
+    "name": "l_distal_phalange_1_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l_distal_phalange_2",
+    "type": "Object3D"
+  },
+  {
+    "name": "l_distal_phalange_2_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l_distal_phalange_3",
+    "type": "Object3D"
+  },
+  {
+    "name": "l_distal_phalange_3_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l_distal_phalange_4",
+    "type": "Object3D"
+  },
+  {
+    "name": "l_distal_phalange_4_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l_distal_phalange_5",
+    "type": "Object3D"
+  },
+  {
+    "name": "l_distal_phalange_5_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l_interemediate_phalange_5",
+    "type": "Object3D"
+  },
+  {
+    "name": "l_interemediate_phalange_5_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l_intermediate_cuneiform",
+    "type": "Object3D"
+  },
+  {
+    "name": "l_intermediate_cuneiform_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l_intermediate_phalange_2",
+    "type": "Object3D"
+  },
+  {
+    "name": "l_intermediate_phalange_2_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l_intermediate_phalange_3",
+    "type": "Object3D"
+  },
+  {
+    "name": "l_intermediate_phalange_3_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l_intermediate_phalange_4",
+    "type": "Object3D"
+  },
+  {
+    "name": "l_intermediate_phalange_4_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l_lateral_cuneiform",
+    "type": "Object3D"
+  },
+  {
+    "name": "l_lateral_cuneiform_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l_medial_cuneiform",
+    "type": "Object3D"
+  },
+  {
+    "name": "l_medial_cuneiform_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l_metatarsal_1",
+    "type": "Object3D"
+  },
+  {
+    "name": "l_metatarsal_1_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l_metatarsal_2",
+    "type": "Object3D"
+  },
+  {
+    "name": "l_metatarsal_2_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l_metatarsal_3",
+    "type": "Object3D"
+  },
+  {
+    "name": "l_metatarsal_3_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l_metatarsal_4",
+    "type": "Object3D"
+  },
+  {
+    "name": "l_metatarsal_4_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l_metatarsal_5",
+    "type": "Object3D"
+  },
+  {
+    "name": "l_metatarsal_5_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l_navicular",
+    "type": "Object3D"
+  },
+  {
+    "name": "l_navicular_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l_proximal_phalange_1",
+    "type": "Object3D"
+  },
+  {
+    "name": "l_proximal_phalange_1_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l_proximal_phalange_2",
+    "type": "Object3D"
+  },
+  {
+    "name": "l_proximal_phalange_2_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l_proximal_phalange_3",
+    "type": "Object3D"
+  },
+  {
+    "name": "l_proximal_phalange_3_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l_proximal_phalange_4",
+    "type": "Object3D"
+  },
+  {
+    "name": "l_proximal_phalange_4_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l_proximal_phalange_5",
+    "type": "Object3D"
+  },
+  {
+    "name": "l_proximal_phalange_5_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l_talus",
+    "type": "Object3D"
+  },
+  {
+    "name": "l_talus_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l1",
+    "type": "Object3D"
+  },
+  {
+    "name": "l1_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l2",
+    "type": "Object3D"
+  },
+  {
+    "name": "l2_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l3",
+    "type": "Object3D"
+  },
+  {
+    "name": "l3_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l4",
+    "type": "Object3D"
+  },
+  {
+    "name": "l4_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l5",
+    "type": "Object3D"
+  },
+  {
+    "name": "l5_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l_capitate",
+    "type": "Object3D"
+  },
+  {
+    "name": "l_capitate_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l_clavicle",
+    "type": "Object3D"
+  },
+  {
+    "name": "l_clavicle_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l_distal_phalange1",
+    "type": "Object3D"
+  },
+  {
+    "name": "l_distal_phalange1_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l_distal_phalange2",
+    "type": "Object3D"
+  },
+  {
+    "name": "l_distal_phalange2_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l_distal_phalange3",
+    "type": "Object3D"
+  },
+  {
+    "name": "l_distal_phalange3_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l_distal_phalange4",
+    "type": "Object3D"
+  },
+  {
+    "name": "l_distal_phalange4_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l_distal_phalange5",
+    "type": "Object3D"
+  },
+  {
+    "name": "l_distal_phalange5_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l_femur",
+    "type": "Object3D"
+  },
+  {
+    "name": "l_femur_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l_fibula",
+    "type": "Object3D"
+  },
+  {
+    "name": "l_fibula_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l_hamate",
+    "type": "Object3D"
+  },
+  {
+    "name": "l_hamate_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l_humerus",
+    "type": "Object3D"
+  },
+  {
+    "name": "l_humerus_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l_intermediate_phalange2",
+    "type": "Object3D"
+  },
+  {
+    "name": "l_intermediate_phalange2_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l_intermediate_phalange3",
+    "type": "Object3D"
+  },
+  {
+    "name": "l_intermediate_phalange3_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l_intermediate_phalange4",
+    "type": "Object3D"
+  },
+  {
+    "name": "l_intermediate_phalange4_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l_intermediate_phalange5",
+    "type": "Object3D"
+  },
+  {
+    "name": "l_intermediate_phalange5_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l_lunate",
+    "type": "Object3D"
+  },
+  {
+    "name": "l_lunate_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l_metacarpal1",
+    "type": "Object3D"
+  },
+  {
+    "name": "l_metacarpal1_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l_metacarpal2",
+    "type": "Object3D"
+  },
+  {
+    "name": "l_metacarpal2_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l_metacarpal3",
+    "type": "Object3D"
+  },
+  {
+    "name": "l_metacarpal3_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l_metacarpal4",
+    "type": "Object3D"
+  },
+  {
+    "name": "l_metacarpal4_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l_metacarpal5",
+    "type": "Object3D"
+  },
+  {
+    "name": "l_metacarpal5_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l_oscoxa",
+    "type": "Object3D"
+  },
+  {
+    "name": "l_oscoxa_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l_patella",
+    "type": "Object3D"
+  },
+  {
+    "name": "l_patella_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l_pisiform",
+    "type": "Object3D"
+  },
+  {
+    "name": "l_pisiform_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l_proximal_phalange1",
+    "type": "Object3D"
+  },
+  {
+    "name": "l_proximal_phalange1_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l_proximal_phalange2",
+    "type": "Object3D"
+  },
+  {
+    "name": "l_proximal_phalange2_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l_proximal_phalange3",
+    "type": "Object3D"
+  },
+  {
+    "name": "l_proximal_phalange3_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l_proximal_phalange4",
+    "type": "Object3D"
+  },
+  {
+    "name": "l_proximal_phalange4_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l_proximal_phalange5",
+    "type": "Object3D"
+  },
+  {
+    "name": "l_proximal_phalange5_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l_radius",
+    "type": "Object3D"
+  },
+  {
+    "name": "l_radius_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l_rib1",
+    "type": "Object3D"
+  },
+  {
+    "name": "l_rib1_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l_rib10",
+    "type": "Object3D"
+  },
+  {
+    "name": "l_rib10_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l_rib11",
+    "type": "Object3D"
+  },
+  {
+    "name": "l_rib11_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l_rib12",
+    "type": "Object3D"
+  },
+  {
+    "name": "l_rib12_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l_rib2",
+    "type": "Object3D"
+  },
+  {
+    "name": "l_rib2_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l_rib3",
+    "type": "Object3D"
+  },
+  {
+    "name": "l_rib3_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l_rib4",
+    "type": "Object3D"
+  },
+  {
+    "name": "l_rib4_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l_rib5",
+    "type": "Object3D"
+  },
+  {
+    "name": "l_rib5_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l_rib6",
+    "type": "Object3D"
+  },
+  {
+    "name": "l_rib6_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l_rib7",
+    "type": "Object3D"
+  },
+  {
+    "name": "l_rib7_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l_rib8",
+    "type": "Object3D"
+  },
+  {
+    "name": "l_rib8_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l_rib9",
+    "type": "Object3D"
+  },
+  {
+    "name": "l_rib9_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l_scaphoid",
+    "type": "Object3D"
+  },
+  {
+    "name": "l_scaphoid_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l_scapula",
+    "type": "Object3D"
+  },
+  {
+    "name": "l_scapula_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l_tibia",
+    "type": "Object3D"
+  },
+  {
+    "name": "l_tibia_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l_trapezium",
+    "type": "Object3D"
+  },
+  {
+    "name": "l_trapezium_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l_trapezoid",
+    "type": "Object3D"
+  },
+  {
+    "name": "l_trapezoid_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l_triquetral",
+    "type": "Object3D"
+  },
+  {
+    "name": "l_triquetral_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "l_ulna",
+    "type": "Object3D"
+  },
+  {
+    "name": "l_ulna_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "Mandible",
+    "type": "Object3D"
+  },
+  {
+    "name": "Mandible_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "r_calcaneus",
+    "type": "Object3D"
+  },
+  {
+    "name": "r_calcaneus_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "r_capitate",
+    "type": "Object3D"
+  },
+  {
+    "name": "r_capitate_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "r_clavicle",
+    "type": "Object3D"
+  },
+  {
+    "name": "r_clavicle_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "r_cuboid",
+    "type": "Object3D"
+  },
+  {
+    "name": "r_cuboid_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "r_distal_phalange_1",
+    "type": "Object3D"
+  },
+  {
+    "name": "r_distal_phalange_1_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "r_distal_phalange_2",
+    "type": "Object3D"
+  },
+  {
+    "name": "r_distal_phalange_2_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "r_distal_phalange_3",
+    "type": "Object3D"
+  },
+  {
+    "name": "r_distal_phalange_3_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "r_distal_phalange_4",
+    "type": "Object3D"
+  },
+  {
+    "name": "r_distal_phalange_4_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "r_distal_phalange_5",
+    "type": "Object3D"
+  },
+  {
+    "name": "r_distal_phalange_5_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "r_distal_phalange1",
+    "type": "Object3D"
+  },
+  {
+    "name": "r_distal_phalange1_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "r_distal_phalange2",
+    "type": "Object3D"
+  },
+  {
+    "name": "r_distal_phalange2_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "r_distal_phalange3",
+    "type": "Object3D"
+  },
+  {
+    "name": "r_distal_phalange3_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "r_distal_phalange4",
+    "type": "Object3D"
+  },
+  {
+    "name": "r_distal_phalange4_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "r_distal_phalange5",
+    "type": "Object3D"
+  },
+  {
+    "name": "r_distal_phalange5_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "r_femur",
+    "type": "Object3D"
+  },
+  {
+    "name": "r_femur_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "r_fibula",
+    "type": "Object3D"
+  },
+  {
+    "name": "r_fibula_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "r_hamate",
+    "type": "Object3D"
+  },
+  {
+    "name": "r_hamate_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "r_humerus",
+    "type": "Object3D"
+  },
+  {
+    "name": "r_humerus_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "r_intermediate_cuneiform",
+    "type": "Object3D"
+  },
+  {
+    "name": "r_intermediate_cuneiform_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "r_intermediate_phalange_2",
+    "type": "Object3D"
+  },
+  {
+    "name": "r_intermediate_phalange_2_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "r_intermediate_phalange_3",
+    "type": "Object3D"
+  },
+  {
+    "name": "r_intermediate_phalange_3_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "r_intermediate_phalange_4",
+    "type": "Object3D"
+  },
+  {
+    "name": "r_intermediate_phalange_4_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "r_intermediate_phalange_5",
+    "type": "Object3D"
+  },
+  {
+    "name": "r_intermediate_phalange_5_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "r_intermediate_phalange2",
+    "type": "Object3D"
+  },
+  {
+    "name": "r_intermediate_phalange2_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "r_intermediate_phalange3",
+    "type": "Object3D"
+  },
+  {
+    "name": "r_intermediate_phalange3_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "r_intermediate_phalange4",
+    "type": "Object3D"
+  },
+  {
+    "name": "r_intermediate_phalange4_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "r_intermediate_phalange5",
+    "type": "Object3D"
+  },
+  {
+    "name": "r_intermediate_phalange5_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "r_lateral_cuneiform",
+    "type": "Object3D"
+  },
+  {
+    "name": "r_lateral_cuneiform_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "r_lunate",
+    "type": "Object3D"
+  },
+  {
+    "name": "r_lunate_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "r_medial_cuneiform",
+    "type": "Object3D"
+  },
+  {
+    "name": "r_medial_cuneiform_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "r_metacarpal1",
+    "type": "Object3D"
+  },
+  {
+    "name": "r_metacarpal1_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "r_metacarpal2",
+    "type": "Object3D"
+  },
+  {
+    "name": "r_metacarpal2_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "r_metacarpal3",
+    "type": "Object3D"
+  },
+  {
+    "name": "r_metacarpal3_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "r_metacarpal4",
+    "type": "Object3D"
+  },
+  {
+    "name": "r_metacarpal4_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "r_metacarpal5",
+    "type": "Object3D"
+  },
+  {
+    "name": "r_metacarpal5_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "r_metatarsal_1",
+    "type": "Object3D"
+  },
+  {
+    "name": "r_metatarsal_1_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "r_metatarsal_2",
+    "type": "Object3D"
+  },
+  {
+    "name": "r_metatarsal_2_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "r_metatarsal_3",
+    "type": "Object3D"
+  },
+  {
+    "name": "r_metatarsal_3_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "r_metatarsal_4",
+    "type": "Object3D"
+  },
+  {
+    "name": "r_metatarsal_4_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "r_metatarsal_5",
+    "type": "Object3D"
+  },
+  {
+    "name": "r_metatarsal_5_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "r_navicular",
+    "type": "Object3D"
+  },
+  {
+    "name": "r_navicular_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "r_oscoxa",
+    "type": "Object3D"
+  },
+  {
+    "name": "r_oscoxa_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "r_patella",
+    "type": "Object3D"
+  },
+  {
+    "name": "r_patella_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "r_pisiform",
+    "type": "Object3D"
+  },
+  {
+    "name": "r_pisiform_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "r_proximal_phalange_1",
+    "type": "Object3D"
+  },
+  {
+    "name": "r_proximal_phalange_1_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "r_proximal_phalange_2",
+    "type": "Object3D"
+  },
+  {
+    "name": "r_proximal_phalange_2_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "r_proximal_phalange_3",
+    "type": "Object3D"
+  },
+  {
+    "name": "r_proximal_phalange_3_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "r_proximal_phalange_4",
+    "type": "Object3D"
+  },
+  {
+    "name": "r_proximal_phalange_4_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "r_proximal_phalange_5",
+    "type": "Object3D"
+  },
+  {
+    "name": "r_proximal_phalange_5_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "r_proximal_phalange1",
+    "type": "Object3D"
+  },
+  {
+    "name": "r_proximal_phalange1_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "r_proximal_phalange2",
+    "type": "Object3D"
+  },
+  {
+    "name": "r_proximal_phalange2_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "r_proximal_phalange3",
+    "type": "Object3D"
+  },
+  {
+    "name": "r_proximal_phalange3_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "r_proximal_phalange4",
+    "type": "Object3D"
+  },
+  {
+    "name": "r_proximal_phalange4_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "r_proximal_phalange5",
+    "type": "Object3D"
+  },
+  {
+    "name": "r_proximal_phalange5_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "r_radius",
+    "type": "Object3D"
+  },
+  {
+    "name": "r_radius_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "r_rib1",
+    "type": "Object3D"
+  },
+  {
+    "name": "r_rib1_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "r_rib10",
+    "type": "Object3D"
+  },
+  {
+    "name": "r_rib10_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "r_rib11",
+    "type": "Object3D"
+  },
+  {
+    "name": "r_rib11_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "r_rib12",
+    "type": "Object3D"
+  },
+  {
+    "name": "r_rib12_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "r_rib2",
+    "type": "Object3D"
+  },
+  {
+    "name": "r_rib2_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "r_rib3",
+    "type": "Object3D"
+  },
+  {
+    "name": "r_rib3_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "r_rib4",
+    "type": "Object3D"
+  },
+  {
+    "name": "r_rib4_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "r_rib5",
+    "type": "Object3D"
+  },
+  {
+    "name": "r_rib5_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "r_rib6",
+    "type": "Object3D"
+  },
+  {
+    "name": "r_rib6_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "r_rib7",
+    "type": "Object3D"
+  },
+  {
+    "name": "r_rib7_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "r_rib8",
+    "type": "Object3D"
+  },
+  {
+    "name": "r_rib8_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "r_rib9",
+    "type": "Object3D"
+  },
+  {
+    "name": "r_rib9_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "r_scaphoid",
+    "type": "Object3D"
+  },
+  {
+    "name": "r_scaphoid_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "r_scapula",
+    "type": "Object3D"
+  },
+  {
+    "name": "r_scapula_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "r_talus",
+    "type": "Object3D"
+  },
+  {
+    "name": "r_talus_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "r_tibia",
+    "type": "Object3D"
+  },
+  {
+    "name": "r_tibia_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "r_trapezium",
+    "type": "Object3D"
+  },
+  {
+    "name": "r_trapezium_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "r_trapezoid",
+    "type": "Object3D"
+  },
+  {
+    "name": "r_trapezoid_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "r_triquetral",
+    "type": "Object3D"
+  },
+  {
+    "name": "r_triquetral_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "r_ulna",
+    "type": "Object3D"
+  },
+  {
+    "name": "r_ulna_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "Sacrum",
+    "type": "Object3D"
+  },
+  {
+    "name": "Sacrum_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "sesamoids",
+    "type": "Object3D"
+  },
+  {
+    "name": "sesamoids_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "sesamoids001",
+    "type": "Object3D"
+  },
+  {
+    "name": "sesamoids001_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "Sternum",
+    "type": "Object3D"
+  },
+  {
+    "name": "Sternum_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "t1",
+    "type": "Object3D"
+  },
+  {
+    "name": "t1_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "t10",
+    "type": "Object3D"
+  },
+  {
+    "name": "t10_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "t11",
+    "type": "Object3D"
+  },
+  {
+    "name": "t11_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "t12",
+    "type": "Object3D"
+  },
+  {
+    "name": "t12_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "t2",
+    "type": "Object3D"
+  },
+  {
+    "name": "t2_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "t3",
+    "type": "Object3D"
+  },
+  {
+    "name": "t3_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "t4",
+    "type": "Object3D"
+  },
+  {
+    "name": "t4_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "t5",
+    "type": "Object3D"
+  },
+  {
+    "name": "t5_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "t6",
+    "type": "Object3D"
+  },
+  {
+    "name": "t6_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "t7",
+    "type": "Object3D"
+  },
+  {
+    "name": "t7_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "t8",
+    "type": "Object3D"
+  },
+  {
+    "name": "t8_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "t9",
+    "type": "Object3D"
+  },
+  {
+    "name": "t9_beige_0",
+    "type": "Mesh"
+  },
+  {
+    "name": "Xiphoid_process",
+    "type": "Object3D"
+  },
+  {
+    "name": "Xiphoid_process_beige_0",
+    "type": "Mesh"
+  }
+]

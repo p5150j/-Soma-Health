@@ -1,0 +1,60 @@
+{
+  "patientId": "SV-7294",
+  "sessions": [
+    { "id": "2020-01", "label": "Jan", "year": "2020", "status": "Optimal" },
+    { "id": "2022-02", "label": "Feb", "year": "2022", "status": "Optimal" },
+    { "id": "2023-05", "label": "May", "year": "2023", "status": null }
+  ],
+  "conditions": [
+    {
+      "bone": "r_clavicle",
+      "displayName": "Right Clavicle",
+      "history": [
+        { "session": "2022-02", "severity": "watch",    "label": "Mild Inflammation" },
+        { "session": "2023-05", "severity": "critical", "label": "Severe Inflammation" }
+      ]
+    },
+    {
+      "bone": "l_rib4",
+      "displayName": "Left Rib 4",
+      "history": [
+        { "session": "2020-01", "severity": "watch",    "label": "Early Density Loss" },
+        { "session": "2022-02", "severity": "watch",    "label": "Reduced Density" },
+        { "session": "2023-05", "severity": "critical", "label": "Reduced Density" }
+      ]
+    },
+    {
+      "bone": "l_rib5",
+      "displayName": "Left Rib 5",
+      "history": [
+        { "session": "2022-02", "severity": "watch",    "label": "Mild Density Loss" },
+        { "session": "2023-05", "severity": "critical", "label": "Reduced Density" }
+      ]
+    },
+    {
+      "bone": "t4",
+      "displayName": "Thoracic T4",
+      "history": [
+        { "session": "2022-02", "severity": "watch", "label": "Early Degeneration" },
+        { "session": "2023-05", "severity": "watch", "label": "Early Degeneration" }
+      ]
+    },
+    {
+      "bone": "t5",
+      "displayName": "Thoracic T5",
+      "history": [
+        { "session": "2022-02", "severity": "watch", "label": "Early Degeneration" },
+        { "session": "2023-05", "severity": "watch", "label": "Progressive Degeneration" }
+      ]
+    },
+    {
+      "bone": "l3",
+      "displayName": "Lumbar L3",
+      "history": [
+        { "session": "2020-01", "severity": "watch",    "label": "Minor Compression Risk" },
+        { "session": "2022-02", "severity": "watch",    "label": "Moderate Compression" },
+        { "session": "2023-05", "severity": "critical", "label": "Compression Risk" }
+      ]
+    }
+  ]
+}

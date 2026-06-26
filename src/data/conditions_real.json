@@ -1,0 +1,54 @@
+{
+  "patientId": "Patrick Ortell",
+  "sessions": [
+    { "id": "2017-05", "label": "May", "year": "2017", "status": "Stable" },
+    { "id": "2026-02", "label": "Feb", "year": "2026", "status": null }
+  ],
+  "conditions": [
+    {
+      "bone": "l1",
+      "displayName": "Lumbar L1",
+      "history": [
+        { "session": "2017-05", "severity": "watch",    "label": "Disc Narrowing" },
+        { "session": "2026-02", "severity": "critical", "label": "Advanced Disc Narrowing" }
+      ]
+    },
+    {
+      "bone": "l2",
+      "displayName": "Lumbar L2",
+      "history": [
+        { "session": "2017-05", "severity": "watch", "label": "Moderate Disc Disease" },
+        { "session": "2026-02", "severity": "watch", "label": "Degenerative Changes" }
+      ]
+    },
+    {
+      "bone": "l3",
+      "displayName": "Lumbar L3",
+      "history": [
+        { "session": "2017-05", "severity": "watch", "label": "Limbus Vertebra" },
+        { "session": "2026-02", "severity": "watch", "label": "Limbus Vertebra (Chronic)" }
+      ]
+    },
+    {
+      "bone": "l4",
+      "displayName": "Lumbar L4",
+      "history": [
+        { "session": "2026-02", "severity": "watch", "label": "Moderate Disc Narrowing" }
+      ]
+    },
+    {
+      "bone": "l5",
+      "displayName": "Lumbar L5",
+      "history": [
+        { "session": "2026-02", "severity": "critical", "label": "L5 Nerve Root Impingement" }
+      ]
+    },
+    {
+      "bone": "t9",
+      "displayName": "Thoracic T9",
+      "history": [
+        { "session": "2026-02", "severity": "watch", "label": "Anterior Compression ~10%" }
+      ]
+    }
+  ]
+}
