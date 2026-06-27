@@ -1,10 +1,11 @@
 'use client'
-import { useState }       from 'react'
-import { MetricCard }     from './MetricCard'
-import { useTimeline }    from '@/context/TimelineContext'
-import biomarkersData     from '@/data/biomarkers.json'
-import conditionsData     from '@/data/conditions_real.json'
-import visitsData         from '@/data/visits.json'
+import { useState }           from 'react'
+import { MetricCard }         from './MetricCard'
+import { useTimeline }        from '@/context/TimelineContext'
+import biomarkersData         from '@/data/biomarkers.json'
+import conditionsData         from '@/data/conditions_real.json'
+import organConditionsData    from '@/data/conditions_organs.json'
+import visitsData             from '@/data/visits.json'
 
 type Indicator = 'green' | 'red' | 'yellow'
 type Trend     = '↗' | '↘' | '→'
@@ -59,6 +60,7 @@ export function RightPanel() {
       const h = c.history.find(h => h.session === selectedSession)
       if (!h) return null
       return {
+        key:         c.bone,
         bone:        c.bone,
         displayName: c.displayName,
         severity:    h.severity as Severity,
@@ -66,6 +68,21 @@ export function RightPanel() {
       }
     })
     .filter((c): c is NonNullable<typeof c> => c !== null)
+
+  const sessionOrgans = organConditionsData.conditions
+    .map(c => {
+      const h = c.history.find(h => h.session === selectedSession)
+      if (!h) return null
+      return {
+        key:         c.organ,
+        displayName: c.displayName,
+        severity:    h.severity as Severity,
+        label:       h.label,
+      }
+    })
+    .filter((c): c is NonNullable<typeof c> => c !== null)
+
+  const allConditions = [...sessionConditions, ...sessionOrgans]
 
   const visits     = visitsData.visits as VisitsMap
   const visitEntry = visits[selectedSession]
@@ -75,7 +92,7 @@ export function RightPanel() {
   }
 
   return (
-    <aside className="w-[clamp(380px,40vw,660px)] h-full px-4 pt-[42px] pb-4 flex flex-col gap-3 overflow-hidden">
+    <aside className="w-[clamp(300px,32vw,480px)] h-full px-4 pt-[42px] pb-4 flex flex-col gap-3 overflow-hidden">
 
       {mode === 'visit' ? (
         <>
@@ -164,20 +181,20 @@ export function RightPanel() {
 
             {activeTab === 'conditions' && (
               <div className="flex flex-col gap-2">
-                {sessionConditions.length === 0 && (
+                {allConditions.length === 0 && (
                   <p className="text-[11px] font-[300] text-white/25 text-center py-8">No conditions recorded for this visit</p>
                 )}
-                {sessionConditions.map(cond => {
-                  const indicator = SEVERITY_INDICATOR[cond.severity]
+                {allConditions.map(item => {
+                  const indicator = SEVERITY_INDICATOR[item.severity]
                   return (
-                    <div key={cond.bone} className="glass-panel backdrop-blur-[40px] backdrop-saturate-150 flex items-center gap-3 px-4 py-3">
+                    <div key={item.key} className="glass-panel backdrop-blur-[40px] backdrop-saturate-150 flex items-center gap-3 px-4 py-3">
                       <span className={`shrink-0 w-[2px] h-7 rounded-full ${PIP_COLOR[indicator]}`} />
                       <div className="flex flex-col gap-0.5 min-w-0 flex-1">
-                        <span className="text-[12px] font-[300] text-white/80 leading-none">{cond.displayName}</span>
-                        <span className="text-[10px] font-[300] text-white/40 leading-none">{cond.label}</span>
+                        <span className="text-[12px] font-[300] text-white/80 leading-none">{item.displayName}</span>
+                        <span className="text-[10px] font-[300] text-white/40 leading-none">{item.label}</span>
                       </div>
                       <span className={`text-[9px] font-[400] uppercase tracking-wider shrink-0 ${SEVERITY_TEXT[indicator]}`}>
-                        {cond.severity}
+                        {item.severity}
                       </span>
                     </div>
                   )
@@ -203,7 +220,7 @@ export function RightPanel() {
           {/* Placeholder */}
           <div className="flex-1 glass-panel backdrop-blur-[40px] backdrop-saturate-150 flex flex-col items-center justify-center gap-4">
             <p className="text-[11px] font-[300] text-white/30 text-center px-8 leading-relaxed">
-              LLM synthesis across all visits will appear here in Phase 2.
+              LLM synthesis across all visits will appear here in Phase 5.
             </p>
             <button className="px-5 py-2 bg-lime text-black text-[11px] font-[500] rounded-full opacity-40 cursor-not-allowed">
               Generate Report

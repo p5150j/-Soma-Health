@@ -1,6 +1,9 @@
+'use client'
+
 export function LeftPanel() {
+
   return (
-    <aside className="w-[clamp(280px,28vw,420px)] h-full p-4 flex flex-col gap-3 overflow-y-auto no-scrollbar">
+    <aside className="w-[clamp(240px,22vw,320px)] h-full p-4 flex flex-col gap-3 overflow-y-auto no-scrollbar">
 
       {/* Patient name */}
       <div className="pt-1 pb-1">
@@ -101,21 +104,6 @@ export function LeftPanel() {
         </div>
       </div>
 
-      {/* Doctor pill */}
-      <div className="mt-auto flex items-center gap-2.5 pt-1">
-        <button className="glass-panel backdrop-blur-[40px] backdrop-saturate-150 w-9 h-9 rounded-[12px] flex items-center justify-center shrink-0">
-          <svg className="w-4 h-4 text-white/40" viewBox="0 0 16 16" fill="none">
-            <circle cx="8" cy="5.5" r="2.5" stroke="currentColor" strokeWidth="1.3"/>
-            <path d="M2.5 13.5C2.5 11 5 9 8 9s5.5 2 5.5 4.5" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round"/>
-          </svg>
-        </button>
-        <button className="flex-1 flex items-center justify-between bg-lime/15 border border-lime/25 text-lime text-[11px] font-[300] px-3.5 py-2 rounded-full">
-          Doctor: Julian Hayes
-          <svg className="w-2.5 h-2.5 ml-1" viewBox="0 0 10 6" fill="none">
-            <path d="M1 1l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-        </button>
-      </div>
 
     </aside>
   )

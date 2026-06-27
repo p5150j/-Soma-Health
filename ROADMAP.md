@@ -45,7 +45,7 @@ Think of it as a living medical record that replaces static PDFs with a navigabl
 
 ---
 
-## Phase 3 — Organ Layer 🔨 In Progress
+## Phase 3 — Organ Layer ✅
 
 Add a semi-transparent organ layer rendered alongside the skeleton. Organ findings (hepatic steatosis, kidney stone, aortic calcification from real CT reports) get their own annotation cards using the same glass card + drei `<Html>` system as bones.
 
@@ -84,6 +84,71 @@ New `src/data/conditions_organs.json` — same session/history/severity shape as
 
 ### Layer toggle
 Top nav layer switcher: **Bones** / **Organs** / **All**. Context flag `showOrgans` in TimelineContext (or new LayerContext). BodyViewer renders `<OrganLayer />` conditionally.
+
+---
+
+---
+
+## Backlog — 3D Organ Meshes (Phase 3 extension)
+
+Replace sphere/cylinder organ placeholders with real anatomical GLB meshes. Infrastructure is already in place (`ModelOrgan` component + `modelUrl` / `modelScale` fields on `OrganDef`) — it's a one-line change per organ once a clean asset is found.
+
+### Key design decision: only show 3D models for organs WITH active conditions
+
+Rendering 3D meshes for all 11 organs simultaneously creates a cluttered blob — stomach, intestines, pancreas, spleen, kidneys and liver all overlapping in the abdominal cavity. The right rule:
+
+- **Organs with a condition** → real 3D mesh (wireframe, severity-colored) + flag annotation
+- **Healthy organs** → subtle sphere glow only, no mesh, no annotation
+
+This keeps the view clean and focuses attention exactly where findings exist.
+
+### What a suitable asset looks like
+
+- **Single outer-surface mesh only** — no embedded vasculature, bile ducts, or internal structure
+- **Low poly already** — 5K–15K triangles (no decimation needed, clean silhouette)
+- **GLB/GLTF format** (or FBX/OBJ convertible via `obj2gltf`)
+- **File size** — under 500 KB after Draco compression (`npx gltf-pipeline --draco.compressMeshes`)
+- **Consistent scale** ideally — a pack where all organs share the same unit system
+
+### Organs still needed (11 total in `conditions_organs.json`)
+
+| Organ | Key | Current |
+|---|---|---|
+| Heart | `heart` | sphere |
+| Left lung | `lung_l` | sphere |
+| Right lung | `lung_r` | sphere |
+| Liver | `liver` | sphere (tried a model — asset quality issues) |
+| Stomach | `stomach` | sphere |
+| Spleen | `spleen` | sphere |
+| Pancreas | `pancreas` | sphere |
+| Left kidney | `kidney_l` | sphere |
+| Right kidney | `kidney_r` | sphere |
+| Aorta | `aorta` | cylinder |
+| Bladder | `bladder` | sphere |
+
+### Good sources to check
+
+- **Sketchfab** → filter by "anatomy", "low poly", free download as GLB. Check triangle count before downloading.
+- **TurboSquid / CGTrader** — some packs include full organ sets in consistent scale
+- **Unity Asset Store exports** — medical anatomy packs often include clean single-surface organs
+- **Avoid**: models that include internal vasculature, multi-mesh assemblies, or models originally built for photorealistic rendering (huge texture maps, extreme poly counts)
+
+### How to wire in a new organ once you have the file
+
+```bash
+# 1. Draco compress (strips textures automatically if you strip materials from the JSON first)
+npx gltf-pipeline -i organ.glb -o organ_draco.glb --draco.compressMeshes --draco.compressionLevel 10
+
+# 2. Copy to public/
+cp organ_draco.glb public/organs/<key>.glb
+```
+
+```ts
+// 3. In ORGANS array in OrganLayer.tsx — add modelUrl + modelScale:
+{ key: 'heart', ..., modelUrl: '/organs/heart.glb', modelScale: 0.12 }
+```
+
+The `ModelOrgan` component handles everything else: centering via bounding box, EdgesGeometry for clean wireframe lines, severity coloring, flag line to annotation card.
 
 ---
 

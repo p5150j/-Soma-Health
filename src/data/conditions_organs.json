@@ -1,0 +1,25 @@
+{
+  "conditions": [
+    {
+      "organ": "liver",
+      "displayName": "Liver",
+      "history": [
+        { "session": "2026-02", "severity": "watch", "label": "Hepatic Steatosis — diffuse fatty infiltration" }
+      ]
+    },
+    {
+      "organ": "kidney_r",
+      "displayName": "Right Kidney",
+      "history": [
+        { "session": "2026-02", "severity": "watch", "label": "2mm stone, lower pole — no obstruction" }
+      ]
+    },
+    {
+      "organ": "aorta",
+      "displayName": "Aorta",
+      "history": [
+        { "session": "2026-02", "severity": "watch", "label": "Mild calcification — premature for age" }
+      ]
+    }
+  ]
+}

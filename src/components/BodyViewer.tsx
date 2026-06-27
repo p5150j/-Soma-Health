@@ -1,12 +1,12 @@
 'use client'
 import React, { useMemo, useRef, useEffect } from 'react'
 import { Canvas } from '@react-three/fiber'
-import { useGLTF, OrbitControls, Html } from '@react-three/drei'
+import { useGLTF, OrbitControls } from '@react-three/drei'
 import * as THREE from 'three'
 import conditionsData from '@/data/conditions_real.json'
 import { useTimeline } from '@/context/TimelineContext'
-
-type Severity = 'watch' | 'critical'
+import { BoneAnnotation, Severity } from './BoneAnnotation'
+import { OrganLayer } from './OrganLayer'
 
 interface ConditionEntry {
   bone:        string
@@ -16,32 +16,7 @@ interface ConditionEntry {
 }
 
 const WIRE_COLOR:   Record<Severity, string> = { watch: '#f5c542', critical: '#ff453a' }
-const FILL_OPACITY: Record<Severity, number> = { watch: 0.12,      critical: 0.18 }
-
-function BoneAnnotation({ position, displayName, label, severity, portal }: {
-  position:    THREE.Vector3
-  displayName: string
-  label:       string
-  severity:    Severity
-  portal:      React.RefObject<HTMLElement>
-}) {
-  const isWatch      = severity === 'watch'
-  const severityLabel = isWatch ? 'Watch' : 'High Risk'
-
-  return (
-    <Html position={position} center occlude="blending" zIndexRange={[9999, 0]} portal={portal}>
-      <div className="pointer-events-none select-none w-[140px]">
-        <div className="glass-panel backdrop-blur-[40px] backdrop-saturate-150 px-3 py-2.5 flex flex-col gap-1">
-          <div className="flex items-center justify-between gap-2">
-            <span className="text-[11px] font-[400] text-white/90 leading-none truncate">{displayName}</span>
-            <span className={`text-[9px] font-[500] leading-none shrink-0 ${isWatch ? 'text-yellow-warn' : 'text-red-alert'}`}>{severityLabel}</span>
-          </div>
-          <span className="text-[10px] font-[300] text-white/45 leading-none">{label}</span>
-        </div>
-      </div>
-    </Html>
-  )
-}
+const FILL_OPACITY: Record<Severity, number> = { watch: 0.12,      critical: 0.18      }
 
 function softSprite() {
   const size = 64
@@ -96,8 +71,8 @@ function Particles({ offsetY }: { offsetY: number }) {
 }
 
 function Skeleton() {
-  const { scene }          = useGLTF('/skeleton/skeleton_lo.glb')
-  const { selectedSession } = useTimeline()
+  const { scene }                        = useGLTF('/skeleton/skeleton_lo.glb')
+  const { selectedSession, activeLayer } = useTimeline()
 
   const portalRef = useRef<HTMLElement>(null!)
   useEffect(() => {
@@ -105,8 +80,6 @@ function Skeleton() {
     if (el) portalRef.current = el
   }, [])
 
-  // Stable center — only recalculate when the scene object itself changes, never on session change.
-  // Bounding box shifts if computed after fill meshes are added, which would jitter the model position.
   const offset = useMemo(() => {
     const box    = new THREE.Box3().setFromObject(scene)
     const center = new THREE.Vector3()
@@ -114,7 +87,11 @@ function Skeleton() {
     return center
   }, [scene])
 
+  const bonesActive = activeLayer === 'bones' || activeLayer === 'all'
+
   const annotations = useMemo(() => {
+    const bonesOpacity = bonesActive ? 1.0 : 0.0
+
     const sessionLookup: Record<string, ConditionEntry> = {}
     conditionsData.conditions.forEach((c) => {
       const entry = c.history.find(h => h.session === selectedSession)
@@ -152,7 +129,7 @@ function Skeleton() {
         color:       condition ? WIRE_COLOR[condition.severity] : '#c8dff0',
         wireframe:   true,
         transparent: true,
-        opacity:     condition ? 0.85 : 0.18,
+        opacity:     condition ? 0.85 * bonesOpacity : 0.18 * bonesOpacity,
       })
 
       if (condition) {
@@ -161,7 +138,7 @@ function Skeleton() {
           new THREE.MeshBasicMaterial({
             color:       WIRE_COLOR[condition.severity],
             transparent: true,
-            opacity:     FILL_OPACITY[condition.severity],
+            opacity:     FILL_OPACITY[condition.severity] * bonesOpacity,
             side:        THREE.DoubleSide,
             depthWrite:  false,
           })
@@ -177,13 +154,13 @@ function Skeleton() {
     })
 
     return anns
-  }, [scene, selectedSession])
+  }, [scene, selectedSession, bonesActive])
 
   return (
     <group position={[-offset.x, -offset.y, -offset.z]}>
       <primitive object={scene} />
       <ambientLight intensity={0.6} />
-      {annotations.map(({ position, condition }) => (
+      {bonesActive && annotations.map(({ position, condition }) => (
         <BoneAnnotation
           key={condition.bone}
           position={position}
@@ -206,6 +183,7 @@ export default function BodyViewer() {
       className="w-full h-full"
     >
       <Skeleton />
+      <OrganLayer />
       <Particles offsetY={0.67} />
       <OrbitControls
         target={[0, 0.67, 0]}

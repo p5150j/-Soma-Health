@@ -9,10 +9,14 @@ export interface Session {
   status: string | null
 }
 
+export type LayerMode = 'bones' | 'organs' | 'all' | 'none'
+
 interface TimelineContextValue {
   sessions:           Session[]
   selectedSession:    string
   setSelectedSession: (id: string) => void
+  activeLayer:        LayerMode
+  setActiveLayer:     (l: LayerMode) => void
 }
 
 const TimelineContext = createContext<TimelineContextValue>(null!)
@@ -20,9 +24,10 @@ const TimelineContext = createContext<TimelineContextValue>(null!)
 export function TimelineProvider({ children }: { children: ReactNode }) {
   const sessions = conditionsData.sessions as Session[]
   const [selectedSession, setSelectedSession] = useState(sessions[sessions.length - 1].id)
+  const [activeLayer, setActiveLayer]         = useState<LayerMode>('all')
 
   return (
-    <TimelineContext.Provider value={{ sessions, selectedSession, setSelectedSession }}>
+    <TimelineContext.Provider value={{ sessions, selectedSession, setSelectedSession, activeLayer, setActiveLayer }}>
       {children}
     </TimelineContext.Provider>
   )
