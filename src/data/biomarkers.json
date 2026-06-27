@@ -1,6 +1,7 @@
 {
   "categories": ["Hormone", "Circulatory", "Immune", "Digestive", "Urinary"],
   "biomarkers": {
+
     "Hormone": [
       {
         "label": "HbA1c",
@@ -8,8 +9,8 @@
         "noChart": false,
         "rangeMin": 4.0, "rangeMax": 10.0, "normalMin": 4.0, "normalMax": 5.6, "mean": 5.7,
         "history": [
-          { "session": "2017-05", "value": "5.1",  "trend": "→", "indicator": "green" },
-          { "session": "2026-02", "value": "5.1",  "trend": "→", "indicator": "green", "note": "Feb 2023 — most recent" }
+          { "session": "2017-05", "value": "5.1", "trend": "→", "indicator": "green" },
+          { "session": "2026-02", "value": "5.1", "trend": "→", "indicator": "green", "note": "Feb 2023 — stable" }
         ]
       },
       {
@@ -19,7 +20,7 @@
         "rangeMin": 70, "rangeMax": 200, "normalMin": 70, "normalMax": 114, "mean": 105,
         "history": [
           { "session": "2017-05", "value": "99.7", "trend": "→", "indicator": "green" },
-          { "session": "2026-02", "value": "99.7", "trend": "→", "indicator": "green", "note": "Feb 2023 — most recent" }
+          { "session": "2026-02", "value": "99.7", "trend": "→", "indicator": "green", "note": "Feb 2023 — stable" }
         ]
       },
       {
@@ -56,15 +57,141 @@
         "history": [
           { "session": "2026-02", "value": "154", "trend": "→", "indicator": "yellow", "note": "Slightly above normal" }
         ]
-      },
+      }
+    ],
+
+    "Circulatory": [
       {
         "label": "Hemoglobin",
         "unit": "g/dL",
         "noChart": false,
-        "rangeMin": 10.0, "rangeMax": 20.0, "normalMin": 13.5, "normalMax": 17.5, "mean": 15.5,
+        "rangeMin": 10.0, "rangeMax": 20.0, "normalMin": 13.4, "normalMax": 16.1, "mean": 15.5,
         "history": [
-          { "session": "2017-05", "value": "16.1", "trend": "→",  "indicator": "yellow", "note": "At upper limit" },
-          { "session": "2026-02", "value": "17.0", "trend": "↗",  "indicator": "red",    "delta": "+0.9 g/dL", "note": "Above limit — monitor" }
+          { "session": "2017-05", "value": "16.1", "trend": "→",  "indicator": "yellow", "note": "At upper limit of normal" },
+          { "session": "2026-02", "value": "17.0", "trend": "↗",  "indicator": "red",    "delta": "+0.9 g/dL", "note": "Above 16.1 limit — persistent across both Feb draws" }
+        ]
+      },
+      {
+        "label": "RBC Count",
+        "unit": "10⁶/µL",
+        "noChart": false,
+        "rangeMin": 3.5, "rangeMax": 7.0, "normalMin": 4.41, "normalMax": 6.07, "mean": 5.1,
+        "history": [
+          { "session": "2017-05", "value": "5.44", "trend": "→", "indicator": "green" },
+          { "session": "2026-02", "value": "5.78", "trend": "↗", "indicator": "green", "delta": "+0.34" }
+        ]
+      },
+      {
+        "label": "Hematocrit",
+        "unit": "%",
+        "noChart": false,
+        "rangeMin": 35, "rangeMax": 60, "normalMin": 40.8, "normalMax": 52.9, "mean": 46,
+        "history": [
+          { "session": "2017-05", "value": "52.0", "trend": "→", "indicator": "green" },
+          { "session": "2026-02", "value": "49.8", "trend": "↘", "indicator": "green", "delta": "-2.2%" }
+        ]
+      },
+      {
+        "label": "MCV",
+        "unit": "fL",
+        "noChart": false,
+        "rangeMin": 75, "rangeMax": 105, "normalMin": 81.0, "normalMax": 95.1, "mean": 88,
+        "history": [
+          { "session": "2017-05", "value": "95.8", "trend": "→", "indicator": "red",   "note": "Slightly above 95.1 — macrocytosis" },
+          { "session": "2026-02", "value": "93.8", "trend": "↘", "indicator": "green", "delta": "-2.0 fL", "note": "Improved — back in range" }
+        ]
+      },
+      {
+        "label": "MCH",
+        "unit": "pg",
+        "noChart": false,
+        "rangeMin": 22, "rangeMax": 36, "normalMin": 26.1, "normalMax": 31.9, "mean": 29,
+        "history": [
+          { "session": "2017-05", "value": "30.7", "trend": "→", "indicator": "green" },
+          { "session": "2026-02", "value": "30.5", "trend": "→", "indicator": "green" }
+        ]
+      },
+      {
+        "label": "MCHC",
+        "unit": "g/dL",
+        "noChart": false,
+        "rangeMin": 28, "rangeMax": 38, "normalMin": 31.0, "normalMax": 35.0, "mean": 33,
+        "history": [
+          { "session": "2017-05", "value": "32.1", "trend": "→", "indicator": "green" },
+          { "session": "2026-02", "value": "33.1", "trend": "↗", "indicator": "green", "delta": "+1.0" }
+        ]
+      },
+      {
+        "label": "Platelets",
+        "unit": "10³/µL",
+        "noChart": false,
+        "rangeMin": 100, "rangeMax": 550, "normalMin": 130, "normalMax": 440, "mean": 250,
+        "history": [
+          { "session": "2017-05", "value": "254", "trend": "→", "indicator": "green" },
+          { "session": "2026-02", "value": "241", "trend": "↘", "indicator": "green", "delta": "-13" }
+        ]
+      },
+      {
+        "label": "RDW",
+        "unit": "%",
+        "noChart": false,
+        "rangeMin": 9.0, "rangeMax": 18.0, "normalMin": 10.9, "normalMax": 15.1, "mean": 12.5,
+        "history": [
+          { "session": "2017-05", "value": "12.6", "trend": "→", "indicator": "green" },
+          { "session": "2026-02", "value": "12.2", "trend": "↘", "indicator": "green" }
+        ]
+      }
+    ],
+
+    "Immune": [
+      {
+        "label": "WBC",
+        "unit": "10³/µL",
+        "noChart": false,
+        "rangeMin": 2.0, "rangeMax": 15.0, "normalMin": 3.8, "normalMax": 10.7, "mean": 7.0,
+        "history": [
+          { "session": "2017-05", "value": "6.9", "trend": "→", "indicator": "green" },
+          { "session": "2026-02", "value": "5.0", "trend": "↘", "indicator": "green", "delta": "-1.9", "note": "Down from 7.4 on Feb 12 — resolving response" }
+        ]
+      },
+      {
+        "label": "Neutrophils",
+        "unit": "10³/µL",
+        "noChart": false,
+        "rangeMin": 1.0, "rangeMax": 9.0, "normalMin": 1.7, "normalMax": 6.7, "mean": 3.5,
+        "history": [
+          { "session": "2017-05", "value": "4.3", "trend": "→", "indicator": "green" },
+          { "session": "2026-02", "value": "3.6", "trend": "↘", "indicator": "green", "delta": "-0.7" }
+        ]
+      },
+      {
+        "label": "Lymphocytes",
+        "unit": "10³/µL",
+        "noChart": false,
+        "rangeMin": 0.5, "rangeMax": 5.0, "normalMin": 0.8, "normalMax": 3.8, "mean": 2.0,
+        "history": [
+          { "session": "2017-05", "value": "1.8", "trend": "→", "indicator": "green" },
+          { "session": "2026-02", "value": "0.9", "trend": "↘", "indicator": "green", "delta": "-0.9", "note": "Lower end of range" }
+        ]
+      },
+      {
+        "label": "Monocytes",
+        "unit": "10³/µL",
+        "noChart": false,
+        "rangeMin": 0.0, "rangeMax": 1.5, "normalMin": 0.2, "normalMax": 1.0, "mean": 0.5,
+        "history": [
+          { "session": "2017-05", "value": "0.5", "trend": "→", "indicator": "green" },
+          { "session": "2026-02", "value": "0.5", "trend": "→", "indicator": "green" }
+        ]
+      },
+      {
+        "label": "Eosinophils",
+        "unit": "10³/µL",
+        "noChart": false,
+        "rangeMin": 0.0, "rangeMax": 1.2, "normalMin": 0.0, "normalMax": 0.8, "mean": 0.15,
+        "history": [
+          { "session": "2017-05", "value": "0.05", "trend": "→", "indicator": "green" },
+          { "session": "2026-02", "value": "0.20", "trend": "↗", "indicator": "green", "delta": "+0.15" }
         ]
       },
       {
@@ -72,10 +199,173 @@
         "unit": "10³/µL",
         "noChart": true,
         "history": [
-          { "session": "2017-05", "value": "0.40", "trend": "→", "indicator": "red",    "note": "HIGH — persistent 3yr pattern" },
-          { "session": "2026-02", "value": "0.20", "trend": "↘", "indicator": "red",    "note": "Still elevated above 0.1 limit" }
+          { "session": "2017-05", "value": "0.40", "trend": "→", "indicator": "red",    "note": "HIGH — 4× above 0.1 limit" },
+          { "session": "2026-02", "value": "0.20", "trend": "↘", "indicator": "red",    "delta": "-0.20", "note": "Still above 0.1 limit — 3yr persistent pattern" }
+        ]
+      }
+    ],
+
+    "Digestive": [
+      {
+        "label": "AST",
+        "unit": "IU/L",
+        "noChart": false,
+        "rangeMin": 0, "rangeMax": 100, "normalMin": 10, "normalMax": 40, "mean": 22,
+        "history": [
+          { "session": "2017-05", "value": "18", "trend": "→", "indicator": "green" },
+          { "session": "2026-02", "value": "30", "trend": "↗", "indicator": "green", "delta": "+12 IU/L" }
+        ]
+      },
+      {
+        "label": "ALT",
+        "unit": "IU/L",
+        "noChart": false,
+        "rangeMin": 0, "rangeMax": 120, "normalMin": 7, "normalMax": 56, "mean": 20,
+        "history": [
+          { "session": "2017-05", "value": "28", "trend": "→", "indicator": "green" },
+          { "session": "2026-02", "value": "36", "trend": "↗", "indicator": "green", "delta": "+8 IU/L" }
+        ]
+      },
+      {
+        "label": "ALP",
+        "unit": "IU/L",
+        "noChart": false,
+        "rangeMin": 20, "rangeMax": 200, "normalMin": 36, "normalMax": 126, "mean": 70,
+        "history": [
+          { "session": "2017-05", "value": "55",  "trend": "→", "indicator": "green" },
+          { "session": "2026-02", "value": "93",  "trend": "↗", "indicator": "green", "delta": "+38 IU/L", "note": "Notable rise — within range" }
+        ]
+      },
+      {
+        "label": "Bilirubin",
+        "unit": "mg/dL",
+        "noChart": false,
+        "rangeMin": 0.0, "rangeMax": 3.0, "normalMin": 0.1, "normalMax": 1.9, "mean": 0.7,
+        "history": [
+          { "session": "2017-05", "value": "1.2", "trend": "→", "indicator": "green" },
+          { "session": "2026-02", "value": "0.6", "trend": "↘", "indicator": "green", "delta": "-0.6 mg/dL" }
+        ]
+      },
+      {
+        "label": "Protein Total",
+        "unit": "g/dL",
+        "noChart": false,
+        "rangeMin": 5.0, "rangeMax": 10.0, "normalMin": 6.4, "normalMax": 8.4, "mean": 7.2,
+        "history": [
+          { "session": "2017-05", "value": "7.8", "trend": "→", "indicator": "green" },
+          { "session": "2026-02", "value": "7.5", "trend": "↘", "indicator": "green" }
+        ]
+      },
+      {
+        "label": "Albumin",
+        "unit": "g/dL",
+        "noChart": false,
+        "rangeMin": 2.5, "rangeMax": 6.0, "normalMin": 3.5, "normalMax": 5.0, "mean": 4.3,
+        "history": [
+          { "session": "2017-05", "value": "4.4", "trend": "→", "indicator": "green" },
+          { "session": "2026-02", "value": "4.2", "trend": "↘", "indicator": "green" }
+        ]
+      },
+      {
+        "label": "Lipase",
+        "unit": "U/L",
+        "noChart": false,
+        "rangeMin": 0, "rangeMax": 400, "normalMin": 23, "normalMax": 300, "mean": 50,
+        "history": [
+          { "session": "2026-02", "value": "36", "trend": "→", "indicator": "green", "note": "Normal — pancreatitis ruled out" }
+        ]
+      }
+    ],
+
+    "Urinary": [
+      {
+        "label": "Creatinine",
+        "unit": "mg/dL",
+        "noChart": false,
+        "rangeMin": 0.4, "rangeMax": 2.0, "normalMin": 0.66, "normalMax": 1.25, "mean": 0.95,
+        "history": [
+          { "session": "2017-05", "value": "1.06", "trend": "→", "indicator": "green" },
+          { "session": "2026-02", "value": "1.12", "trend": "↗", "indicator": "yellow", "delta": "+0.06", "note": "1.04→1.12 over 4 days — mild upward trend" }
+        ]
+      },
+      {
+        "label": "BUN",
+        "unit": "mg/dL",
+        "noChart": false,
+        "rangeMin": 5, "rangeMax": 40, "normalMin": 9, "normalMax": 20, "mean": 13,
+        "history": [
+          { "session": "2017-05", "value": "17", "trend": "→", "indicator": "green" },
+          { "session": "2026-02", "value": "20", "trend": "↗", "indicator": "yellow", "delta": "+3", "note": "At upper limit — consistent with mild renal stress" }
+        ]
+      },
+      {
+        "label": "GFR",
+        "unit": "mL/min",
+        "noChart": false,
+        "rangeMin": 15, "rangeMax": 130, "normalMin": 60, "normalMax": 120, "mean": 90,
+        "history": [
+          { "session": "2017-05", "value": "86", "trend": "→", "indicator": "green" },
+          { "session": "2026-02", "value": "81", "trend": "↘", "indicator": "yellow", "delta": "-5", "note": "Dropped 89→81 over 4 days — monitor trend" }
+        ]
+      },
+      {
+        "label": "Sodium",
+        "unit": "mmol/L",
+        "noChart": false,
+        "rangeMin": 125, "rangeMax": 155, "normalMin": 134, "normalMax": 145, "mean": 140,
+        "history": [
+          { "session": "2017-05", "value": "138", "trend": "→", "indicator": "green" },
+          { "session": "2026-02", "value": "137", "trend": "→", "indicator": "green" }
+        ]
+      },
+      {
+        "label": "Potassium",
+        "unit": "mmol/L",
+        "noChart": false,
+        "rangeMin": 2.5, "rangeMax": 6.5, "normalMin": 3.5, "normalMax": 5.1, "mean": 4.2,
+        "history": [
+          { "session": "2017-05", "value": "4.5", "trend": "→", "indicator": "green" },
+          { "session": "2026-02", "value": "4.1", "trend": "↘", "indicator": "green" }
+        ]
+      },
+      {
+        "label": "Calcium",
+        "unit": "mg/dL",
+        "noChart": false,
+        "rangeMin": 7.0, "rangeMax": 12.0, "normalMin": 8.4, "normalMax": 10.2, "mean": 9.4,
+        "history": [
+          { "session": "2017-05", "value": "9.4", "trend": "→", "indicator": "green" },
+          { "session": "2026-02", "value": "8.9", "trend": "↘", "indicator": "green" }
+        ]
+      },
+      {
+        "label": "Chloride",
+        "unit": "mmol/L",
+        "noChart": true,
+        "history": [
+          { "session": "2017-05", "value": "103", "trend": "→", "indicator": "green" },
+          { "session": "2026-02", "value": "104", "trend": "→", "indicator": "green" }
+        ]
+      },
+      {
+        "label": "CO₂",
+        "unit": "mmol/L",
+        "noChart": true,
+        "history": [
+          { "session": "2017-05", "value": "22", "trend": "→", "indicator": "green" },
+          { "session": "2026-02", "value": "25", "trend": "↗", "indicator": "green" }
+        ]
+      },
+      {
+        "label": "Anion Gap",
+        "unit": "mmol/L",
+        "noChart": true,
+        "history": [
+          { "session": "2017-05", "value": "13", "trend": "→", "indicator": "green" },
+          { "session": "2026-02", "value": "8",  "trend": "↘", "indicator": "green" }
         ]
       }
     ]
+
   }
 }

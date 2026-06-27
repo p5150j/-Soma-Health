@@ -17,6 +17,8 @@ interface ConditionEntry {
 
 const WIRE_COLOR:   Record<Severity, string> = { watch: '#f5c542', critical: '#ff453a' }
 const FILL_OPACITY: Record<Severity, number> = { watch: 0.12,      critical: 0.18      }
+const LAB_CYAN = '#4fc3f7'
+const LAB_FILL_OPACITY = 0.14
 
 function softSprite() {
   const size = 64
@@ -72,7 +74,7 @@ function Particles({ offsetY }: { offsetY: number }) {
 
 function Skeleton() {
   const { scene }                        = useGLTF('/skeleton/skeleton_lo.glb')
-  const { selectedSession, activeLayer } = useTimeline()
+  const { selectedSession, activeLayer, labsOn, labTargets } = useTimeline()
 
   const portalRef = useRef<HTMLElement>(null!)
   useEffect(() => {
@@ -88,6 +90,11 @@ function Skeleton() {
   }, [scene])
 
   const bonesActive = activeLayer === 'bones' || activeLayer === 'all'
+
+  const labBoneSet = useMemo(
+    () => new Set(labTargets.flatMap(t => t.boneTargets)),
+    [labTargets]
+  )
 
   const annotations = useMemo(() => {
     const bonesOpacity = bonesActive ? 1.0 : 0.0
@@ -123,7 +130,8 @@ function Skeleton() {
     const anns: { position: THREE.Vector3; condition: ConditionEntry }[] = []
 
     meshes.forEach((child) => {
-      const condition = sessionLookup[child.name]
+      const condition  = sessionLookup[child.name]
+      const hasLabGlow = labsOn && labBoneSet.has(child.name) && !condition
 
       child.material = new THREE.MeshBasicMaterial({
         color:       condition ? WIRE_COLOR[condition.severity] : '#c8dff0',
@@ -150,11 +158,24 @@ function Skeleton() {
         child.getWorldPosition(pos)
         pos.sub(sceneWorldPos)
         anns.push({ position: pos, condition })
+      } else if (hasLabGlow) {
+        const glow = new THREE.Mesh(
+          child.geometry,
+          new THREE.MeshBasicMaterial({
+            color:       LAB_CYAN,
+            transparent: true,
+            opacity:     LAB_FILL_OPACITY * bonesOpacity,
+            side:        THREE.DoubleSide,
+            depthWrite:  false,
+          })
+        )
+        glow.userData = { isFill: true }
+        child.add(glow)
       }
     })
 
     return anns
-  }, [scene, selectedSession, bonesActive])
+  }, [scene, selectedSession, bonesActive, labsOn, labBoneSet])
 
   return (
     <group position={[-offset.x, -offset.y, -offset.z]}>

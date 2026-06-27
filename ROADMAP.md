@@ -152,21 +152,54 @@ The `ModelOrgan` component handles everything else: centering via bounding box, 
 
 ---
 
-## Phase 4 — Chemistry & Blood Markers Linked to Body
+## Phase 4 — Chemistry & Blood Markers Linked to Body ✅
 
-Blood panel results get spatially anchored. High creatinine → kidneys glow. Low hemoglobin → marrow regions highlight. The body becomes an explainer for why those numbers matter.
+Blood panel results spatially anchored to the 3D body. Flagged labs glow cyan on the relevant anatomy — distinct from condition highlights (yellow/red).
 
-Implementation: a mapping file `src/data/marker-to-bone.json` maps lab test names to bone/organ mesh names + a severity derivation rule (threshold + direction).
-
-**Real data ready:** `mydata/labs_bloodwork_2023-2026/` has Feb 2023 and Feb 2026 panels (TSH, PSA, HbA1c, Lipid, CMP, CBC, Hepatic Function, Lipase) structured with `value`, `unit`, `range`, `status`, and `flag` fields — already shaped for this mapping.
+**What shipped:**
+- `src/data/lab-highlights.json` — flagged markers per session with `boneTargets[]` and `organTargets[]`
+- `labTargets` computed in `TimelineContext` from current session, consumed by both `BodyViewer` and `OrganLayer`
+- Labs toggle (bottom-left widget) enables/disables the cyan layer independently from bones/organs
+- Cyan fill (`#4fc3f7`, opacity 0.14 bones / 0.18 organs) — no wireframe, reads as "systemic" vs structural
+- Condition color wins if a structure has both a radiology finding and a lab flag
+- **5 flagged highlights wired:** Hemoglobin HIGH → sternum + femurs + lumbar marrow; Basophils HIGH → same marrow sites; HDL LOW → aorta + heart; Triglycerides HIGH → liver; Creatinine/GFR trending → kidney L+R
+- `biomarkers.json` fully populated: all 5 sub-tabs (Hormone, Circulatory, Immune, Digestive, Urinary) now have real data — 40+ markers across 2 sessions with trends, deltas, and reference range charts
+- Hemoglobin and Basophils moved from Hormone to their correct categories (Circulatory / Immune)
+- RightPanel `labCards` now driven by `activeLabCat` dynamically — no longer hardcoded to Hormone
 
 ---
 
 ## Phase 5 — AI Narrative Layer
 
-An LLM reads the full conditions + history and writes a plain-English summary: "Your spine has shown progressive degeneration over 3 years, likely correlated with the elevated inflammatory markers seen in Feb 2022." Collapsible panel or chat interface alongside the 3D view.
+Claude reads the full patient record across all visits and generates a plain-English synthesis — the cross-specialty correlations that fall through the cracks of siloed care.
 
-Anthropic API, straightforward to wire in.
+### What's already in place
+
+- **Analyze mode** scaffolded in RightPanel — `mode: 'visit' | 'analyze'` state, "Analyze →" trigger, "Generate Report" button (currently disabled), back navigation
+- **`ANTHROPIC_API_KEY`** in `.env.local` — ready to call
+- **Rich data for context** — 40+ biomarkers with trends, 2 sessions, bone + organ conditions from real radiology reports, cross-session lab observations already written in `mydata/`
+- **Body target mapping** already exists in `lab-highlights.json` — each flagged marker knows which body parts it affects
+
+### What needs to be built
+
+**1. `/api/analyze` route** — Next.js App Router API handler that:
+- Accepts patient context (conditions + labs + flags + cross-session observations)
+- Calls `claude-sonnet-4-6` with streaming
+- Returns insight objects: `{ text: string, bodyTargets: string[], severity: 'watch' | 'critical' }[]`
+
+**2. Prompt** — packages all structured data into a context block. Claude should produce 4–6 insights that cross systems: e.g. HDL + aortic calcification → cardiovascular risk; Creatinine trend + kidney stone → renal monitoring. Plain English, no jargon.
+
+**3. Streaming UI** — wire "Generate Report" to the API, stream insight cards into the Analyze panel as they arrive. Each card shows the text + a subtle body target indicator.
+
+**4. Insight → body highlight** — clicking an insight card highlights the relevant bones/organs on the 3D body. Uses existing `activeLayer` / `labTargets` infrastructure — just needs a new `analyzeTargets` state in context.
+
+**5. (Stretch) Real-time streaming body animation** — body lights up as each insight streams in, not just on click. Requires parsing structured tags mid-stream and an animation queue in Three.js (`useFrame` lerping opacity per structure). This is the cinematic version — build after steps 1–4.
+
+### Build order
+1. API route + prompt + plain streaming → Analyze panel renders text  *(~2 hrs)*
+2. Structure response as insight cards with `bodyTargets` *(~1 hr)*
+3. Click insight → body highlights those structures *(~1 hr)*
+4. Real-time streaming animation *(~2 hrs — the hard part)*
 
 ---
 

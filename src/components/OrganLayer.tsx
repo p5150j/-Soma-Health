@@ -1,5 +1,5 @@
 'use client'
-import React, { useRef, useEffect, useMemo, useState } from 'react'
+import React, { Suspense, useRef, useEffect, useMemo, useState } from 'react'
 import * as THREE from 'three'
 import { useFrame } from '@react-three/fiber'
 import { useGLTF, Line } from '@react-three/drei'
@@ -10,8 +10,10 @@ import organConditionsData from '@/data/conditions_organs.json'
 const WIRE_COLOR:   Record<Severity, string> = { watch: '#f5c542', critical: '#ff453a' }
 const WIRE_OPACITY: Record<Severity, number> = { watch: 0.70,      critical: 0.85 }
 const FILL_OPACITY: Record<Severity, number> = { watch: 0.18,      critical: 0.26 }
-const HEALTHY_COLOR = '#c8dff0'
-const HEALTHY_WIRE  = 0.28
+const HEALTHY_COLOR    = '#c8dff0'
+const HEALTHY_WIRE     = 0.28
+const LAB_CYAN         = '#4fc3f7'
+const LAB_FILL_OPACITY = 0.18
 
 interface OrganDef {
   key:              string
@@ -22,67 +24,84 @@ interface OrganDef {
   annotationOffset: [number, number, number]
   modelUrl?:        string
   modelScale?:      number
+  flipX?:           boolean
+  rotateY?:         number
+  debugColor?:      string
 }
 
 const ORGANS: OrganDef[] = [
-  { key: 'heart',    anchor: 't5',  offset: [-0.02,  0.00,  0.05], scale: [0.06, 0.07, 0.06], shape: 'sphere',   annotationOffset: [ 0.00,  0.10, 0.20] },
-  { key: 'lung_l',   anchor: 't5',  offset: [-0.07, -0.04,  0.02], scale: [0.08, 0.12, 0.07], shape: 'sphere',   annotationOffset: [-0.10,  0.10, 0.20] },
-  { key: 'lung_r',   anchor: 't5',  offset: [ 0.07, -0.04,  0.02], scale: [0.08, 0.12, 0.07], shape: 'sphere',   annotationOffset: [ 0.10,  0.10, 0.20] },
-  { key: 'liver',    anchor: 't12', offset: [ 0.07, -0.02,  0.05], scale: [0.08, 0.06, 0.06], shape: 'sphere',   annotationOffset: [ 0.10,  0.06, 0.18] },
-  { key: 'stomach',  anchor: 't12', offset: [-0.03,  0.01,  0.05], scale: [0.05, 0.05, 0.05], shape: 'sphere',   annotationOffset: [-0.10,  0.06, 0.18] },
-  { key: 'spleen',   anchor: 't9',  offset: [-0.09, -0.04,  0.03], scale: [0.05, 0.05, 0.04], shape: 'sphere',   annotationOffset: [-0.14,  0.06, 0.18] },
-  { key: 'pancreas', anchor: 'l1',  offset: [-0.02,  0.03,  0.04], scale: [0.06, 0.02, 0.03], shape: 'sphere',   annotationOffset: [-0.06,  0.08, 0.18] },
-  { key: 'kidney_l', anchor: 'l1',  offset: [-0.08,  0.01, -0.01], scale: [0.04, 0.06, 0.03], shape: 'sphere',   annotationOffset: [-0.14,  0.02, 0.18] },
-  { key: 'kidney_r', anchor: 'l1',  offset: [ 0.08,  0.01, -0.01], scale: [0.04, 0.06, 0.03], shape: 'sphere',   annotationOffset: [ 0.14,  0.02, 0.18] },
-  { key: 'aorta',    anchor: 'l1',  offset: [ 0.01,  0.06, -0.02], scale: [0.025, 0.20, 0.025], shape: 'cylinder', annotationOffset: [ 0.10,  0.12, 0.18] },
-  { key: 'bladder',  anchor: 'l5',  offset: [ 0.00, -0.08,  0.05], scale: [0.04, 0.04, 0.04], shape: 'sphere',   annotationOffset: [ 0.10,  0.04, 0.16] },
+  { key: 'heart',       anchor: 't5',  offset: [-0.02,  0.00,  0.05], scale: [0.06, 0.07, 0.06], shape: 'sphere',   annotationOffset: [ 0.00,  0.10, 0.20], modelUrl: '/organs/heart.glb',       modelScale: 0.0006 },
+  { key: 'lung_l',      anchor: 't5',  offset: [-0.03, -0.03,  0.03], scale: [0.08, 0.12, 0.07], shape: 'sphere',   annotationOffset: [-0.10,  0.10, 0.20], modelUrl: '/organs/lung_l.glb', modelScale: 0.0008, rotateY: Math.PI },
+  { key: 'lung_r',      anchor: 't5',  offset: [ 0.01, -0.03,  0.03], scale: [0.08, 0.12, 0.07], shape: 'sphere',   annotationOffset: [ 0.10,  0.10, 0.20], modelUrl: '/organs/lung_l.glb', modelScale: 0.0008, flipX: true, rotateY: Math.PI },
+  { key: 'liver',       anchor: 't12', offset: [ 0.07, -0.02,  0.05], scale: [0.08, 0.06, 0.06], shape: 'sphere',   annotationOffset: [ 0.10,  0.06, 0.18], modelUrl: '/organs/liver.glb',       modelScale: 0.0004 },
+  { key: 'gallbladder', anchor: 't12', offset: [ 0.06, -0.05,  0.05], scale: [0.03, 0.03, 0.03], shape: 'sphere',   annotationOffset: [ 0.14,  0.00, 0.18], modelUrl: '/organs/gallbladder.glb', modelScale: 0.0004 },
+  { key: 'stomach',     anchor: 't12', offset: [-0.03,  0.01,  0.05], scale: [0.05, 0.05, 0.05], shape: 'sphere',   annotationOffset: [-0.10,  0.06, 0.18] },
+  { key: 'spleen',      anchor: 't9',  offset: [-0.09, -0.04,  0.03], scale: [0.05, 0.05, 0.04], shape: 'sphere',   annotationOffset: [-0.14,  0.06, 0.18], modelUrl: '/organs/spleen.glb',      modelScale: 0.0004 },
+  { key: 'pancreas',    anchor: 'l1',  offset: [-0.02,  0.03,  0.04], scale: [0.06, 0.02, 0.03], shape: 'sphere',   annotationOffset: [-0.06,  0.08, 0.18], modelUrl: '/organs/pancreas.glb',    modelScale: 0.0004 },
+  { key: 'kidney_l',    anchor: 'l1',  offset: [-0.08,  0.01, -0.01], scale: [0.04, 0.06, 0.03], shape: 'sphere',   annotationOffset: [-0.14,  0.02, 0.18], modelUrl: '/organs/kidney_l.glb',    modelScale: 0.0004 },
+  { key: 'kidney_r',    anchor: 'l1',  offset: [ 0.08,  0.01, -0.01], scale: [0.04, 0.06, 0.03], shape: 'sphere',   annotationOffset: [ 0.14,  0.02, 0.18], modelUrl: '/organs/kidney_r.glb',    modelScale: 0.0004 },
+  { key: 'aorta',       anchor: 'l1',  offset: [ 0.01,  0.06, -0.02], scale: [0.025, 0.20, 0.025], shape: 'cylinder', annotationOffset: [ 0.10,  0.12, 0.18] },
+  { key: 'bladder',     anchor: 'l5',  offset: [ 0.00, -0.08,  0.05], scale: [0.04, 0.04, 0.04], shape: 'sphere',   annotationOffset: [ 0.10,  0.04, 0.16], modelUrl: '/organs/bladder.glb',     modelScale: 0.0004 },
 ]
 
 const ANCHORS_NEEDED = new Set(ORGANS.map(o => `${o.anchor}_beige_0`))
 
+// Kick off all organ GLB loads before any component renders — prevents useGLTF from suspending mid-render
+ORGANS.forEach(o => { if (o.modelUrl) useGLTF.preload(o.modelUrl) })
+
 type Finding = { severity: Severity; label: string; displayName: string }
 
-// Renders a GLTF organ model as clean edge lines (like bones) centered on (wx,wy,wz)
-function ModelOrgan({ url, modelScale = 0.05, wx, wy, wz, finding }: {
-  url:         string
-  modelScale?: number
-  wx:          number
-  wy:          number
-  wz:          number
-  finding:     Finding | undefined
+function ModelOrgan({ url, modelScale = 0.0007, flipX = false, rotateY = 0, debugColor, wx, wy, wz, finding, hasLabGlow }: {
+  url:          string
+  modelScale?:  number
+  flipX?:       boolean
+  rotateY?:     number
+  debugColor?:  string
+  wx:           number
+  wy:           number
+  wz:           number
+  finding:      Finding | undefined
+  hasLabGlow:   boolean
 }) {
   const { scene } = useGLTF(url)
 
-  // Extract EdgesGeometry from the most compact mesh — computed once per scene load
-  const { edges, center } = useMemo(() => {
+  const { geometry, center } = useMemo(() => {
     const meshes: THREE.Mesh[] = []
     scene.traverse(child => { if (child instanceof THREE.Mesh) meshes.push(child) })
-    meshes.forEach(m => m.geometry.computeBoundingSphere())
-    const target = meshes.reduce((a, b) =>
-      (a.geometry.boundingSphere?.radius ?? Infinity) <= (b.geometry.boundingSphere?.radius ?? Infinity) ? a : b
-    )
-    // EdgesGeometry with 15° crease — only draws silhouette + sharp feature edges, not every tri
-    const edges  = new THREE.EdgesGeometry(target.geometry, 15)
-    const bbox   = new THREE.Box3().setFromBufferAttribute(
-      target.geometry.attributes.position as THREE.BufferAttribute
-    )
+    const target = meshes[0]
+    if (!target) return { geometry: new THREE.SphereGeometry(0.5), center: new THREE.Vector3() }
+    const geometry = target.geometry.clone()
+    const posAttr = geometry.attributes.position as THREE.BufferAttribute
+    if (!posAttr) return { geometry, center: new THREE.Vector3() }
+    const bbox = new THREE.Box3().setFromBufferAttribute(posAttr)
     const center = new THREE.Vector3()
     bbox.getCenter(center)
-    return { edges, center }
+    return { geometry, center }
   }, [scene])
 
-  const wireColor   = finding ? WIRE_COLOR[finding.severity] : HEALTHY_COLOR
-  const wireOpacity = finding ? WIRE_OPACITY[finding.severity] : HEALTHY_WIRE
+  const offset: [number, number, number] = [
+    -center.x * modelScale,
+    -center.y * modelScale,
+    -center.z * modelScale,
+  ]
+
+  const wireColor   = debugColor ?? (finding ? WIRE_COLOR[finding.severity] : HEALTHY_COLOR)
+  const wireOpacity = finding ? WIRE_OPACITY[finding.severity] : (debugColor ? 0.85 : HEALTHY_WIRE)
+  const fillColor   = finding ? WIRE_COLOR[finding.severity] : LAB_CYAN
+  const fillOpacity = finding ? FILL_OPACITY[finding.severity] : LAB_FILL_OPACITY
+
+  const s: [number, number, number] = [flipX ? -modelScale : modelScale, modelScale, modelScale]
 
   return (
-    <group position={[wx, wy, wz]}>
-      <lineSegments
-        geometry={edges}
-        position={[-center.x * modelScale, -center.y * modelScale, -center.z * modelScale]}
-        scale={modelScale}
-      >
-        <lineBasicMaterial color={wireColor} opacity={wireOpacity} transparent depthTest={false} />
-      </lineSegments>
+    <group position={[wx, wy, wz]} rotation={[0, rotateY, 0]}>
+      <mesh geometry={geometry} position={offset} scale={s}>
+        <meshBasicMaterial color={wireColor} wireframe transparent opacity={wireOpacity} depthTest={false} />
+      </mesh>
+      {(finding || hasLabGlow) && (
+        <mesh geometry={geometry} position={offset} scale={s}>
+          <meshBasicMaterial color={fillColor} transparent opacity={fillOpacity} side={THREE.DoubleSide} depthWrite={false} depthTest={false} />
+        </mesh>
+      )}
     </group>
   )
 }
@@ -116,9 +135,14 @@ function OrganFlag({ organPos, annotationPos, finding, portal }: {
 }
 
 export function OrganLayer() {
-  const { selectedSession, activeLayer } = useTimeline()
+  const { selectedSession, activeLayer, labsOn, labTargets } = useTimeline()
   const { scene } = useGLTF('/skeleton/skeleton_lo.glb')
   const organsActive = activeLayer === 'organs' || activeLayer === 'all'
+
+  const labOrganSet = useMemo(
+    () => new Set(labTargets.flatMap(t => t.organTargets)),
+    [labTargets]
+  )
 
   const portalRef = useRef<HTMLElement>(null!)
   useEffect(() => {
@@ -166,17 +190,24 @@ export function OrganLayer() {
         const wy = anchor.y + organ.offset[1]
         const wz = anchor.z + organ.offset[2]
 
-        const finding = sessionFindings[organ.key]
+        const finding    = sessionFindings[organ.key]
+        const hasLabGlow = labsOn && labOrganSet.has(organ.key) && !finding
 
         return (
           <group key={organ.key}>
             {organ.modelUrl ? (
-              <ModelOrgan
-                url={organ.modelUrl}
-                modelScale={organ.modelScale}
-                wx={wx} wy={wy} wz={wz}
-                finding={finding}
+              <Suspense fallback={null}>
+                <ModelOrgan
+                  url={organ.modelUrl}
+                  modelScale={organ.modelScale}
+                  flipX={organ.flipX}
+                  rotateY={organ.rotateY}
+                  debugColor={organ.debugColor}
+                  wx={wx} wy={wy} wz={wz}
+                  finding={finding}
+                  hasLabGlow={hasLabGlow}
                 />
+              </Suspense>
             ) : (
               <group position={[wx, wy, wz]} scale={organ.scale}>
                 <mesh>
@@ -202,6 +233,22 @@ export function OrganLayer() {
                       color={WIRE_COLOR[finding.severity]}
                       transparent
                       opacity={FILL_OPACITY[finding.severity]}
+                      side={THREE.DoubleSide}
+                      depthWrite={false}
+                      depthTest={false}
+                    />
+                  </mesh>
+                )}
+                {hasLabGlow && (
+                  <mesh>
+                    {organ.shape === 'cylinder'
+                      ? <cylinderGeometry args={[0.5, 0.5, 1, 16]} />
+                      : <sphereGeometry args={[0.5, 16, 12]} />
+                    }
+                    <meshBasicMaterial
+                      color={LAB_CYAN}
+                      transparent
+                      opacity={LAB_FILL_OPACITY}
                       side={THREE.DoubleSide}
                       depthWrite={false}
                       depthTest={false}

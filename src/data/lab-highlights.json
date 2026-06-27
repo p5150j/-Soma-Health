@@ -1,0 +1,59 @@
+{
+  "highlights": [
+    {
+      "session":      "2026-02",
+      "marker":       "Hemoglobin",
+      "label":        "Hemoglobin",
+      "value":        "17.0",
+      "unit":         "g/dL",
+      "note":         "Above upper limit 16.1 — polycythemia or hemoconcentration. Persistent across both Feb 2026 draws.",
+      "severity":     "watch",
+      "boneTargets":  ["Sternum_beige_0", "l1_beige_0", "l2_beige_0", "l3_beige_0", "l4_beige_0", "r_femur_beige_0", "l_femur_beige_0"],
+      "organTargets": []
+    },
+    {
+      "session":      "2026-02",
+      "marker":       "Basophils",
+      "label":        "Basophilia",
+      "value":        "0.2",
+      "unit":         "10³/µL",
+      "note":         "Persistently elevated — present Feb 2023, Feb 12 and Feb 16, 2026. Three occurrences across 3 years.",
+      "severity":     "watch",
+      "boneTargets":  ["Sternum_beige_0", "l1_beige_0", "l2_beige_0", "r_femur_beige_0", "l_femur_beige_0"],
+      "organTargets": []
+    },
+    {
+      "session":      "2026-02",
+      "marker":       "HDL",
+      "label":        "HDL Cholesterol",
+      "value":        "31",
+      "unit":         "mg/dL",
+      "note":         "LOW — significantly below 40 threshold. Elevated cardiovascular risk.",
+      "severity":     "critical",
+      "boneTargets":  [],
+      "organTargets": ["aorta", "heart"]
+    },
+    {
+      "session":      "2026-02",
+      "marker":       "Triglycerides",
+      "label":        "Triglycerides",
+      "value":        "154",
+      "unit":         "mg/dL",
+      "note":         "Slightly above normal threshold — associated with hepatic fat accumulation.",
+      "severity":     "watch",
+      "boneTargets":  [],
+      "organTargets": ["liver"]
+    },
+    {
+      "session":      "2026-02",
+      "marker":       "Creatinine",
+      "label":        "Creatinine / GFR",
+      "value":        "1.12",
+      "unit":         "mg/dL",
+      "note":         "Trending up 1.04→1.12 over 4 days. GFR dropped 89→81. Mild kidney stress pattern.",
+      "severity":     "watch",
+      "boneTargets":  [],
+      "organTargets": ["kidney_l", "kidney_r"]
+    }
+  ]
+}

@@ -38,7 +38,7 @@ function next(bones: boolean, organs: boolean): LayerMode {
 }
 
 export function LayerToggles() {
-  const { activeLayer, setActiveLayer } = useTimeline()
+  const { activeLayer, setActiveLayer, labsOn, setLabsOn } = useTimeline()
   const bonesOn  = activeLayer === 'bones'  || activeLayer === 'all'
   const organsOn = activeLayer === 'organs' || activeLayer === 'all'
 
@@ -62,7 +62,11 @@ export function LayerToggles() {
 
         <span className="w-px h-3.5 bg-white/10" />
 
-        <SliderToggle label="Labs" on={false} disabled />
+        <SliderToggle
+          label="Labs"
+          on={labsOn}
+          onClick={() => setLabsOn(!labsOn)}
+        />
 
       </div>
     </div>

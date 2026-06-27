@@ -34,7 +34,9 @@ export function RightPanel() {
   const [activeTab, setActiveTab]     = useState<MainTab>('labs')
   const [activeLabCat, setActiveLabCat] = useState<string>('Hormone')
 
-  const labCards = biomarkersData.biomarkers.Hormone.map((bm, i) => {
+  const categoryMarkers = (biomarkersData.biomarkers as Record<string, typeof biomarkersData.biomarkers.Hormone>)[activeLabCat] ?? []
+
+  const labCards = categoryMarkers.map((bm, i) => {
     const entry = bm.history.find(h => h.session === selectedSession)
       ?? bm.history[bm.history.length - 1]
     return {
@@ -142,7 +144,7 @@ export function RightPanel() {
           {/* Tab body */}
           <div className="flex-1 min-h-0 overflow-y-auto no-scrollbar">
 
-            {activeTab === 'labs' && activeLabCat === 'Hormone' && (
+            {activeTab === 'labs' && labCards.length > 0 && (
               <div className="columns-3 gap-2.5">
                 {labCards.map(card => (
                   <div key={card.label} className="break-inside-avoid mb-2.5">
@@ -152,7 +154,7 @@ export function RightPanel() {
               </div>
             )}
 
-            {activeTab === 'labs' && activeLabCat !== 'Hormone' && (
+            {activeTab === 'labs' && labCards.length === 0 && (
               <div className="glass-panel backdrop-blur-[40px] backdrop-saturate-150 flex items-center justify-center h-32">
                 <p className="text-[11px] font-[300] text-white/25">No data for this category</p>
               </div>
