@@ -298,6 +298,35 @@ Best input is CT DICOM (series of slices). Flat X-ray PNGs/JPGs/TIFFs work but r
 
 ---
 
+## Backlog — LLM Analyze Mode: Animated Body Narration
+
+When the LLM generates a holistic timeline analysis (Analyze mode, Phase 5), it should animate the 3D body in real time as it narrates — lighting up the systems and structures it's actively drawing correlations from.
+
+**The experience:**
+The user hits "Generate Report." The LLM begins narrating (audio + text transcript). As it speaks, the body responds: mentions the lumbar spine → L1/L5 glow red. Shifts to cardiovascular risk → aorta and relevant bone marrow regions illuminate. Connects the HDL finding to the aortic calcification → both highlight simultaneously with a visual connector or synchronized pulse. The body becomes a live map of the LLM's reasoning.
+
+**Why this is the most compelling feature in the whole product:**
+Every other health dashboard shows you data. This one shows you *thinking* — a clinician-grade synthesis playing out spatially on your own body in real time. No specialist currently does this across systems. The LLM sees the full timeline. The body makes it legible.
+
+**Technical approach when ready:**
+- LLM response is structured (not just prose) — each insight has `systems: ['l1', 'aorta', 'hdl']` tags
+- Streaming response → parse tags as they arrive → trigger Three.js highlight transitions via a shared animation queue
+- Audio via Web Speech API or ElevenLabs TTS, timed to streaming tokens
+- `useFrame` lerps material opacity/emissive color per highlighted structure
+- Analyzer mode overrides layer state — shows all layers at once for the duration of the narration, then returns to previous state
+
+**Implementation order:** Build Phase 5 LLM API call first (plain text response). Then structure the response format. Then wire the animation layer. Audio is last and optional.
+
+---
+
+## Backlog — Condition Click → Camera Isolation
+
+Tapping a condition in the Conditions tab focuses the 3D camera on that specific bone or organ and briefly isolates it (other structures dim further). Fast path to understanding exactly where in the body a finding is located.
+
+**Implementation:** `setTarget()` on OrbitControls ref + lerp camera position toward the structure's world coordinates. Single `useFrame` animation, ~60 frames. Reset on next condition click or tab switch.
+
+---
+
 ## Useful Patterns Already Established
 
 - **Adding a new data layer**: create a new `*-conditions.json`, add a new lookup map in `BodyViewer.tsx`, traverse the relevant mesh names

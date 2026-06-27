@@ -75,7 +75,7 @@ export function RightPanel() {
   }
 
   return (
-    <aside className="w-[clamp(380px,40vw,660px)] h-full px-4 pt-8 pb-4 flex flex-col gap-3 overflow-hidden">
+    <aside className="w-[clamp(380px,40vw,660px)] h-full px-4 pt-[42px] pb-4 flex flex-col gap-3 overflow-hidden">
 
       {mode === 'visit' ? (
         <>
@@ -87,8 +87,8 @@ export function RightPanel() {
                   key={tab}
                   onClick={() => setActiveTab(tab)}
                   className={activeTab === tab
-                    ? 'px-3 py-1 text-[11px] font-[500] bg-lime text-black rounded-full'
-                    : 'px-3 py-1 text-[11px] font-[300] text-white/40 glass-panel backdrop-blur-[40px] backdrop-saturate-150 rounded-full'
+                    ? 'px-4 py-1.5 text-[11px] font-[500] bg-lime text-black rounded-full'
+                    : 'px-4 py-1.5 text-[11px] font-[300] text-white/40 glass-panel backdrop-blur-[40px] backdrop-saturate-150 rounded-full'
                   }
                 >
                   {TAB_LABEL[tab]}
@@ -110,10 +110,10 @@ export function RightPanel() {
                 <button
                   key={cat}
                   onClick={() => setActiveLabCat(cat)}
-                  className={`pb-2 text-[11px] font-[300] transition-colors border-b-2 -mb-px ${
+                  className={`pt-2 pb-2 text-[11px] font-[300] transition-colors border-b-2 -mb-px ${
                     activeLabCat === cat
                       ? 'text-white/80 border-lime'
-                      : 'text-white/30 border-transparent hover:text-white/50'
+                      : 'text-white/55 border-transparent hover:text-white/75'
                   }`}
                 >
                   {cat}
