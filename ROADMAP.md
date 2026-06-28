@@ -45,18 +45,34 @@ Think of it as a living medical record that replaces static PDFs with a navigabl
 
 ---
 
-## Phase 3 — Organ Layer ✅
+## Phase 3 — Organ Layer ✅ COMPLETE (all 12 organs, zero placeholders)
 
-Add a semi-transparent organ layer rendered alongside the skeleton. Organ findings (hepatic steatosis, kidney stone, aortic calcification from real CT reports) get their own annotation cards using the same glass card + drei `<Html>` system as bones.
+Real wireframe GLB organ meshes for all 12 organs, live in `<OrganLayer />`. Organ findings from real CT reports drive color highlights and annotation flags using the same glass card + drei `<Html>` system as bones.
 
-### Approach decided: Three.js primitives (not a GLTF)
+### What shipped
+
+- 9 organs extracted from downloaded GLBs (`abdomen_anatomy.glb`, `healthy_heart_and_lungs.glb`) via `scripts/extract-organs.mjs`
+- **Stomach** and **aorta** created from scratch in Blender using direct TCP socket to the Blender MCP addon (port 9876) — Frenet-Serret tube generation in Python
+  - Stomach: J-curve tube (SEGS=28), `modelScale: 0.015`, `flipX: true` to orient fundus anatomically
+  - Aorta: 3-segment tube — hook/arch at top + straight trunk + Y-fork at bottom (iliac bifurcation), `modelScale: 0.022`, `rotateY: Math.PI`
+- **Anatomy X-axis convention fix**: viewer uses face-to-face convention (patient's left = viewer's right = positive X). All organ X offsets were negated when this was discovered (liver was on wrong side, etc.). Lungs exempted — their `rotateY` + `flipX` already handled orientation.
+- `ModelOrgan` renders ALL `THREE.Mesh` objects in GLTF scene (multi-geometry) — required for Blender-created meshes
+
+### Key technical notes
+
+- **No Draco compression** on any organ GLB — Draco without decoder crashes WebGL context
+- **`useGLTF.preload(url)` at module level** — prevents Suspense mid-render WebGL thrash
+- **Blender MCP command type**: `execute_code` (not `execute_blender_code` — that key doesn't exist)
+- See `project_organ_meshes.md` in memory for full calibrated ORGANS array and Blender TCP usage pattern
+
+### Original approach notes (kept for history)
 
 **What we tried and why it failed:**
 - Z-Anatomy open anatomy model (`splanchnology` from Sketchfab) — 47MB `.bin` file, causes WebGL context loss when loaded alongside the skeleton. Too heavy.
-- Custom extraction: parsed named organ meshes from the source OBJ (`Z-Anatomy-Layers1-7.obj`) — organs are fully named (`kidney_l`, `kidney_r`, `liver_0`–`liver_7`, `spleen`, `stomach`, `pancreas`, `gallbladder`, `bladder`, lungs, trachea). Converted to GLB via `obj2gltf` + `@gltf-transform/cli simplify` → still causes WebGL context loss, likely degenerate geometry from the OBJ→GLB pipeline.
+- Custom extraction from source OBJ — caused WebGL context loss, likely degenerate geometry from the OBJ→GLB pipeline.
 
-**The right POC move: named Three.js mesh primitives**
-Each organ is a `<mesh>` with a scaled `SphereGeometry` or `BoxGeometry` positioned at anatomically correct coordinates in the skeleton's space. Named explicitly (`heart`, `liver`, `kidney_l`, etc.) so they can be targeted identically to bones. When a real labeled GLB is available later, it's a straight component swap.
+**Fallback that worked: individual mesh extraction from curated GLBs**
+`scripts/extract-organs.mjs` clones the source doc, strips all but the target mesh, removes textures, writes clean GLB.
 
 ### Coordinate anchors (relative to skeleton center at y=0)
 ```

@@ -30,17 +30,17 @@ interface OrganDef {
 }
 
 const ORGANS: OrganDef[] = [
-  { key: 'heart',       anchor: 't5',  offset: [-0.02,  0.00,  0.05], scale: [0.06, 0.07, 0.06], shape: 'sphere',   annotationOffset: [ 0.00,  0.10, 0.20], modelUrl: '/organs/heart.glb',       modelScale: 0.0006 },
-  { key: 'lung_l',      anchor: 't5',  offset: [-0.03, -0.03,  0.03], scale: [0.08, 0.12, 0.07], shape: 'sphere',   annotationOffset: [-0.10,  0.10, 0.20], modelUrl: '/organs/lung_l.glb', modelScale: 0.0008, rotateY: Math.PI },
-  { key: 'lung_r',      anchor: 't5',  offset: [ 0.01, -0.03,  0.03], scale: [0.08, 0.12, 0.07], shape: 'sphere',   annotationOffset: [ 0.10,  0.10, 0.20], modelUrl: '/organs/lung_l.glb', modelScale: 0.0008, flipX: true, rotateY: Math.PI },
-  { key: 'liver',       anchor: 't12', offset: [ 0.07, -0.02,  0.05], scale: [0.08, 0.06, 0.06], shape: 'sphere',   annotationOffset: [ 0.10,  0.06, 0.18], modelUrl: '/organs/liver.glb',       modelScale: 0.0004 },
-  { key: 'gallbladder', anchor: 't12', offset: [ 0.06, -0.05,  0.05], scale: [0.03, 0.03, 0.03], shape: 'sphere',   annotationOffset: [ 0.14,  0.00, 0.18], modelUrl: '/organs/gallbladder.glb', modelScale: 0.0004 },
-  { key: 'stomach',     anchor: 't12', offset: [-0.03,  0.01,  0.05], scale: [0.05, 0.05, 0.05], shape: 'sphere',   annotationOffset: [-0.10,  0.06, 0.18] },
-  { key: 'spleen',      anchor: 't9',  offset: [-0.09, -0.04,  0.03], scale: [0.05, 0.05, 0.04], shape: 'sphere',   annotationOffset: [-0.14,  0.06, 0.18], modelUrl: '/organs/spleen.glb',      modelScale: 0.0004 },
-  { key: 'pancreas',    anchor: 'l1',  offset: [-0.02,  0.03,  0.04], scale: [0.06, 0.02, 0.03], shape: 'sphere',   annotationOffset: [-0.06,  0.08, 0.18], modelUrl: '/organs/pancreas.glb',    modelScale: 0.0004 },
-  { key: 'kidney_l',    anchor: 'l1',  offset: [-0.08,  0.01, -0.01], scale: [0.04, 0.06, 0.03], shape: 'sphere',   annotationOffset: [-0.14,  0.02, 0.18], modelUrl: '/organs/kidney_l.glb',    modelScale: 0.0004 },
-  { key: 'kidney_r',    anchor: 'l1',  offset: [ 0.08,  0.01, -0.01], scale: [0.04, 0.06, 0.03], shape: 'sphere',   annotationOffset: [ 0.14,  0.02, 0.18], modelUrl: '/organs/kidney_r.glb',    modelScale: 0.0004 },
-  { key: 'aorta',       anchor: 'l1',  offset: [ 0.01,  0.06, -0.02], scale: [0.025, 0.20, 0.025], shape: 'cylinder', annotationOffset: [ 0.10,  0.12, 0.18] },
+  { key: 'heart',       anchor: 't5',  offset: [ 0.02,  0.00,  0.05], scale: [0.06, 0.07, 0.06], shape: 'sphere',   annotationOffset: [ 0.00,  0.10, 0.20], modelUrl: '/organs/heart.glb',       modelScale: 0.0006 },
+  { key: 'lung_l',      anchor: 't5',  offset: [-0.03, -0.03,  0.03], scale: [0.08, 0.12, 0.07], shape: 'sphere',   annotationOffset: [-0.10,  0.10, 0.20], modelUrl: '/organs/lung_l.glb',      modelScale: 0.0008, rotateY: Math.PI },
+  { key: 'lung_r',      anchor: 't5',  offset: [ 0.01, -0.03,  0.03], scale: [0.08, 0.12, 0.07], shape: 'sphere',   annotationOffset: [ 0.10,  0.10, 0.20], modelUrl: '/organs/lung_l.glb',      modelScale: 0.0008, flipX: true, rotateY: Math.PI },
+  { key: 'liver',       anchor: 't12', offset: [-0.07,  0.02,  0.05], scale: [0.08, 0.06, 0.06], shape: 'sphere',   annotationOffset: [-0.10,  0.06, 0.18], modelUrl: '/organs/liver2.glb',      modelScale: 0.09  },
+  { key: 'gallbladder', anchor: 't12', offset: [-0.06, -0.05,  0.05], scale: [0.03, 0.03, 0.03], shape: 'sphere',   annotationOffset: [-0.14,  0.00, 0.18], modelUrl: '/organs/gallbladder.glb', modelScale: 0.0004 },
+  { key: 'stomach',     anchor: 't12', offset: [ 0.06, -0.01,  0.04], scale: [0.05, 0.05, 0.05], shape: 'sphere',   annotationOffset: [ 0.10,  0.06, 0.18], modelUrl: '/organs/stomach.glb',     modelScale: 0.08,  flipX: true },
+  { key: 'spleen',      anchor: 't9',  offset: [ 0.09, -0.04,  0.03], scale: [0.05, 0.05, 0.04], shape: 'sphere',   annotationOffset: [ 0.14,  0.06, 0.18], modelUrl: '/organs/spleen.glb',      modelScale: 0.0004 },
+  { key: 'pancreas',    anchor: 'l1',  offset: [ 0.02,  0.03,  0.04], scale: [0.06, 0.02, 0.03], shape: 'sphere',   annotationOffset: [ 0.06,  0.08, 0.18], modelUrl: '/organs/pancreas.glb',    modelScale: 0.0004 },
+  { key: 'kidney_l',    anchor: 'l1',  offset: [ 0.08,  0.01, -0.01], scale: [0.04, 0.06, 0.03], shape: 'sphere',   annotationOffset: [ 0.14,  0.02, 0.18], modelUrl: '/organs/kidney_l.glb',    modelScale: 0.0004 },
+  { key: 'kidney_r',    anchor: 'l1',  offset: [-0.08,  0.01, -0.01], scale: [0.04, 0.06, 0.03], shape: 'sphere',   annotationOffset: [-0.14,  0.02, 0.18], modelUrl: '/organs/kidney_r.glb',    modelScale: 0.0004 },
+  { key: 'aorta',       anchor: 't5',  offset: [ 0.00, -0.19,  0.02], scale: [0.025, 0.20, 0.025], shape: 'cylinder', annotationOffset: [-0.12,  0.10, 0.18], modelUrl: '/organs/aorta.glb', modelScale: 0.022, rotateY: Math.PI },
   { key: 'bladder',     anchor: 'l5',  offset: [ 0.00, -0.08,  0.05], scale: [0.04, 0.04, 0.04], shape: 'sphere',   annotationOffset: [ 0.10,  0.04, 0.16], modelUrl: '/organs/bladder.glb',     modelScale: 0.0004 },
 ]
 
@@ -65,18 +65,16 @@ function ModelOrgan({ url, modelScale = 0.0007, flipX = false, rotateY = 0, debu
 }) {
   const { scene } = useGLTF(url)
 
-  const { geometry, center } = useMemo(() => {
+  const { geometries, center } = useMemo(() => {
     const meshes: THREE.Mesh[] = []
     scene.traverse(child => { if (child instanceof THREE.Mesh) meshes.push(child) })
-    const target = meshes[0]
-    if (!target) return { geometry: new THREE.SphereGeometry(0.5), center: new THREE.Vector3() }
-    const geometry = target.geometry.clone()
-    const posAttr = geometry.attributes.position as THREE.BufferAttribute
-    if (!posAttr) return { geometry, center: new THREE.Vector3() }
-    const bbox = new THREE.Box3().setFromBufferAttribute(posAttr)
+    if (!meshes.length) return { geometries: [new THREE.SphereGeometry(0.5)], center: new THREE.Vector3() }
+    const geometries = meshes.map(m => m.geometry.clone())
+    const bbox = new THREE.Box3()
+    geometries.forEach(g => { const posAttr = g.attributes.position as THREE.BufferAttribute; if (posAttr) bbox.expandByObject(new THREE.Mesh(g)) })
     const center = new THREE.Vector3()
     bbox.getCenter(center)
-    return { geometry, center }
+    return { geometries, center }
   }, [scene])
 
   const offset: [number, number, number] = [
@@ -94,14 +92,16 @@ function ModelOrgan({ url, modelScale = 0.0007, flipX = false, rotateY = 0, debu
 
   return (
     <group position={[wx, wy, wz]} rotation={[0, rotateY, 0]}>
-      <mesh geometry={geometry} position={offset} scale={s}>
-        <meshBasicMaterial color={wireColor} wireframe transparent opacity={wireOpacity} depthTest={false} />
-      </mesh>
-      {(finding || hasLabGlow) && (
-        <mesh geometry={geometry} position={offset} scale={s}>
+      {geometries.map((geometry, i) => (
+        <mesh key={i} geometry={geometry} position={offset} scale={s}>
+          <meshBasicMaterial color={wireColor} wireframe transparent opacity={wireOpacity} depthTest={false} />
+        </mesh>
+      ))}
+      {(finding || hasLabGlow) && geometries.map((geometry, i) => (
+        <mesh key={`fill-${i}`} geometry={geometry} position={offset} scale={s}>
           <meshBasicMaterial color={fillColor} transparent opacity={fillOpacity} side={THREE.DoubleSide} depthWrite={false} depthTest={false} />
         </mesh>
-      )}
+      ))}
     </group>
   )
 }
@@ -117,7 +117,7 @@ function OrganFlag({ organPos, annotationPos, finding, portal }: {
       <Line
         points={[organPos, annotationPos]}
         color={WIRE_COLOR[finding.severity]}
-        lineWidth={1}
+        lineWidth={3}
         transparent
         opacity={0.45}
         depthTest={false}

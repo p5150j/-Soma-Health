@@ -1,7 +1,7 @@
 'use client'
 import React, { useMemo, useRef, useEffect } from 'react'
 import { Canvas } from '@react-three/fiber'
-import { useGLTF, OrbitControls } from '@react-three/drei'
+import { useGLTF, OrbitControls, Line } from '@react-three/drei'
 import * as THREE from 'three'
 import conditionsData from '@/data/conditions_real.json'
 import { useTimeline } from '@/context/TimelineContext'
@@ -127,7 +127,7 @@ function Skeleton() {
     const sceneWorldPos = new THREE.Vector3()
     scene.getWorldPosition(sceneWorldPos)
 
-    const anns: { position: THREE.Vector3; condition: ConditionEntry }[] = []
+    const anns: { position: THREE.Vector3; annotationPos: THREE.Vector3; condition: ConditionEntry }[] = []
 
     meshes.forEach((child) => {
       const condition  = sessionLookup[child.name]
@@ -157,7 +157,12 @@ function Skeleton() {
         const pos = new THREE.Vector3()
         child.getWorldPosition(pos)
         pos.sub(sceneWorldPos)
-        anns.push({ position: pos, condition })
+        const annotationPos = new THREE.Vector3(
+          pos.x < -0.02 ? pos.x - 0.14 : pos.x + 0.14,
+          pos.y + 0.04,
+          pos.z + 0.12
+        )
+        anns.push({ position: pos, annotationPos, condition })
       } else if (hasLabGlow) {
         const glow = new THREE.Mesh(
           child.geometry,
@@ -181,15 +186,24 @@ function Skeleton() {
     <group position={[-offset.x, -offset.y, -offset.z]}>
       <primitive object={scene} />
       <ambientLight intensity={0.6} />
-      {bonesActive && annotations.map(({ position, condition }) => (
-        <BoneAnnotation
-          key={condition.bone}
-          position={position}
-          displayName={condition.displayName}
-          label={condition.label}
-          severity={condition.severity}
-          portal={portalRef}
-        />
+      {bonesActive && annotations.map(({ position, annotationPos, condition }) => (
+        <React.Fragment key={condition.bone}>
+          <Line
+            points={[position, annotationPos]}
+            color={WIRE_COLOR[condition.severity]}
+            lineWidth={3}
+            transparent
+            opacity={0.45}
+            depthTest={false}
+          />
+          <BoneAnnotation
+            position={annotationPos}
+            displayName={condition.displayName}
+            label={condition.label}
+            severity={condition.severity}
+            portal={portalRef}
+          />
+        </React.Fragment>
       ))}
     </group>
   )
