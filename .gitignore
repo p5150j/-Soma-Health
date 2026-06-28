@@ -43,3 +43,6 @@ next-env.d.ts
 # Raw source data — UC Health exports, DICOM images, MyChart screenshots, lab JSONs.
 # Source material only; processed versions live in src/data/. Never on a public repo.
 mydata/
+
+# Design reference images — local inspiration only, no need to ship these.
+ref_images/
