@@ -185,37 +185,53 @@ Blood panel results spatially anchored to the 3D body. Flagged labs glow cyan on
 
 ---
 
-## Phase 5 — AI Narrative Layer
+## Phase 5 — AI Narrative Layer ✅ COMPLETE
 
-Claude reads the full patient record across all visits and generates a plain-English synthesis — the cross-specialty correlations that fall through the cracks of siloed care.
+Claude reads the full patient record across all visits and generates a fellowship-physician-voiced synthesis — the cross-specialty correlations that fall through the cracks of siloed care.
 
-### What's already in place
+### What shipped
 
-- **Analyze mode** scaffolded in RightPanel — `mode: 'visit' | 'analyze'` state, "Analyze →" trigger, "Generate Report" button (currently disabled), back navigation
-- **`ANTHROPIC_API_KEY`** in `.env.local` — ready to call
-- **Rich data for context** — 40+ biomarkers with trends, 2 sessions, bone + organ conditions from real radiology reports, cross-session lab observations already written in `mydata/`
-- **Body target mapping** already exists in `lab-highlights.json` — each flagged marker knows which body parts it affects
+- **BAML v0.223.0** (`baml_src/`) — structured LLM output with Schema-Aligned Parsing. `@@stream.done` on `ConditionInsight` and `LabInsight` classes means cards only render when their fields are fully complete — no half-rendered cards mid-stream.
+- **`/api/analyze` route** — NDJSON streaming endpoint. Server-side only (`serverExternalPackages: ['@boundaryml/baml']`). API key never reaches the browser.
+- **`AnalyzePanel.tsx`** — full streaming UI with spinner overlay until the entire response is done. Sections: headline, trajectory gauge (1–10 bar, red→yellow→lime), Primary Concerns, Lab Highlights (2-col), Watchlist + Actions. Regenerate button clears cache and re-fires.
+- **ConditionInsightCard redesign** — instrument-panel aesthetic (ref_images driven): name + URGENT/WATCH/MONITOR status label, hairline divider, label/value metric rows (Trajectory / Before / Status), clinical text as dim footnote. Completely different from the Conditions tab cards.
+- **Fellowship physician system prompt** — direct, cross-signal language. Trajectory score is honest. Recommendations are specific ("Schedule lumbar MRI within 30 days", not "see a doctor").
+- **Full patient context** — all sessions, all conditions (skeletal + organs), all biomarkers, all lab highlights passed as single JSON context object. Enables 9yr progression language.
 
-### What needs to be built
+### Key technical notes
 
-**1. `/api/analyze` route** — Next.js App Router API handler that:
-- Accepts patient context (conditions + labs + flags + cross-session observations)
-- Calls `claude-sonnet-4-6` with streaming
-- Returns insight objects: `{ text: string, bodyTargets: string[], severity: 'watch' | 'critical' }[]`
+- `withBaml()` webpack plugin conflicts with Next.js 16 Turbopack — removed, replaced with `serverExternalPackages: ['@boundaryml/baml']` + `turbopack: {}`
+- BAML generator must use **CJS** (no `module_format "esm"`) — Turbopack can't resolve `.js` extension imports that ESM mode generates
+- NDJSON stream: client buffers lines, splits on `\n`, parses `{ partial }` / `{ final }` / `{ error }` messages
+- `SCORE_WIDTH` array of 10 Tailwind width classes instead of inline `style={{ width }}` (Tailwind v4 rule)
 
-**2. Prompt** — packages all structured data into a context block. Claude should produce 4–6 insights that cross systems: e.g. HDL + aortic calcification → cardiovascular risk; Creatinine trend + kidney stone → renal monitoring. Plain English, no jargon.
+### Phase 5 backlog
 
-**3. Streaming UI** — wire "Generate Report" to the API, stream insight cards into the Analyze panel as they arrive. Each card shows the text + a subtle body target indicator.
+#### [BACKLOG] Per-Section Clinical Citations
 
-**4. Insight → body highlight** — clicking an insight card highlights the relevant bones/organs on the 3D body. Uses existing `activeLayer` / `labTargets` infrastructure — just needs a new `analyzeTargets` state in context.
+Each `ConditionInsight` and `LabInsight` card shows 1–3 citation chips below the clinical text. Clicking opens source in new tab.
 
-**5. (Stretch) Real-time streaming body animation** — body lights up as each insight streams in, not just on click. Requires parsing structured tags mid-stream and an animation queue in Three.js (`useFrame` lerping opacity per structure). This is the cinematic version — build after steps 1–4.
+**v1 (safe — no hallucinated URLs):**
+- Claude generates PubMed search-link terms → we construct `https://pubmed.ncbi.nlm.nih.gov/?term=<encoded>` — always resolves, never fabricated
+- For org guidelines (AHA, ACC, USPSTF): Claude provides org name + guideline title, we link to known org search pages
 
-### Build order
-1. API route + prompt + plain streaming → Analyze panel renders text  *(~2 hrs)*
-2. Structure response as insight cards with `bodyTargets` *(~1 hr)*
-3. Click insight → body highlights those structures *(~1 hr)*
-4. Real-time streaming animation *(~2 hrs — the hard part)*
+**v2:** Second BAML call `EnrichWithCitations` with `web_search` tool — verifies and replaces search links with exact DOIs.
+
+**BAML schema change (v1):**
+```baml
+class Reference {
+  title  string
+  source string  // "PubMed" | "AHA" | "ACC" | "USPSTF" | etc.
+  url    string  // PubMed search URL or stable org guideline URL
+  @@stream.done
+}
+class ConditionInsight { ... references Reference[] }
+class LabInsight       { ... references Reference[] }
+```
+
+**UI:** glass-pill chips below `clinical` text, `text-[9px]`, `text-white/30`, hover → `text-lime/60`, `target="_blank"`.
+
+See `PHASE5_PLAN.md` for full scope including open questions.
 
 ---
 
@@ -409,6 +425,20 @@ Best input is CT DICOM (series of slices). Flat X-ray PNGs/JPGs/TIFFs work but r
 **When to do this:** Before Phase 6 (real Cigna/FHIR data). FHIR already uses encounter-centric records — this schema maps naturally to it. Refactoring to `visits.json` before FHIR integration means one migration instead of two.
 
 **Migration effort:** Medium. `conditions.json` → nested under visit imaging. `biomarkers.json` → nested under visit labs. `TimelineContext` sessions become visit IDs. UI components read from `visit.data.imaging` / `visit.data.labs` instead of separate files.
+
+---
+
+## UI Polish Log (cross-phase)
+
+Shipped alongside phases, not their own phase:
+
+- **Conditions tab — bento masonry layout**: 2-col `columns-2` for both Skeletal and Organs sections in RightPanel
+- **Labs/Organs off by default**: `activeLayer` defaults to `'bones'`, `labsOn` defaults to `false`
+- **MouseHint component**: bottom-right fixed glass pill with CSS-drawn mouse icons, explains Orbit/Pan/Zoom controls
+- **Lab fill opacity bumped to 0.28**: both `BodyViewer` and `OrganLayer` — matches bone glow intensity
+- **RightPanel wider**: `clamp(300px,32vw,480px)` → `clamp(340px,38vw,560px)`
+- **Count-up animations — LeftPanel**: `CountUp` component with cubic ease-out, staggered durations per vital (O₂ Sat 850ms → BMI 2100ms). Sells "pulling data" on load.
+- **Count-up animations — MetricCard labs**: `AnimatedValue` reads decimal precision from data string, derives duration from `seed` prop for per-card stagger. Replays on category/session switch.
 
 ---
 
