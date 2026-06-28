@@ -2,7 +2,8 @@
 import { useState }           from 'react'
 import { MetricCard }         from './MetricCard'
 import { useTimeline }        from '@/context/TimelineContext'
-import { AnalyzePanel }      from './AnalyzePanel'
+import { AnalyzePanel }       from './AnalyzePanel'
+import { ScanModal }          from './ScanModal'
 import biomarkersData         from '@/data/biomarkers.json'
 import conditionsData         from '@/data/conditions_real.json'
 import organConditionsData    from '@/data/conditions_organs.json'
@@ -14,7 +15,7 @@ type Severity  = 'stable' | 'watch' | 'critical'
 type PanelMode = 'visit' | 'analyze'
 type MainTab   = 'labs' | 'imaging' | 'conditions'
 
-interface ImagingEntry { modality: string; region: string; src: string }
+interface ImagingEntry { modality: string; region: string; src: string; enhanced?: string; bone?: string; heatmap?: string }
 interface VisitRecord  { type: string; imaging: ImagingEntry[] }
 interface VisitsMap    { [sessionId: string]: VisitRecord }
 
@@ -34,6 +35,7 @@ export function RightPanel() {
   const [mode, setMode]               = useState<PanelMode>('visit')
   const [activeTab, setActiveTab]     = useState<MainTab>('labs')
   const [activeLabCat, setActiveLabCat] = useState<string>('Hormone')
+  const [modalImage, setModalImage]   = useState<ImagingEntry | null>(null)
 
   const categoryMarkers = (biomarkersData.biomarkers as Record<string, typeof biomarkersData.biomarkers.Hormone>)[activeLabCat] ?? []
 
@@ -171,14 +173,21 @@ export function RightPanel() {
 
             {activeTab === 'imaging' && (
               <div className="grid grid-cols-2 gap-2.5">
-                {(visitEntry?.imaging ?? []).map(img => (
-                  <div key={img.src} className="glass-panel backdrop-blur-[40px] backdrop-saturate-150 p-3 flex flex-col gap-2">
+                {(visitEntry?.imaging ?? []).map((img) => (
+                  <div
+                    key={img.src}
+                    className="relative group glass-panel backdrop-blur-[40px] backdrop-saturate-150 p-3 flex flex-col gap-2 cursor-pointer"
+                    onClick={() => setModalImage(img as ImagingEntry)}
+                  >
                     <div className="flex items-center gap-1.5">
                       <span className="px-1.5 py-0.5 text-[9px] font-[500] bg-white/10 text-white/60 rounded-full">{img.modality}</span>
                       <span className="text-[10px] font-[300] text-white/45 truncate">{img.region}</span>
                     </div>
-                    <div className="h-48 rounded-xl overflow-hidden bg-black/40">
+                    <div className="relative h-36 rounded-xl overflow-hidden bg-black/40">
                       <img src={img.src} alt={img.region} className="w-full h-full object-cover object-center opacity-85" />
+                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/50 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                        <span className="text-[10px] font-[300] text-white/80 tracking-wide">View Enhanced →</span>
+                      </div>
                     </div>
                   </div>
                 ))}
@@ -188,6 +197,13 @@ export function RightPanel() {
                   </div>
                 )}
               </div>
+            )}
+
+            {modalImage && (
+              <ScanModal
+                image={modalImage}
+                onClose={() => setModalImage(null)}
+              />
             )}
 
             {activeTab === 'conditions' && (

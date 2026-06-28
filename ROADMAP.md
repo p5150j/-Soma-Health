@@ -235,6 +235,40 @@ See `PHASE5_PLAN.md` for full scope including open questions.
 
 ---
 
+## Phase 5.5 — Imaging Enhancement Pipeline ✅ COMPLETE
+
+ML-powered scan enhancement running on the RTX 4090 GPU box. Scans in the Imaging tab are now interactive — hover a card to see "View Enhanced →", click to open a deep-dive modal with three views of that scan.
+
+### What shipped
+
+- **GPU pipeline** (`dev@100.69.124.73`) — three enhancement passes per scan image, all pre-computed offline
+  - **Real-ESRGAN 2×** (`RealESRGAN_x4plus`, `--fp32`) — super-resolution upscale. Recovers trabecular detail and cortical margins lost to PACS export compression
+  - **Bone Window** — false-color density map via matplotlib `hot` colormap (15th–98th percentile stretch). Air=black, soft tissue=orange, dense cortex=white
+  - **GradCAM** — gradient-weighted Class Activation Map from TorchXRayVision DenseNet-121 (112,120 chest radiographs, 14 pathology classes). Highlights regions of density anomaly — independent of any documented diagnosis
+- **`ScanModal.tsx`** — single-image deep-dive modal (portal to `document.body`, `z-[60]`). Tabs: Original | Bone Window | AI Attention. ESC to close. Tabs disabled when enhanced image not present.
+- **Reference chips** — each enhancement tab links out to the actual models and papers used (Real-ESRGAN arXiv, GradCAM paper, CheXNet, TorchXRayVision, Hounsfield Units explainer)
+- **Explicit data provenance note** — UI calls out that enhancements are derived from scan pixel data only, not from the patient's medical record
+- **`visits.json` schema extended** — `enhanced`, `bone`, `heatmap` optional fields alongside `src`. Modal falls back to `src` gracefully if any are absent.
+- **`IMAGING_PIPELINE.md`** — full documentation: pipeline steps, GPU box setup, model details, add-new-scan instructions, backlog
+
+### Key technical notes
+
+- All processing is **offline/pre-computed** — zero ML inference at runtime in the browser, just image swaps
+- Real-ESRGAN outputs `<name>__sr.png` (double underscore) — `--suffix _sr` appends to stem before extension
+- GradCAM target layer: `model.features.denseblock4.denselayer16.conv2` (last conv of DenseNet trunk)
+- TorchXRayVision expects input in `[-1024, 1024]` float range — normalize: `(pixel/255) * 2048 - 1024`
+- Model is chest-trained; GradCAM on spine/skull reads as density anomaly signal, not named pathology
+- `public/scans/` and `public/scans-enhanced/` are gitignored (patient imaging data)
+
+### Enhancement pipeline backlog
+
+- **SpineFM** — vertebrae segmentation overlay labeling L1–L5 and C1–C7 directly on X-ray images. Needs PNG data loader adaptation (currently designed for NHANES format)
+- **BioViL-T + MedSAM2** — condition-text → scan region grounding ("L4-L5 herniation" → precise highlighted region on the actual scan image). Would link the conditions in the Conditions tab to visible findings in the Imaging tab
+- **Two-session diff view** — side-by-side comparison of the same scan region across two visits (e.g. 2017 lumbar XR vs 2026 CT) within the modal
+- **X2BR** (arXiv 2504.08675) — when weights release: single X-ray → lumbar/cervical/thoracic bone mesh. True anatomy-shaped 3D preview in the imaging card. Monitor: https://arxiv.org/abs/2504.08675
+
+---
+
 ## Phase 6 — Real Data Integration
 
 Replace `conditions.json` and static biomarker values with live Cigna/FHIR API calls. The data contract is already designed for this — the JSON shape is the same, just fetched instead of static. Patient auth + FHIR/HL7 integration.
