@@ -3,15 +3,17 @@
     "2017-05": {
       "type": "Imaging",
       "imaging": [
-        { "modality": "XR", "region": "Lumbar Spine AP",  "src": "/scans/scan_lumbar_ap.png" },
-        { "modality": "XR", "region": "Lumbar Spine Lat", "src": "/scans/scan_lumbar_lat.png" }
+        { "modality": "XR", "region": "Lumbar Spine AP",        "src": "/scans/scan_lumbar_ap.png" },
+        { "modality": "XR", "region": "Lumbar Spine Lateral",   "src": "/scans/scan_lumbar_lat.png" },
+        { "modality": "XR", "region": "Abdomen / Pelvis AP",    "src": "/scans/scan_abdomen_ap.png" }
       ]
     },
     "2026-02": {
       "type": "Imaging + Labs",
       "imaging": [
-        { "modality": "CT", "region": "Abdomen/Pelvis", "src": "/scans/scan_abdomen_ap.png" },
-        { "modality": "CT", "region": "Brain Axial",    "src": "/scans/scan_ct_brain.png" }
+        { "modality": "CT", "region": "Head / Neck Axial",      "src": "/scans/scan_ct_head.png" },
+        { "modality": "XR", "region": "Skull Lateral",          "src": "/scans/scan_skull_lat.png" },
+        { "modality": "XR", "region": "Cervical Spine Lateral", "src": "/scans/scan_cervical_lat.png" }
       ]
     }
   }
