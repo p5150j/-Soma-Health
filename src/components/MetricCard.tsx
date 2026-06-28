@@ -1,4 +1,36 @@
+'use client'
+import { useState, useEffect } from 'react'
 import { MiniChart } from './MiniChart'
+
+function decimalsOf(str: string): number {
+  const dot = str.indexOf('.')
+  return dot === -1 ? 0 : str.length - dot - 1
+}
+
+function AnimatedValue({ value, seed }: { value: string; seed: number }) {
+  const target   = parseFloat(value)
+  const decimals = decimalsOf(value)
+  const duration = 900 + seed * 190
+  const [cur, setCur] = useState(0)
+
+  useEffect(() => {
+    setCur(0)
+    const start = performance.now()
+    let raf: number
+    const tick = (now: number) => {
+      const t      = Math.min((now - start) / duration, 1)
+      const eased  = 1 - (1 - t) ** 3
+      const next   = parseFloat((eased * target).toFixed(decimals))
+      setCur(next)
+      if (t < 1) raf = requestAnimationFrame(tick)
+      else setCur(target)
+    }
+    raf = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(raf)
+  }, [value, target, duration, decimals])
+
+  return <>{cur.toFixed(decimals)}</>
+}
 
 type Indicator = 'green' | 'red' | 'yellow'
 
@@ -42,7 +74,7 @@ export function MetricCard({ label, value, unit, trend, indicator, delta, note, 
 
       {/* Value */}
       <div className="flex items-baseline gap-1">
-        <span className="text-[32px] leading-[1] font-[200] tracking-[-0.03em] text-white">{value}</span>
+        <span className="text-[32px] leading-[1] font-[200] tracking-[-0.03em] text-white"><AnimatedValue value={value} seed={seed} /></span>
         <span className="text-[10px] font-[300] text-white/45 leading-none ml-0.5">{unit}</span>
         <span className={`text-[14px] ml-1 leading-none ${trend === '↗' ? 'text-green-ok' : trend === '↘' ? 'text-red-alert' : 'text-white/50'}`}>{trend}</span>
       </div>

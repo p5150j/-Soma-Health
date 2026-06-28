@@ -19,7 +19,9 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "baml_client": ["./baml_client/baml_client/index.ts"],
+      "baml_client/*": ["./baml_client/baml_client/*"]
     }
   },
   "include": [

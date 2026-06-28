@@ -4,11 +4,13 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "npx baml-cli generate && next build",
     "start": "next start",
     "lint": "eslint"
   },
   "dependencies": {
+    "@boundaryml/baml": "^0.223.0",
+    "@boundaryml/baml-nextjs-plugin": "^0.1.0",
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.6.1",
     "framer-motion": "^12.41.0",

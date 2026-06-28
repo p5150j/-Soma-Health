@@ -1,4 +1,23 @@
 'use client'
+import { useState, useEffect } from 'react'
+
+function CountUp({ to, duration, decimals = 0 }: { to: number; duration: number; decimals?: number }) {
+  const [val, setVal] = useState(0)
+  useEffect(() => {
+    const start = performance.now()
+    let raf: number
+    const tick = (now: number) => {
+      const t = Math.min((now - start) / duration, 1)
+      const eased = 1 - (1 - t) ** 3
+      setVal(parseFloat((eased * to).toFixed(decimals)))
+      if (t < 1) raf = requestAnimationFrame(tick)
+      else setVal(to)
+    }
+    raf = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(raf)
+  }, [to, duration, decimals])
+  return <>{val.toFixed(decimals)}</>
+}
 
 export function LeftPanel() {
 
@@ -52,15 +71,15 @@ export function LeftPanel() {
           </div>
           <div>
             <p className="text-[9px] font-[300] text-white/25 uppercase tracking-wider mb-1">Weight</p>
-            <p className="text-[20px] font-[200] text-white/80 leading-none">230 <span className="text-[9px] font-[300] text-white/35">lbs</span></p>
+            <p className="text-[20px] font-[200] text-white/80 leading-none"><CountUp to={230} duration={1100} /> <span className="text-[9px] font-[300] text-white/35">lbs</span></p>
           </div>
           <div>
             <p className="text-[9px] font-[300] text-white/25 uppercase tracking-wider mb-1">Temp</p>
-            <p className="text-[20px] font-[200] text-white/80 leading-none">98.4 <span className="text-[9px] font-[300] text-white/35">°F</span></p>
+            <p className="text-[20px] font-[200] text-white/80 leading-none"><CountUp to={98.4} duration={1600} decimals={1} /> <span className="text-[9px] font-[300] text-white/35">°F</span></p>
           </div>
           <div>
             <p className="text-[9px] font-[300] text-white/25 uppercase tracking-wider mb-1">O₂ Sat</p>
-            <p className="text-[20px] font-[200] text-white/80 leading-none">96 <span className="text-[9px] font-[300] text-white/35">%</span></p>
+            <p className="text-[20px] font-[200] text-white/80 leading-none"><CountUp to={96} duration={850} /> <span className="text-[9px] font-[300] text-white/35">%</span></p>
           </div>
         </div>
 
@@ -70,7 +89,7 @@ export function LeftPanel() {
             <span className="text-[11px] font-[300] text-white/50">BMI</span>
           </div>
           <div className="flex items-baseline gap-2">
-            <span className="text-[22px] font-[200] text-white/80 leading-none">36.0</span>
+            <span className="text-[22px] font-[200] text-white/80 leading-none"><CountUp to={36.0} duration={2100} decimals={1} /></span>
             <span className="text-[9px] font-[300] text-red-alert">Class II Obesity</span>
           </div>
         </div>
@@ -96,7 +115,7 @@ export function LeftPanel() {
         </div>
         <div className="glass-panel backdrop-blur-[40px] backdrop-saturate-150 p-3 flex flex-col gap-1.5">
           <p className="text-[9px] font-[300] text-white/25 uppercase tracking-wider">Visits</p>
-          <p className="text-[11px] font-[300] text-white/65 leading-tight">2 <span className="text-white/30 text-[9px]">/ 9yr</span></p>
+          <p className="text-[11px] font-[300] text-white/65 leading-tight"><CountUp to={2} duration={1350} /> <span className="text-white/30 text-[9px]">/ 9yr</span></p>
         </div>
         <div className="glass-panel backdrop-blur-[40px] backdrop-saturate-150 p-3 flex flex-col gap-1.5">
           <p className="text-[9px] font-[300] text-white/25 uppercase tracking-wider">Pattern</p>

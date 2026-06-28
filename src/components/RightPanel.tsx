@@ -2,6 +2,7 @@
 import { useState }           from 'react'
 import { MetricCard }         from './MetricCard'
 import { useTimeline }        from '@/context/TimelineContext'
+import { AnalyzePanel }      from './AnalyzePanel'
 import biomarkersData         from '@/data/biomarkers.json'
 import conditionsData         from '@/data/conditions_real.json'
 import organConditionsData    from '@/data/conditions_organs.json'
@@ -102,7 +103,7 @@ export function RightPanel() {
   }
 
   return (
-    <aside className="w-[clamp(300px,32vw,480px)] h-full px-4 pt-[42px] pb-4 flex flex-col gap-3 overflow-hidden">
+    <aside className="w-[clamp(340px,38vw,560px)] h-full px-4 pt-[42px] pb-4 flex flex-col gap-3 overflow-hidden">
 
       {mode === 'visit' ? (
         <>
@@ -276,15 +277,7 @@ export function RightPanel() {
             <span className="text-[13px] font-[300] text-white/70">Timeline Analysis</span>
           </div>
 
-          {/* Placeholder */}
-          <div className="flex-1 glass-panel backdrop-blur-[40px] backdrop-saturate-150 flex flex-col items-center justify-center gap-4">
-            <p className="text-[11px] font-[300] text-white/30 text-center px-8 leading-relaxed">
-              LLM synthesis across all visits will appear here in Phase 5.
-            </p>
-            <button className="px-5 py-2 bg-lime text-black text-[11px] font-[500] rounded-full opacity-40 cursor-not-allowed">
-              Generate Report
-            </button>
-          </div>
+          <AnalyzePanel />
         </>
       )}
 
