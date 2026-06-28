@@ -127,7 +127,7 @@ export function RightPanel() {
               onClick={() => setMode('analyze')}
               className="px-3 py-1 text-[11px] font-[300] text-lime/70 border border-lime/20 rounded-full hover:text-lime hover:border-lime/40 transition-colors shrink-0"
             >
-              Analyze →
+              Deep Brief →
             </button>
           </div>
 
@@ -274,7 +274,7 @@ export function RightPanel() {
             >
               ←
             </button>
-            <span className="text-[13px] font-[300] text-white/70">Timeline Analysis</span>
+            <span className="text-[13px] font-[300] text-white/70">Deep Brief</span>
           </div>
 
           <AnalyzePanel />
