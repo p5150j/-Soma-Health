@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Raw source data — UC Health exports, DICOM images, MyChart screenshots, lab JSONs.
+# Source material only; processed versions live in src/data/. Never on a public repo.
+mydata/
