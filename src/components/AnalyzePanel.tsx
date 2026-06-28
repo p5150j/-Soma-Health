@@ -56,6 +56,15 @@ function scoreColor(score: number): string {
   return 'bg-lime'
 }
 
+function BulletText({ text }: { text: string }) {
+  const idx = text.indexOf(' — ')
+  if (idx === -1) return <>{text}</>
+  return <>
+    <span className="font-[500] text-white/75">{text.slice(0, idx)}</span>
+    <span className="text-white/35"> — {text.slice(idx + 3)}</span>
+  </>
+}
+
 function ConditionCard({ item }: { item: ConditionInsight }) {
   return (
     <div className="glass-panel backdrop-blur-[40px] backdrop-saturate-150 px-4 pt-3.5 pb-4 flex flex-col gap-3">
@@ -266,11 +275,11 @@ export function AnalyzePanel() {
         <div className="flex flex-col gap-2">
           {(display?.watchlist?.length ?? 0) > 0 && (
             <div className="glass-panel backdrop-blur-[40px] backdrop-saturate-150 px-4 py-4 flex flex-col gap-3">
-              <span className="text-[11px] font-[500] uppercase tracking-widest text-white/40">Watchlist</span>
+              <span className="text-[11px] font-[500] uppercase tracking-widest text-lime">Watchlist</span>
               <ul className="flex flex-col gap-2">
                 {display!.watchlist.map((item, i) => (
-                  <li key={i} className="text-[11px] font-[300] text-white/50 leading-snug flex gap-2">
-                    <span className="text-white/25 shrink-0 mt-px">·</span>{item}
+                  <li key={i} className="text-[11px] font-[300] leading-snug flex gap-2">
+                    <span className="text-white/25 shrink-0 mt-px">·</span><span><BulletText text={item} /></span>
                   </li>
                 ))}
               </ul>
@@ -278,11 +287,11 @@ export function AnalyzePanel() {
           )}
           {(display?.recommendations?.length ?? 0) > 0 && (
             <div className="glass-panel backdrop-blur-[40px] backdrop-saturate-150 px-4 py-4 flex flex-col gap-3">
-              <span className="text-[11px] font-[500] uppercase tracking-widest text-white/40">Actions</span>
+              <span className="text-[11px] font-[500] uppercase tracking-widest text-lime">Actions</span>
               <ul className="flex flex-col gap-2">
                 {display!.recommendations.map((item, i) => (
-                  <li key={i} className="text-[11px] font-[300] text-white/50 leading-snug flex gap-2">
-                    <span className="text-lime/50 shrink-0 mt-px">→</span>{item}
+                  <li key={i} className="text-[11px] font-[300] leading-snug flex gap-2">
+                    <span className="text-lime/50 shrink-0 mt-px">→</span><span><BulletText text={item} /></span>
                   </li>
                 ))}
               </ul>
