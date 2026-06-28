@@ -96,15 +96,23 @@ export function LeftPanel() {
       </div>
 
       {/* Biological Age */}
-      <div className="glass-panel backdrop-blur-[40px] backdrop-saturate-150 p-4">
-        <div className="flex items-center justify-between mb-2">
+      <div className="glass-panel backdrop-blur-[40px] backdrop-saturate-150 p-4 flex flex-col gap-3">
+        <div className="flex items-center justify-between">
           <div className="flex items-center gap-1.5">
             <span className="shrink-0 w-[2px] h-[11px] rounded-full bg-white/20" />
             <span className="text-[11px] font-[300] text-white/50">Biological Age</span>
           </div>
-          <span className="text-[9px] font-[300] text-white/25 italic">Phase 5 — AI derived</span>
+          <span className="text-[8px] font-[500] tracking-[0.12em] uppercase text-lime/50">Coming Soon</span>
         </div>
-        <span className="text-[32px] font-[200] text-white/20 tracking-[-0.03em] leading-none">—</span>
+
+        <div className="flex items-baseline gap-2">
+          <span className="text-[32px] font-[200] text-white/10 tracking-[-0.03em] leading-none">—</span>
+          <span className="text-[10px] font-[300] text-white/20">yrs</span>
+        </div>
+
+        <p className="text-[9px] font-[300] text-white/25 leading-relaxed border-t border-white/5 pt-2.5">
+          Derived from epigenetic markers, HbA1c, hormone panel, BMI trajectory, and imaging findings via multi-modal AI model.
+        </p>
       </div>
 
       {/* Visit History — 3 mini cards */}
