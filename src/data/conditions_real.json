@@ -8,6 +8,8 @@
     {
       "bone": "l1",
       "displayName": "Lumbar L1",
+      "icd10": "M51.16",
+      "description": "Progressive intervertebral disc height loss at L1–L2. Reduces spinal canal clearance and contributes to axial back pain and stiffness.",
       "history": [
         { "session": "2017-05", "severity": "watch",    "label": "Disc Narrowing" },
         { "session": "2026-02", "severity": "critical", "label": "Advanced Disc Narrowing" }
@@ -16,6 +18,8 @@
     {
       "bone": "l2",
       "displayName": "Lumbar L2",
+      "icd10": "M51.16",
+      "description": "Degenerative changes at L2–L3 with moderate disc height reduction. Increases facet joint loading and may refer pain to the lower back and hips.",
       "history": [
         { "session": "2017-05", "severity": "watch", "label": "Moderate Disc Disease" },
         { "session": "2026-02", "severity": "watch", "label": "Degenerative Changes" }
@@ -24,6 +28,8 @@
     {
       "bone": "l3",
       "displayName": "Lumbar L3",
+      "icd10": "M48.8",
+      "description": "Chronic bony anomaly from a vertebral endplate fragment separated during adolescent growth. Stable structurally but can irritate the adjacent disc over time.",
       "history": [
         { "session": "2017-05", "severity": "watch", "label": "Limbus Vertebra" },
         { "session": "2026-02", "severity": "watch", "label": "Limbus Vertebra (Chronic)" }
@@ -32,6 +38,8 @@
     {
       "bone": "l4",
       "displayName": "Lumbar L4",
+      "icd10": "M51.16",
+      "description": "Moderate disc height reduction at L4–L5 with possible annular bulging. Common contributor to lower back pain, leg symptoms, and reduced lumbar mobility.",
       "history": [
         { "session": "2026-02", "severity": "watch", "label": "Moderate Disc Narrowing" }
       ]
@@ -39,6 +47,8 @@
     {
       "bone": "l5",
       "displayName": "Lumbar L5",
+      "icd10": "G54.4",
+      "description": "Foraminal stenosis or disc protrusion compressing the L5 nerve root. Can cause radiating pain, numbness, or weakness tracking down the leg into the foot.",
       "history": [
         { "session": "2026-02", "severity": "critical", "label": "L5 Nerve Root Impingement" }
       ]
@@ -46,6 +56,8 @@
     {
       "bone": "t9",
       "displayName": "Thoracic T9",
+      "icd10": "M48.54",
+      "description": "Approximately 10% loss of vertebral body height at T9, consistent with early compression or degenerative change. Often asymptomatic but warrants monitoring for progression.",
       "history": [
         { "session": "2026-02", "severity": "watch", "label": "Anterior Compression ~10%" }
       ]

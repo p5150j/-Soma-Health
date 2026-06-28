@@ -3,6 +3,7 @@ import { LeftPanel }        from '@/components/LeftPanel'
 import { RightPanel }       from '@/components/RightPanel'
 import { FooterNav }        from '@/components/FooterNav'
 import { LayerToggles }     from '@/components/LayerToggles'
+import { MouseHint }        from '@/components/MouseHint'
 import { BodyViewerLoader } from '@/components/BodyViewerLoader'
 import { TimelineProvider } from '@/context/TimelineContext'
 
@@ -34,6 +35,9 @@ export default function Home() {
 
       {/* Layer toggles — bottom-left, matches footer nav height */}
       <LayerToggles />
+
+      {/* Mouse navigation hint — bottom-right */}
+      <MouseHint />
 
       {/* Bone annotation portal — sits above panels so drei Html annotations are never clipped by panel stacking context */}
       <div id="bone-annotation-portal" className="absolute inset-0 z-[5] pointer-events-none" />

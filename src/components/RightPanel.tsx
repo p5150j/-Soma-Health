@@ -59,14 +59,21 @@ export function RightPanel() {
 
   const sessionConditions = conditionsData.conditions
     .map(c => {
-      const h = c.history.find(h => h.session === selectedSession)
+      const h    = c.history.find(h => h.session === selectedSession)
       if (!h) return null
+      const prev = c.history.filter(h => h.session !== selectedSession).at(-1)
+      const trend: 'worsening' | 'stable' | 'new' =
+        !prev ? 'new'
+        : (h.severity === 'critical' && prev.severity === 'watch') ? 'worsening'
+        : 'stable'
       return {
         key:         c.bone,
-        bone:        c.bone,
         displayName: c.displayName,
+        icd10:       (c as any).icd10 as string | undefined,
+        description: (c as any).description as string | undefined,
         severity:    h.severity as Severity,
         label:       h.label,
+        trend,
       }
     })
     .filter((c): c is NonNullable<typeof c> => c !== null)
@@ -78,13 +85,14 @@ export function RightPanel() {
       return {
         key:         c.organ,
         displayName: c.displayName,
+        icd10:       (c as any).icd10 as string | undefined,
+        description: (c as any).description as string | undefined,
         severity:    h.severity as Severity,
         label:       h.label,
+        trend:       'new' as const,
       }
     })
     .filter((c): c is NonNullable<typeof c> => c !== null)
-
-  const allConditions = [...sessionConditions, ...sessionOrgans]
 
   const visits     = visitsData.visits as VisitsMap
   const visitEntry = visits[selectedSession]
@@ -168,7 +176,7 @@ export function RightPanel() {
                       <span className="px-1.5 py-0.5 text-[9px] font-[500] bg-white/10 text-white/60 rounded-full">{img.modality}</span>
                       <span className="text-[10px] font-[300] text-white/45 truncate">{img.region}</span>
                     </div>
-                    <div className="h-28 rounded-xl overflow-hidden bg-black/40">
+                    <div className="h-48 rounded-xl overflow-hidden bg-black/40">
                       <img src={img.src} alt={img.region} className="w-full h-full object-cover object-center opacity-85" />
                     </div>
                   </div>
@@ -182,25 +190,74 @@ export function RightPanel() {
             )}
 
             {activeTab === 'conditions' && (
-              <div className="flex flex-col gap-2">
-                {allConditions.length === 0 && (
+              <div className="flex flex-col gap-4">
+                {sessionConditions.length === 0 && sessionOrgans.length === 0 && (
                   <p className="text-[11px] font-[300] text-white/25 text-center py-8">No conditions recorded for this visit</p>
                 )}
-                {allConditions.map(item => {
-                  const indicator = SEVERITY_INDICATOR[item.severity]
-                  return (
-                    <div key={item.key} className="glass-panel backdrop-blur-[40px] backdrop-saturate-150 flex items-center gap-3 px-4 py-3">
-                      <span className={`shrink-0 w-[2px] h-7 rounded-full ${PIP_COLOR[indicator]}`} />
-                      <div className="flex flex-col gap-0.5 min-w-0 flex-1">
-                        <span className="text-[12px] font-[300] text-white/80 leading-none">{item.displayName}</span>
-                        <span className="text-[10px] font-[300] text-white/40 leading-none">{item.label}</span>
-                      </div>
-                      <span className={`text-[9px] font-[400] uppercase tracking-wider shrink-0 ${SEVERITY_TEXT[indicator]}`}>
-                        {item.severity}
-                      </span>
+
+                {sessionConditions.length > 0 && (
+                  <div className="flex flex-col gap-2">
+                    <span className="text-[9px] font-[500] uppercase tracking-widest text-white/25 px-1">Skeletal</span>
+                    <div className="columns-2 gap-2">
+                    {sessionConditions.map(item => {
+                      const indicator = SEVERITY_INDICATOR[item.severity]
+                      const severityLabel = item.severity === 'critical' ? 'High Risk' : item.severity === 'watch' ? 'Watch' : 'Stable'
+                      return (
+                        <div key={item.key} className="break-inside-avoid mb-2 glass-panel backdrop-blur-[40px] backdrop-saturate-150 overflow-hidden">
+                          <div className={`h-[1.5px] w-full ${PIP_COLOR[indicator]}`} />
+                          <div className="px-3 pt-2.5 pb-3 flex flex-col gap-1.5">
+                            <div className="flex items-start justify-between gap-3">
+                              <span className="text-[13px] font-[400] text-white/90 leading-tight tracking-tight">{item.displayName}</span>
+                              <div className="flex flex-col items-end gap-0.5 shrink-0 pt-px">
+                                <span className={`text-[11px] font-[500] ${SEVERITY_TEXT[indicator]}`}>{severityLabel}</span>
+                                {item.trend === 'worsening' && <span className="text-[9px] text-red-alert/60 tracking-wide">↑ worsening</span>}
+                                {item.trend === 'new'       && <span className="text-[9px] text-white/20 tracking-wide">new</span>}
+                              </div>
+                            </div>
+                            <span className="text-[11px] font-[300] text-white/50 leading-snug">{item.label}</span>
+                            {item.description && (
+                              <p className="text-[10px] font-[300] text-white/25 leading-relaxed">{item.description}</p>
+                            )}
+                            {item.icd10 && (
+                              <span className="text-[9px] font-[300] text-white/15 tracking-widest">ICD-10 · {item.icd10}</span>
+                            )}
+                          </div>
+                        </div>
+                      )
+                    })}
                     </div>
-                  )
-                })}
+                  </div>
+                )}
+
+                {sessionOrgans.length > 0 && (
+                  <div className="flex flex-col gap-2">
+                    <span className="text-[9px] font-[500] uppercase tracking-widest text-white/25 px-1">Organs</span>
+                    <div className="columns-2 gap-2">
+                    {sessionOrgans.map(item => {
+                      const indicator = SEVERITY_INDICATOR[item.severity]
+                      const severityLabel = item.severity === 'critical' ? 'High Risk' : item.severity === 'watch' ? 'Watch' : 'Stable'
+                      return (
+                        <div key={item.key} className="break-inside-avoid mb-2 glass-panel backdrop-blur-[40px] backdrop-saturate-150 overflow-hidden">
+                          <div className={`h-[1.5px] w-full ${PIP_COLOR[indicator]}`} />
+                          <div className="px-3 pt-2.5 pb-3 flex flex-col gap-1.5">
+                            <div className="flex items-start justify-between gap-3">
+                              <span className="text-[13px] font-[400] text-white/90 leading-tight tracking-tight">{item.displayName}</span>
+                              <span className={`text-[11px] font-[500] shrink-0 pt-px ${SEVERITY_TEXT[indicator]}`}>{severityLabel}</span>
+                            </div>
+                            <span className="text-[11px] font-[300] text-white/50 leading-snug">{item.label}</span>
+                            {item.description && (
+                              <p className="text-[10px] font-[300] text-white/25 leading-relaxed">{item.description}</p>
+                            )}
+                            {item.icd10 && (
+                              <span className="text-[9px] font-[300] text-white/15 tracking-widest">ICD-10 · {item.icd10}</span>
+                            )}
+                          </div>
+                        </div>
+                      )
+                    })}
+                    </div>
+                  </div>
+                )}
               </div>
             )}
 

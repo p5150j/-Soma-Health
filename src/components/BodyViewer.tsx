@@ -18,7 +18,7 @@ interface ConditionEntry {
 const WIRE_COLOR:   Record<Severity, string> = { watch: '#f5c542', critical: '#ff453a' }
 const FILL_OPACITY: Record<Severity, number> = { watch: 0.12,      critical: 0.18      }
 const LAB_CYAN = '#4fc3f7'
-const LAB_FILL_OPACITY = 0.14
+const LAB_FILL_OPACITY = 0.28
 
 function softSprite() {
   const size = 64

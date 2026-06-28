@@ -40,8 +40,8 @@ const TimelineContext = createContext<TimelineContextValue>(null!)
 export function TimelineProvider({ children }: { children: ReactNode }) {
   const sessions = conditionsData.sessions as Session[]
   const [selectedSession, setSelectedSession] = useState(sessions[sessions.length - 1].id)
-  const [activeLayer, setActiveLayer]         = useState<LayerMode>('all')
-  const [labsOn, setLabsOn]                   = useState(true)
+  const [activeLayer, setActiveLayer]         = useState<LayerMode>('bones')
+  const [labsOn, setLabsOn]                   = useState(false)
 
   const labTargets = useMemo(
     () => (labHighlightsData.highlights as LabHighlight[]).filter(h => h.session === selectedSession),

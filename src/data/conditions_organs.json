@@ -3,6 +3,8 @@
     {
       "organ": "liver",
       "displayName": "Liver",
+      "icd10": "K76.0",
+      "description": "Diffuse fatty infiltration of the liver parenchyma. Associated with metabolic syndrome, obesity, and insulin resistance. Reversible with diet and weight reduction.",
       "history": [
         { "session": "2026-02", "severity": "watch", "label": "Hepatic Steatosis — diffuse fatty infiltration" }
       ]
@@ -10,6 +12,8 @@
     {
       "organ": "kidney_r",
       "displayName": "Right Kidney",
+      "icd10": "N20.0",
+      "description": "2mm calculus in the lower pole of the right kidney with no evidence of obstruction or hydronephrosis. Below threshold for intervention — hydration and periodic monitoring recommended.",
       "history": [
         { "session": "2026-02", "severity": "watch", "label": "2mm stone, lower pole — no obstruction" }
       ]
@@ -17,6 +21,8 @@
     {
       "organ": "aorta",
       "displayName": "Aorta",
+      "icd10": "I70.0",
+      "description": "Early calcific deposits in the aortic wall occurring sooner than expected for age. Associated with elevated cardiovascular risk — lipid management and blood pressure monitoring advised.",
       "history": [
         { "session": "2026-02", "severity": "watch", "label": "Mild calcification — premature for age" }
       ]

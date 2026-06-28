@@ -13,7 +13,7 @@ const FILL_OPACITY: Record<Severity, number> = { watch: 0.18,      critical: 0.2
 const HEALTHY_COLOR    = '#c8dff0'
 const HEALTHY_WIRE     = 0.28
 const LAB_CYAN         = '#4fc3f7'
-const LAB_FILL_OPACITY = 0.18
+const LAB_FILL_OPACITY = 0.28
 
 interface OrganDef {
   key:              string
