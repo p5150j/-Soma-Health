@@ -1,6 +1,6 @@
 'use client'
-import { useState, useCallback } from 'react'
-import type { HealthAnalysis, ConditionInsight, LabInsight } from 'baml_client/types'
+import { useState, useCallback, useEffect } from 'react'
+import type { HealthAnalysis, ConditionInsight, LabInsight, Reference } from 'baml_client/types'
 import type { partial_types } from 'baml_client/partial_types'
 import conditionsData     from '@/data/conditions_real.json'
 import conditionsOrgans   from '@/data/conditions_organs.json'
@@ -56,6 +56,41 @@ function scoreColor(score: number): string {
   return 'bg-lime'
 }
 
+const SOURCE_URL: Record<string, (q: string) => string> = {
+  PubMed:  q => `https://pubmed.ncbi.nlm.nih.gov/?term=${encodeURIComponent(q)}`,
+  arXiv:   q => `https://arxiv.org/search/?query=${encodeURIComponent(q)}&searchtype=all`,
+  AHA:     q => `https://www.heart.org/en/search?q=${encodeURIComponent(q)}`,
+  ACC:     q => `https://www.acc.org/search#q=${encodeURIComponent(q)}`,
+  USPSTF:  q => `https://www.uspreventiveservicestaskforce.org/uspstf/search_recommendations?q=${encodeURIComponent(q)}`,
+  WHO:     q => `https://www.who.int/search?query=${encodeURIComponent(q)}`,
+  NIH:     q => `https://www.nih.gov/search/results?q=${encodeURIComponent(q)}`,
+  ESC:     q => `https://www.escardio.org/Search?query=${encodeURIComponent(q)}`,
+}
+
+function CitationChips({ refs }: { refs?: Reference[] }) {
+  if (!refs?.length) return null
+  return (
+    <div className="flex flex-wrap gap-1.5 pt-2.5 border-t border-white/6">
+      {refs.map((ref, i) => {
+        const build = SOURCE_URL[ref.source] ?? SOURCE_URL.PubMed
+        const href  = build(ref.query)
+        return (
+          <a
+            key={i}
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            title={ref.title}
+            className="px-2 py-0.5 rounded-full border border-white/10 text-[8px] font-[400] tracking-wide text-white/30 hover:text-lime/70 hover:border-lime/25 transition-colors"
+          >
+            {ref.source}
+          </a>
+        )
+      })}
+    </div>
+  )
+}
+
 function BulletText({ text }: { text: string }) {
   const idx = text.indexOf(' — ')
   if (idx === -1) return <>{text}</>
@@ -105,19 +140,80 @@ function ConditionCard({ item }: { item: ConditionInsight }) {
         {item.clinical}
       </p>
 
+      <CitationChips refs={item.references} />
+
     </div>
   )
 }
 
 function LabCard({ item }: { item: LabInsight }) {
   return (
-    <div className="glass-panel backdrop-blur-[40px] backdrop-saturate-150 px-3 pt-2.5 pb-3 flex flex-col gap-1">
+    <div className="glass-panel backdrop-blur-[40px] backdrop-saturate-150 px-3 pt-2.5 pb-3 flex flex-col gap-1.5">
       <div className="flex items-baseline justify-between gap-2">
         <span className="text-[11px] font-[400] text-white/80 leading-none">{item.marker}</span>
         <span className="text-[11px] font-[500] text-lime shrink-0">{item.value}<span className="text-[9px] font-[300] text-white/30 ml-0.5">{item.unit}</span></span>
       </div>
       <p className="text-[10px] font-[300] text-white/30 leading-relaxed">{item.interpretation}</p>
+      <CitationChips refs={item.references} />
     </div>
+  )
+}
+
+const LOADING_MESSAGES = [
+  'Running deep brief…',
+  'Checking if it\'s lupus… (it\'s never lupus)',
+  'Bypassing prior authorization…',
+  'Consulting 175 billion parameters about your testosterone…',
+  'Your L5 disc has entered the chat…',
+  'Doing math on your mortality. Briefly.',
+  'Tokenizing your suffering…',
+  'Synthesizing what three specialists missed…',
+  'Attending the grand rounds you weren\'t invited to…',
+  'Performing a differential diagnosis at the speed of silicon…',
+  'The algorithm is concerned. Professionally.',
+  'Running the labs your insurance denied…',
+  'Asking the LLM to be less corporate about your BMI…',
+  'Your aorta and your cholesterol are in a meeting…',
+  'Gradient descending into your medical history…',
+  'Definitely not hallucinating your symptoms…',
+  'Synthesizing 9 years of deferred appointments…',
+  'Skipping the "everything looks fine" part…',
+  'Co-pay: $0. Honesty: incoming.',
+  'The model has opinions about your lumbar spine…',
+  'Checking if it\'s stress… (it\'s also stress)',
+  'Running 40,000 tokens through your bloodwork…',
+  'Performing evidence-based speculation…',
+  'Your biomarkers have entered the context window…',
+  'Decoding the things your doctor glossed over…',
+  'Computing the cross-system signals no one connected…',
+  'Fine-tuning the diagnosis… and the doom…',
+  'Not a doctor. Definitely not. But here we go…',
+  'Overriding corporate-medicine hedging…',
+  'Your cortisol is high and so are our compute costs…',
+]
+
+function CyclingMessage() {
+  const [idx, setIdx] = useState(0)
+  const [visible, setVisible] = useState(true)
+
+  useEffect(() => {
+    const cycle = setInterval(() => {
+      setVisible(false)
+      setTimeout(() => {
+        setIdx(i => (i + 1) % LOADING_MESSAGES.length)
+        setVisible(true)
+      }, 300)
+    }, 2600)
+    return () => clearInterval(cycle)
+  }, [])
+
+  return (
+    <p
+      className="text-[10px] font-[300] text-lime/50 tracking-wide text-center px-6 transition-opacity duration-300"
+      style={{ opacity: visible ? 1 : 0 }}
+    >
+      {LOADING_MESSAGES[idx]}
+    </p>
   )
 }
 
@@ -185,13 +281,13 @@ export function AnalyzePanel() {
     return (
       <div className="flex-1 glass-panel backdrop-blur-[40px] backdrop-saturate-150 flex flex-col items-center justify-center gap-4 min-h-0">
         <p className="text-[11px] font-[300] text-white/30 text-center px-8 leading-relaxed">
-          Full timeline synthesis across all visits — conditions, labs, trajectory.
+          Machine learning synthesis across your full medical history — every visit, every system, every signal.
         </p>
         <button
           onClick={run}
           className="px-5 py-2 bg-lime text-black text-[11px] font-[500] rounded-full hover:opacity-90 transition-opacity"
         >
-          Generate Report
+          Brief Me
         </button>
       </div>
     )
@@ -215,7 +311,7 @@ export function AnalyzePanel() {
       {loading && (
         <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 bg-[rgba(8,8,8,0.35)] backdrop-blur-[2px] rounded-2xl">
           <div className="w-6 h-6 rounded-full border-2 border-lime/20 border-t-lime animate-spin" />
-          <p className="text-[10px] font-[300] text-white/35 tracking-wide">Analyzing…</p>
+          <CyclingMessage />
         </div>
       )}
 
@@ -244,33 +340,7 @@ export function AnalyzePanel() {
         </div>
       )}
 
-      {/* Primary concerns */}
-      {(display?.primary_concerns?.length ?? 0) > 0 && (
-        <div className="flex flex-col gap-2">
-          <span className="text-[9px] font-[500] uppercase tracking-widest text-white/25 px-1">Primary Concerns</span>
-          <div className="flex flex-col gap-2">
-            {display!.primary_concerns.map((item, i) => (
-              <ConditionCard key={i} item={item as ConditionInsight} />
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* Lab highlights */}
-      {(display?.lab_highlights?.length ?? 0) > 0 && (
-        <div className="flex flex-col gap-2">
-          <span className="text-[9px] font-[500] uppercase tracking-widest text-white/25 px-1">Lab Highlights</span>
-          <div className="columns-2 gap-2">
-            {display!.lab_highlights.map((item, i) => (
-              <div key={i} className="break-inside-avoid mb-2">
-                <LabCard item={item as LabInsight} />
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* Watchlist + Recommendations */}
+      {/* Watchlist + Recommendations — schema order: generated before heavy card arrays */}
       {((display?.watchlist?.length ?? 0) > 0 || (display?.recommendations?.length ?? 0) > 0) && (
         <div className="flex flex-col gap-2">
           {(display?.watchlist?.length ?? 0) > 0 && (
@@ -300,13 +370,39 @@ export function AnalyzePanel() {
         </div>
       )}
 
+      {/* Primary concerns */}
+      {(display?.primary_concerns?.length ?? 0) > 0 && (
+        <div className="flex flex-col gap-2">
+          <span className="text-[9px] font-[500] uppercase tracking-widest text-white/25 px-1">Primary Concerns</span>
+          <div className="flex flex-col gap-2">
+            {display!.primary_concerns.map((item, i) => (
+              <ConditionCard key={i} item={item as ConditionInsight} />
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Lab highlights */}
+      {(display?.lab_highlights?.length ?? 0) > 0 && (
+        <div className="flex flex-col gap-2">
+          <span className="text-[9px] font-[500] uppercase tracking-widest text-white/25 px-1">Lab Highlights</span>
+          <div className="columns-2 gap-2">
+            {display!.lab_highlights.map((item, i) => (
+              <div key={i} className="break-inside-avoid mb-2">
+                <LabCard item={item as LabInsight} />
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
       {/* Regenerate */}
       {cached && !loading && (
         <button
           onClick={regenerate}
           className="self-end px-3 py-1 text-[10px] font-[300] text-white/30 border border-white/10 rounded-full hover:text-lime/60 hover:border-lime/20 transition-colors"
         >
-          ↺ Regenerate
+          ↺ Re-brief
         </button>
       )}
 

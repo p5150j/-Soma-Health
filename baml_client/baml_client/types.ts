@@ -54,16 +54,17 @@ export interface ConditionInsight {
   now: string
   clinical: string
   urgency: "monitor" | "address_soon" | "urgent"
+  references: Reference[]
   
 }
 
 export interface HealthAnalysis {
   headline: string
   trajectory_score: number
-  primary_concerns: ConditionInsight[]
-  lab_highlights: LabInsight[]
   watchlist: string[]
   recommendations: string[]
+  primary_concerns: ConditionInsight[]
+  lab_highlights: LabInsight[]
   
 }
 
@@ -72,5 +73,13 @@ export interface LabInsight {
   value: string
   unit: string
   interpretation: string
+  references: Reference[]
+  
+}
+
+export interface Reference {
+  title: string
+  source: string
+  query: string
   
 }

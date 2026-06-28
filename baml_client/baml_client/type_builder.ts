@@ -27,18 +27,20 @@ export { FieldType, EnumBuilder, ClassBuilder }
 export default class TypeBuilder {
     private tb: _TypeBuilder;
     
-    ConditionInsight: ClassViewer<'ConditionInsight', "name" | "trajectory" | "was" | "now" | "clinical" | "urgency">;
+    ConditionInsight: ClassViewer<'ConditionInsight', "name" | "trajectory" | "was" | "now" | "clinical" | "urgency" | "references">;
     
-    HealthAnalysis: ClassViewer<'HealthAnalysis', "headline" | "trajectory_score" | "primary_concerns" | "lab_highlights" | "watchlist" | "recommendations">;
+    HealthAnalysis: ClassViewer<'HealthAnalysis', "headline" | "trajectory_score" | "watchlist" | "recommendations" | "primary_concerns" | "lab_highlights">;
     
-    LabInsight: ClassViewer<'LabInsight', "marker" | "value" | "unit" | "interpretation">;
+    LabInsight: ClassViewer<'LabInsight', "marker" | "value" | "unit" | "interpretation" | "references">;
+    
+    Reference: ClassViewer<'Reference', "title" | "source" | "query">;
     
     
 
     constructor() {
         this.tb = new _TypeBuilder({
           classes: new Set([
-            "ConditionInsight","HealthAnalysis","LabInsight",
+            "ConditionInsight","HealthAnalysis","LabInsight","Reference",
           ]),
           enums: new Set([
             
@@ -47,15 +49,19 @@ export default class TypeBuilder {
         });
         
         this.ConditionInsight = this.tb.classViewer("ConditionInsight", [
-          "name","trajectory","was","now","clinical","urgency",
+          "name","trajectory","was","now","clinical","urgency","references",
         ]);
         
         this.HealthAnalysis = this.tb.classViewer("HealthAnalysis", [
-          "headline","trajectory_score","primary_concerns","lab_highlights","watchlist","recommendations",
+          "headline","trajectory_score","watchlist","recommendations","primary_concerns","lab_highlights",
         ]);
         
         this.LabInsight = this.tb.classViewer("LabInsight", [
-          "marker","value","unit","interpretation",
+          "marker","value","unit","interpretation","references",
+        ]);
+        
+        this.Reference = this.tb.classViewer("Reference", [
+          "title","source","query",
         ]);
         
         

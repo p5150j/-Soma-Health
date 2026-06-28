@@ -463,6 +463,41 @@ Every other health dashboard shows you data. This one shows you *thinking* — a
 
 ---
 
+## Backlog — Deep Brief: Two-Phase Batched LLM Pipeline
+
+Right now "Deep Brief" does everything in one call — headline, trajectory, watchlist, actions, primary concerns with references, lab highlights with references. The response is heavy and watchlist/actions had to be moved early in the schema to avoid truncation. The natural split is two calls that deliver different layers of depth:
+
+**Phase 1 call — The Brief** (fast, ~3–5 seconds)
+`HealthSummary` BAML function returns: headline, trajectory_score, watchlist, recommendations. No references, no detail cards. Streams in immediately — user has the clinical picture before the spinner is gone.
+
+**Phase 2 call — The Deep** (slower, ~10–20 seconds, starts when Phase 1 completes or in parallel)
+`HealthDetail` BAML function returns: primary_concerns (ConditionInsight[] with references), lab_highlights (LabInsight[] with references). Cards stream in one by one after the brief is already readable.
+
+**UX flow:**
+1. User clicks "Brief Me"
+2. Spinner + cycling messages
+3. Brief lands (headline + score + watchlist + actions) — spinner lifts, user can read
+4. "Loading detail…" indicator replaces spinner in the card area
+5. Primary Concern cards pop in one by one as Phase 2 streams
+6. Lab Highlight cards fill in
+7. Everything complete — Re-brief button appears
+
+**Why this is better:**
+- Actually earns the name "Deep Brief" — a brief that goes deep, not a brief that takes forever
+- User isn't staring at a spinner for 20 seconds before seeing anything
+- Phase 2 can run in parallel with the user reading Phase 1
+- Token budget problem disappears — each call has room to breathe
+- Future: Phase 2 could be triggered on-demand ("Show me the detail") rather than automatic
+
+**Implementation:**
+- Two BAML functions: `BriefHealthRecord` → `HealthSummary`, `DetailHealthRecord` → `HealthDetail`
+- Two `/api/brief` and `/api/detail` routes (or one route with a `mode` param)
+- `AnalyzePanel` fires Phase 1 on "Brief Me", fires Phase 2 on Phase 1 complete
+- Separate state: `briefData`, `detailData`, `briefLoading`, `detailLoading`
+- `display = { ...briefData, ...detailData }` merges both as they arrive
+
+---
+
 ## Backlog — Condition Click → Camera Isolation
 
 Tapping a condition in the Conditions tab focuses the 3D camera on that specific bone or organ and briefly isolates it (other structures dim further). Fast path to understanding exactly where in the body a finding is located.

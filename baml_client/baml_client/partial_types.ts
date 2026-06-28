@@ -20,7 +20,7 @@ $ pnpm add @boundaryml/baml
 
 import type { Image, Audio, Pdf, Video } from "@boundaryml/baml"
 import type { Checked, Check } from "./types"
-import type {  ConditionInsight,  HealthAnalysis,  LabInsight } from "./types"
+import type {  ConditionInsight,  HealthAnalysis,  LabInsight,  Reference } from "./types"
 import type * as types from "./types"
 
 /******************************************************************************
@@ -43,19 +43,26 @@ export namespace partial_types {
       now: string
       clinical: string
       urgency: "monitor" | "address_soon" | "urgent"
+      references: types.Reference[]
     }
     export interface HealthAnalysis {
       headline?: string | null
       trajectory_score?: number | null
-      primary_concerns: types.ConditionInsight[]
-      lab_highlights: types.LabInsight[]
       watchlist: string[]
       recommendations: string[]
+      primary_concerns: types.ConditionInsight[]
+      lab_highlights: types.LabInsight[]
     }
     export interface LabInsight {
       marker: string
       value: string
       unit: string
       interpretation: string
+      references: types.Reference[]
+    }
+    export interface Reference {
+      title: string
+      source: string
+      query: string
     }
 }
