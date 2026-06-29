@@ -21,6 +21,80 @@ html, body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* ── Deep Brief idle state animations ───────────────────────────────────── */
+@keyframes brief-ring {
+  0%   { transform: scale(1);  opacity: 0.18; }
+  100% { transform: scale(7);  opacity: 0; }
+}
+@keyframes brief-node-pulse {
+  0%, 100% { opacity: 0.12; }
+  50%       { opacity: 0.55; }
+}
+@keyframes brief-orb-inner {
+  0%, 100% { opacity: 0.08; }
+  50%       { opacity: 0.28; }
+}
+@keyframes brief-orb-mid {
+  0%, 100% { opacity: 0.04; }
+  50%       { opacity: 0.12; }
+}
+@keyframes brief-orb-outer {
+  0%, 100% { opacity: 0.02; }
+  50%       { opacity: 0.06; }
+}
+@keyframes brief-sweep-y {
+  0%         { transform: translateY(-90px); opacity: 0; }
+  8%, 92%    { opacity: 0.28; }
+  100%       { transform: translateY(100px); opacity: 0; }
+}
+@keyframes brief-scan-h {
+  0%         { transform: translateX(-8px);   opacity: 0; }
+  4%, 96%    { opacity: 1; }
+  100%       { transform: translateX(308px);  opacity: 0; }
+}
+@keyframes brief-terminal {
+  0%   { transform: translateY(0); }
+  100% { transform: translateY(-50%); }
+}
+.brief-terminal { animation: brief-terminal 28s linear infinite; }
+
+@keyframes brief-sweep-div {
+  0%         { top: -2px;  opacity: 0; }
+  5%, 95%    { opacity: 0.22; }
+  100%       { top: 100%;  opacity: 0; }
+}
+@keyframes brief-ring-html {
+  0%   { transform: scale(1); opacity: 0.18; }
+  100% { transform: scale(8); opacity: 0; }
+}
+@keyframes brief-float-label {
+  0%         { opacity: 0; transform: translateY(4px); }
+  12%, 78%   { opacity: 1; transform: translateY(0); }
+  100%       { opacity: 0; transform: translateY(-4px); }
+}
+
+.brief-ring {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: brief-ring 3.6s ease-out infinite;
+}
+.brief-node-pulse   { animation: brief-node-pulse 2.8s ease-in-out infinite; }
+.brief-orb-inner    { animation: brief-orb-inner  4s ease-in-out infinite; }
+.brief-orb-mid      { animation: brief-orb-mid    4s ease-in-out infinite 0.4s; }
+.brief-orb-outer    { animation: brief-orb-outer   4s ease-in-out infinite 0.8s; }
+.brief-sweep-y      { animation: brief-sweep-y 5.5s ease-in-out infinite; }
+.brief-scan-h       { animation: brief-scan-h 5s ease-in-out infinite; }
+.brief-sweep-div    { position: absolute; left: 0; right: 0; animation: brief-sweep-div 5.5s ease-in-out infinite; }
+.brief-ring-html    { transform-origin: center; animation: brief-ring-html 3.6s ease-out infinite; }
+.brief-float-label  { opacity: 0; animation: brief-float-label 5s ease-in-out infinite both; }
+.brief-fade-bottom {
+  background: linear-gradient(to top,
+    rgba(8,8,8,0.97) 0%,
+    rgba(8,8,8,0.75) 40%,
+    transparent 100%
+  );
+}
+
 @layer utilities {
   .glass-panel {
     background: rgba(18, 18, 20, 0.55);

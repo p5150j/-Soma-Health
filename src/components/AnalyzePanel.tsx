@@ -279,16 +279,94 @@ export function AnalyzePanel() {
 
   if (!display && !loading && !error) {
     return (
-      <div className="flex-1 glass-panel backdrop-blur-[40px] backdrop-saturate-150 flex flex-col items-center justify-center gap-4 min-h-0">
-        <p className="text-[11px] font-[300] text-white/30 text-center px-8 leading-relaxed">
-          Machine learning synthesis across your full medical history — every visit, every system, every signal.
-        </p>
-        <button
-          onClick={run}
-          className="px-5 py-2 bg-lime text-black text-[11px] font-[500] rounded-full hover:opacity-90 transition-opacity"
-        >
-          Brief Me
-        </button>
+      <div className="flex-1 glass-panel backdrop-blur-[40px] backdrop-saturate-150 relative overflow-hidden min-h-0">
+
+        {/* scrolling terminal background */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none px-5 pt-4">
+          <div className="brief-terminal flex flex-col gap-[5px]">
+            {([
+              '→ initializing synthesis engine',
+              'loading patient record [P-20240312]',
+              'parsing timeline: 2017-05 → 2026-02',
+              'found 2 clinical sessions',
+              'indexing skeletal_conditions.json',
+              '  nodes: 14  severity_flags: 3',
+              'indexing organ_conditions.json',
+              '  nodes: 12  severity_flags: 2',
+              'loading biomarkers.json',
+              '  markers: 43  flagged: 6',
+              'computing 9yr trajectory window',
+              'L5–S1 disc: severity escalation ↑',
+              'lumbar_stenosis: chronic  progression: confirmed',
+              'testosterone: −38% Δ over 9yr',
+              'HDL: 38 mg/dL  status: below_threshold',
+              'cortisol: elevated × 2 sessions',
+              'aortic_calcification: risk vector flagged',
+              'BMD T-score: −2.4  classification: osteoporosis',
+              'cross-referencing ICD-10 taxonomy ... done',
+              'running multi-system anomaly detection',
+              'computing primary concern rankings',
+              'scoring overall trajectory [1–10 scale]',
+              'synthesizing watchlist entries',
+              'generating actionable recommendations',
+              'cross-referencing: AHA  ESC  NIH  USPSTF',
+              'compiling citation index',
+              '→ pipeline ready — awaiting instruction',
+              '',
+            ] as string[]).concat([
+              '→ initializing synthesis engine',
+              'loading patient record [P-20240312]',
+              'parsing timeline: 2017-05 → 2026-02',
+              'found 2 clinical sessions',
+              'indexing skeletal_conditions.json',
+              '  nodes: 14  severity_flags: 3',
+              'indexing organ_conditions.json',
+              '  nodes: 12  severity_flags: 2',
+              'loading biomarkers.json',
+              '  markers: 43  flagged: 6',
+              'computing 9yr trajectory window',
+              'L5–S1 disc: severity escalation ↑',
+              'lumbar_stenosis: chronic  progression: confirmed',
+              'testosterone: −38% Δ over 9yr',
+              'HDL: 38 mg/dL  status: below_threshold',
+              'cortisol: elevated × 2 sessions',
+              'aortic_calcification: risk vector flagged',
+              'BMD T-score: −2.4  classification: osteoporosis',
+              'cross-referencing ICD-10 taxonomy ... done',
+              'running multi-system anomaly detection',
+              'computing primary concern rankings',
+              'scoring overall trajectory [1–10 scale]',
+              'synthesizing watchlist entries',
+              'generating actionable recommendations',
+              'cross-referencing: AHA  ESC  NIH  USPSTF',
+              'compiling citation index',
+              '→ pipeline ready — awaiting instruction',
+              '',
+            ]).map((line, i) => (
+              <p key={i} className={`font-mono text-[9px] leading-relaxed whitespace-pre ${
+                line.startsWith('→') ? 'text-lime/35' : line.startsWith('  ') ? 'text-white/10' : 'text-white/15'
+              }`}>{line || ' '}</p>
+            ))}
+          </div>
+        </div>
+
+        {/* fade masks top + bottom */}
+        <div className="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-[rgba(18,18,20,0.9)] to-transparent pointer-events-none z-10"/>
+        <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[rgba(18,18,20,0.95)] to-transparent pointer-events-none z-10"/>
+
+        {/* content — dead center */}
+        <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 px-8 z-20">
+          <p className="text-[11px] font-[300] text-white/40 text-center leading-relaxed">
+            ML synthesis across your full medical history —<br/>every visit, every system, every signal.
+          </p>
+          <button
+            onClick={run}
+            className="mt-1 px-8 py-3 bg-lime text-black text-[12px] font-[500] rounded-full hover:bg-lime/90 active:scale-[0.98] transition-all"
+          >
+            Start Brief Pipeline →
+          </button>
+        </div>
+
       </div>
     )
   }

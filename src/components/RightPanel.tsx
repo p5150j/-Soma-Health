@@ -109,7 +109,7 @@ export function RightPanel() {
 
       {mode === 'visit' ? (
         <>
-          {/* Main tab bar + Analyze trigger */}
+          {/* Main tab bar + Deep Brief CTA */}
           <div className="flex items-center justify-between gap-2 shrink-0">
             <div className="flex items-center gap-1.5">
               {(['labs', 'imaging', 'conditions'] as MainTab[]).map(tab => (
@@ -127,9 +127,9 @@ export function RightPanel() {
             </div>
             <button
               onClick={() => setMode('analyze')}
-              className="px-3 py-1 text-[11px] font-[300] text-lime/70 border border-lime/20 rounded-full hover:text-lime hover:border-lime/40 transition-colors shrink-0"
+              className="px-4 py-1.5 text-[11px] font-[500] bg-lime text-black rounded-full hover:bg-lime/90 active:scale-[0.98] transition-all shrink-0"
             >
-              Deep Brief →
+              Holistic Deep Brief →
             </button>
           </div>
 
