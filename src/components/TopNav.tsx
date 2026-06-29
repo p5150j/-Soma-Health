@@ -1,5 +1,15 @@
 export function TopNav() {
   return (
+    <>
+      {/* Soma wordmark — own fixed element, not inside the transformed header */}
+      <div className="fixed top-4 left-6 z-50 flex items-center gap-2.5">
+        <div className="w-[2px] h-[18px] bg-lime rounded-full" />
+        <div className="flex flex-col gap-[2px]">
+          <span className="text-[18px] font-[500] text-white tracking-tight leading-none">Soma</span>
+          <span className="text-[10px] font-[300] text-white/40 leading-none tracking-wide">Your health, fully understood.</span>
+        </div>
+      </div>
+
     <header className="fixed top-4 left-1/2 -translate-x-1/2 z-50">
       <div className="flex items-center gap-5 px-5 py-3 rounded-2xl bg-[rgba(18,18,20,0.55)] backdrop-blur-[40px] backdrop-saturate-150 border border-white/[0.08] shadow-[0_8px_40px_rgba(0,0,0,0.6)]">
 
@@ -58,5 +68,6 @@ export function TopNav() {
 
       </div>
     </header>
+    </>
   )
 }
