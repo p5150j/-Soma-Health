@@ -81,7 +81,7 @@ function CitationChips({ refs }: { refs?: Reference[] }) {
             target="_blank"
             rel="noopener noreferrer"
             title={ref.title}
-            className="px-2 py-0.5 rounded-full border border-white/10 text-[8px] font-[400] tracking-wide text-white/30 hover:text-lime/70 hover:border-lime/25 transition-colors"
+            className="px-2 py-0.5 rounded-full border border-white/25 text-[8px] font-[400] tracking-wide text-white/55 hover:text-lime hover:border-lime/40 transition-colors"
           >
             {ref.source}
           </a>
