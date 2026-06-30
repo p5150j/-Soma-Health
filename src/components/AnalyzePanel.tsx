@@ -1,5 +1,5 @@
 'use client'
-import { useState, useCallback, useEffect } from 'react'
+import { useState, useCallback, useEffect, useRef } from 'react'
 import type { HealthAnalysis, ConditionInsight, LabInsight, Reference } from 'baml_client/types'
 import type { partial_types } from 'baml_client/partial_types'
 import conditionsData     from '@/data/conditions_real.json'
@@ -107,8 +107,8 @@ function ConditionCard({ item }: { item: ConditionInsight }) {
       {/* Header: name + urgency status */}
       <div className="flex items-start justify-between gap-3">
         <span className="text-[14px] font-[400] text-white/90 leading-tight tracking-[-0.01em]">{item.name}</span>
-        <span className={`text-[8px] font-[600] tracking-[0.14em] uppercase shrink-0 mt-0.5 ${URGENCY_COLOR[item.urgency]}`}>
-          {URGENCY_LABEL[item.urgency]}
+        <span className={`text-[8px] font-[600] tracking-[0.14em] uppercase shrink-0 mt-0.5 ${URGENCY_COLOR[item.urgency] ?? 'text-white/25'}`}>
+          {URGENCY_LABEL[item.urgency] ?? ''}
         </span>
       </div>
 
@@ -119,8 +119,8 @@ function ConditionCard({ item }: { item: ConditionInsight }) {
       <div className="flex flex-col gap-2">
         <div className="flex items-center justify-between gap-4">
           <span className="text-[8px] font-[500] text-white/20 uppercase tracking-[0.1em]">Trajectory</span>
-          <span className={`text-[10px] font-[400] ${TRAJECTORY_COLOR[item.trajectory]}`}>
-            {TRAJECTORY_GLYPH[item.trajectory]}&nbsp;{item.trajectory}
+          <span className={`text-[10px] font-[400] ${TRAJECTORY_COLOR[item.trajectory] ?? 'text-white/40'}`}>
+            {TRAJECTORY_GLYPH[item.trajectory] ?? '→'}&nbsp;{item.trajectory}
           </span>
         </div>
         {item.was && (
@@ -223,7 +223,15 @@ export function AnalyzePanel() {
   const [loading,   setLoading]     = useState(false)
   const [error,     setError]       = useState<string | null>(null)
 
-  const display = cached ?? streaming
+  const display   = cached ?? streaming
+  const scrollRef = useRef<HTMLDivElement>(null)
+
+  // Auto-scroll to bottom as content streams in
+  useEffect(() => {
+    if (streaming && scrollRef.current) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight
+    }
+  }, [streaming])
 
   const run = useCallback(async () => {
     setLoading(true)
@@ -394,7 +402,7 @@ export function AnalyzePanel() {
       )}
 
       {/* Scrollable content beneath overlay */}
-      <div className="flex-1 min-h-0 overflow-y-auto no-scrollbar flex flex-col gap-3">
+      <div ref={scrollRef} className="flex-1 min-h-0 overflow-y-auto no-scrollbar flex flex-col gap-3">
 
       {/* Headline */}
       {display?.headline && (
