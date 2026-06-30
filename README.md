@@ -1,9 +1,10 @@
 # 🧬 Soma
 ### *Your health, fully understood.*
 
-![og-image](public/og-image.png)
 
-https://github.com/p5150j/-Soma-Health/raw/main/public/demo.mp4
+https://github.com/user-attachments/assets/4da760a0-89c3-4797-8b01-212f1f53734c
+
+
 
 The US healthcare system costs more per capita than any other country on earth. In return, patients get a "member portal" that is a maze of PDFs, broken filters, and lab results with zero context. No narrative. No trajectory. No signal. Just raw data buried behind three login screens and a fax machine mentality baked into software that should know better.
 
