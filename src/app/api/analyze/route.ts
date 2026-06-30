@@ -42,6 +42,12 @@ const HealthAnalysisSchema = z.object({
 const OUTPUT_FORMAT = `\
 Respond with ONLY a valid JSON object — no markdown fences, no explanatory text.
 
+Hard limits (strictly enforce — this is a streaming budget constraint):
+- primary_concerns: maximum 4 items, ordered by urgency descending
+- lab_highlights: maximum 4 items, most clinically significant first
+- references per item: exactly 1
+- clinical text: 2 sentences maximum — be direct, no padding
+
 {
   "headline": string,
   "trajectory_score": integer 1–10,
@@ -148,7 +154,7 @@ export async function POST(req: Request) {
           },
           body: JSON.stringify({
             model:      'claude-sonnet-4-6',
-            max_tokens: 8096,
+            max_tokens: 4096,
             stream:     true,
             messages: [{
               role:    'user',
