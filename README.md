@@ -3,6 +3,8 @@
 
 ![og-image](public/og-image.png)
 
+https://github.com/p5150j/-Soma-Health/raw/main/public/demo.mp4
+
 The US healthcare system costs more per capita than any other country on earth. In return, patients get a "member portal" that is a maze of PDFs, broken filters, and lab results with zero context. No narrative. No trajectory. No signal. Just raw data buried behind three login screens and a fax machine mentality baked into software that should know better.
 
 This is not a small insurer problem or a big insurer problem. It is an industry problem. The data exists. The scans exist. The bloodwork going back a decade exists. It is all sitting in systems that treat patients like claims numbers instead of people who deserve to understand their own biology. The technology to do better has existed for years. Nobody bothered.
@@ -14,6 +16,8 @@ So I downloaded my own records and built the platform they should have built.
 The 3D body is not decorative. Every bone in the skeleton is individually addressable and lights up based on real clinical findings, color-coded by severity. Toggle on the organ layer and 12 soft-tissue meshes appear in anatomically correct positions, each mapped to real CT findings. Toggle on the labs layer and out-of-range biomarkers anchor themselves spatially to the bones and organs they actually implicate. Bone annotation cards float in 3D space. The whole thing reacts to a timeline scrubber moving across years of clinical history. This is not a visualization of fake data. It is annotated with actual conditions from actual clinical notes, real biomarker values across real visits, and scan imagery processed from PACS.
 
 The data is there. Do better. So I did.
+
+Phases 1 through 5.6 — 3D skeleton, organ layer, biomarker mapping, ML imaging pipeline, and the full AI deep brief — were built in a single weekend. More is coming in the [roadmap](#roadmap).
 
 > See the [roadmap](#roadmap) for what is coming next.
 
