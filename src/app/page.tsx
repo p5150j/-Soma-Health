@@ -5,6 +5,7 @@ import { FooterNav }        from '@/components/FooterNav'
 import { LayerToggles }     from '@/components/LayerToggles'
 import { MouseHint }        from '@/components/MouseHint'
 import { BodyViewerLoader } from '@/components/BodyViewerLoader'
+import { SceneLoader }      from '@/components/SceneLoader'
 import { TimelineProvider } from '@/context/TimelineContext'
 
 export default function Home() {
@@ -41,6 +42,9 @@ export default function Home() {
 
       {/* Bone annotation portal — sits above panels so drei Html annotations are never clipped by panel stacking context */}
       <div id="bone-annotation-portal" className="absolute inset-0 z-[5] pointer-events-none" />
+
+      {/* Scene loading overlay — fades out once Three.js assets are ready */}
+      <SceneLoader />
 
     </div>
     </TimelineProvider>

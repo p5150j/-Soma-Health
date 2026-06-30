@@ -3,13 +3,19 @@
 
 ![og-image](public/og-image.png)
 
-I got tired of logging into a health insurance portal that showed me nothing. Cigna, like every major US insurer, gives you a "member portal" that is a maze of PDFs, broken filters, and lab results with zero context. I have been their patient for years. I have CT scans, bloodwork going back a decade, clinical notes, imaging reports. All of it sitting in a system that treats me like a claims number, not a person. So I downloaded all of it. Every encounter, every biomarker, every scan. Then I built Soma.
+The US healthcare system costs more per capita than any other country on earth. In return, patients get a "member portal" that is a maze of PDFs, broken filters, and lab results with zero context. No narrative. No trajectory. No signal. Just raw data buried behind three login screens and a fax machine mentality baked into software that should know better.
 
-Soma is what a personal health intelligence platform should look like. Not a wellness app. Not a symptom checker. A real tool for someone who takes their own biology seriously and wants their data to actually work for them. It took a few weeks to build the core, and I kept going because the more I wired in, the more I realized how much signal was just sitting there unclaimed. Patterns in lab trends. Imaging findings that never got followed up on. A clinical narrative that existed nowhere in my chart but could be synthesized in seconds.
+This is not a small insurer problem or a big insurer problem. It is an industry problem. The data exists. The scans exist. The bloodwork going back a decade exists. It is all sitting in systems that treat patients like claims numbers instead of people who deserve to understand their own biology. The technology to do better has existed for years. Nobody bothered.
 
-This is built entirely on my own real personal health records. The 3D body is not decorative. It is annotated with actual conditions from actual clinical notes. The biomarker charts are not seeded with fake ranges. They are my numbers, across real visits, over real time. The ML imaging pipeline ran against scans I pulled directly from Philips IntelliSpace PACS. If this feels more credible than most health tech demos, it is because it is.
+So I downloaded my own records and built the platform they should have built.
 
-The point is not the tech. The point is that this is what patients deserve by default, and it is embarrassing that nobody has built it yet. Soma is my argument that they should.
+**This is not a demo with static JSON.** I built real data extraction and ETL tooling to pull raw clinical data, biomarker metrics, and body scan imagery from source systems. I designed a data model that is actually useful end to end, not just a display layer on top of a flat export. I enhanced that data with machine learning: super-resolution imaging, density analysis, and AI attention heatmaps computed on a dedicated GPU pipeline. I synthesized the full patient timeline into a type-safe, structured LLM deep brief using BAML and Claude, streaming a clinical narrative that is genuinely useful, not just to patients like me, but to physicians, specialists, and every role in the medical supply chain who needs to understand a patient's full picture fast.
+
+The 3D body is not decorative. It is annotated with actual conditions from actual clinical notes. The biomarker charts are my numbers, across real visits, over real time. The imaging pipeline ran against scans pulled directly from PACS. If this feels more credible than most health tech demos, it is because it is.
+
+The data is there. Do better. So I did.
+
+> See the [roadmap](#roadmap) for what is coming next.
 
 ---
 
@@ -277,7 +283,7 @@ The Deep Brief requires a valid `ANTHROPIC_API_KEY`. All other features (3D view
 
 ## 📊 Data
 
-All health data in this app is real personal health records exported from Cigna's member portal and supplemented with direct PACS imaging access. Names and identifiers have been modified for privacy. Condition annotations are derived from actual clinical notes and imaging reports. The biomarker ranges, trend directions, and lab flags reflect real results across real visits.
+All health data in this app is real personal health records exported from a major US health insurer's member portal and supplemented with direct PACS imaging access. Names and identifiers have been modified for privacy. Condition annotations are derived from actual clinical notes and imaging reports. The biomarker ranges, trend directions, and lab flags reflect real results across real visits.
 
 This is not a synthetic demo. That is the whole point.
 
