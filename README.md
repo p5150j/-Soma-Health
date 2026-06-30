@@ -93,7 +93,7 @@ An offline GPU pipeline that takes raw PNG scans and produces three enhanced var
 1. Bone window computation + GradCAM inference via `enhance_scans.py`
 2. Real-ESRGAN super-resolution pass
 
-Enhanced outputs are `scp`'d back to `public/scans-enhanced/` and paths registered in `visits.json`. Full runbook in [`IMAGING_PIPELINE.md`](IMAGING_PIPELINE.md).
+Enhanced outputs are `scp`'d back to `public/scans-enhanced/` and paths registered in `visits.json`. Full runbook in [`docs/IMAGING_PIPELINE.md`](docs/IMAGING_PIPELINE.md).
 
 ---
 
